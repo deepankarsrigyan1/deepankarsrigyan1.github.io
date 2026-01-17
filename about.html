@@ -16,15 +16,12 @@
   --stroke:rgba(255,255,255,0.16);
 
   --accent:#f3c74b;
-
   --bgImage: url("assets/bg-template.png");
 
-  /* logos (already large) */
   --logoSize: 210px;
   --logoSizeMobile: 165px;
 }
 
-/* base */
 *{box-sizing:border-box}
 html,body{
   margin:0;height:100%;
@@ -88,7 +85,7 @@ a:hover{color:var(--accent)}
 .sectionTitle{
   margin:24px 0 16px;
   font-weight:900;
-  font-size:20px;          /* +2px */
+  font-size:20px;
   padding-bottom:6px;
   border-bottom:2px solid rgba(243,199,75,0.8);
   display:inline-block;
@@ -103,29 +100,24 @@ a:hover{color:var(--accent)}
   backdrop-filter:blur(10px);
 }
 
-/* ================= LOGOS (FORCE VISIBILITY) ================= */
+/* ================= LOGOS ================= */
 .logo{
   width:var(--logoSize);
   height:var(--logoSize);
   border-radius:26px;
   display:grid;
   place-items:center;
-  background:#ffffff;          /* solid white plate */
-  border:2px solid #ffffff;    /* hard edge for contrast */
+  background:#ffffff;
+  border:2px solid #ffffff;
   overflow:hidden;
   flex:0 0 auto;
   box-shadow:0 14px 34px rgba(0,0,0,0.4);
 }
-
-/* CRITICAL FIX: force logo pixels onto white canvas */
 .logo img{
   width:100%;
   height:100%;
   object-fit:contain;
-  background:#ffffff;          /* THIS fixes UW logo invisibility */
-  opacity:1 !important;
-  filter:none !important;
-  mix-blend-mode:normal !important;
+  background:#ffffff;
 }
 
 /* ================= CURRENT POSITION ================= */
@@ -138,18 +130,18 @@ a:hover{color:var(--accent)}
 
 .posText{display:flex;flex-direction:column;gap:10px}
 .posRole{
-  font-size:22px;              /* +2px */
+  font-size:22px;
   font-weight:900;
 }
 .posDept{
-  font-size:17px;              /* +2px */
+  font-size:17px;
   color:rgba(242,242,242,0.85);
 }
 .posMeta{
   display:flex;
   gap:10px;
   flex-wrap:wrap;
-  font-size:15px;              /* +2px */
+  font-size:15px;
   color:rgba(242,242,242,0.75);
 }
 .pill{
@@ -158,11 +150,9 @@ a:hover{color:var(--accent)}
   border:1px solid rgba(255,255,255,0.16);
   background:rgba(255,255,255,0.08);
 }
-
-/* project/details kept */
 .posDetails{
   margin-top:12px;
-  font-size:16px;              /* +2px */
+  font-size:16px;
   line-height:1.75;
   color:rgba(242,242,242,0.80);
 }
@@ -180,26 +170,24 @@ a:hover{color:var(--accent)}
 }
 .eduMain{flex:1}
 .eduDegree{
-  font-size:18px;              /* +2px */
+  font-size:18px;
   font-weight:900;
 }
 .eduInst{
   margin:6px 0 10px;
-  font-size:16px;              /* +2px */
+  font-size:16px;
   color:rgba(242,242,242,0.82);
 }
 .eduMeta{
   display:flex;
   gap:10px;
   flex-wrap:wrap;
-  font-size:15px;              /* +2px */
+  font-size:15px;
   color:rgba(242,242,242,0.72);
 }
-
-/* PhD thesis (RESTORED) */
 .eduThesis{
   margin-top:10px;
-  font-size:15px;              /* +2px */
+  font-size:15px;
   color:rgba(242,242,242,0.88);
 }
 .eduThesis a{
@@ -211,11 +199,10 @@ a:hover{color:var(--accent)}
 .footer{
   margin-top:26px;
   text-align:center;
-  font-size:14px;              /* +2px */
+  font-size:14px;
   color:rgba(242,242,242,0.6);
 }
 
-/* responsive */
 @media (max-width:900px){
   :root{ --logoSize: var(--logoSizeMobile); }
   .positionBar,.eduRow{flex-direction:column;align-items:flex-start}
@@ -239,20 +226,18 @@ a:hover{color:var(--accent)}
 <main class="page">
 <div class="container">
 
-<!-- CURRENT POSITION -->
 <div class="sectionTitle">Current position</div>
 
 <section class="glass positionBar">
   <div class="logo">
     <img src="assets/logo-bu.png" alt="Boston University logo">
   </div>
-
   <div class="posText">
     <div class="posRole">Postdoctoral Research Associate</div>
     <div class="posDept">Department of Physics, Boston University</div>
     <div class="posMeta">
       <span class="pill">Nov. 2024 – Present</span>
-      <span class="pill">Boston, MA</span>
+      <span class="pill">Boston, MA, USA</span>
     </div>
     <div class="posDetails">
       (Optional) Add 2–3 lines here describing your projects, techniques,
@@ -261,7 +246,6 @@ a:hover{color:var(--accent)}
   </div>
 </section>
 
-<!-- EDUCATION -->
 <div class="sectionTitle">Education</div>
 
 <section class="glass eduWrap">
@@ -269,13 +253,14 @@ a:hover{color:var(--accent)}
 
 <div class="eduRow">
   <div class="logo">
-    <img src="assets/logo-uw.PNG" alt="University of Wisconsin–Madison logo">
+    <img src="assets/logo-uw2.PNG" alt="University of Wisconsin–Madison logo">
   </div>
   <div class="eduMain">
     <div class="eduDegree">Doctor of Philosophy</div>
     <div class="eduInst">Materials Science and Engineering · University of Wisconsin–Madison</div>
     <div class="eduMeta">
       <span class="pill">09/2018 – 10/2024</span>
+      <span class="pill">Madison, WI, USA</span>
     </div>
     <div class="eduThesis">
       <b>Thesis:</b> <em>PASTE YOUR PhD THESIS TITLE HERE</em>
@@ -287,13 +272,14 @@ a:hover{color:var(--accent)}
 
 <div class="eduRow">
   <div class="logo">
-    <img src="assets/logo-uw.PNG" alt="University of Wisconsin–Madison logo">
+    <img src="assets/logo-uw2.PNG" alt="University of Wisconsin–Madison logo">
   </div>
   <div class="eduMain">
     <div class="eduDegree">Master of Science</div>
     <div class="eduInst">Materials Science and Engineering · University of Wisconsin–Madison</div>
     <div class="eduMeta">
       <span class="pill">08/2018 – 05/2021</span>
+      <span class="pill">Madison, WI, USA</span>
     </div>
   </div>
 </div>
@@ -307,6 +293,7 @@ a:hover{color:var(--accent)}
     <div class="eduInst">Ceramic Engineering · IIT (BHU) Varanasi</div>
     <div class="eduMeta">
       <span class="pill">07/2013 – 05/2017</span>
+      <span class="pill">Varanasi, India</span>
     </div>
   </div>
 </div>
