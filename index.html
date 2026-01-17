@@ -36,7 +36,6 @@ a:hover{color:var(--accent)}
   padding:18px 36px;
   background:linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0));
 }
-
 .nav .name{font-weight:700;font-size:18px}
 .nav .menu{display:flex;gap:22px;font-size:14px;flex-wrap:wrap}
 .nav .menu a{opacity:0.85;padding-bottom:3px}
@@ -88,22 +87,20 @@ a:hover{color:var(--accent)}
   pointer-events:none;
   opacity:0.95;
   filter: drop-shadow(0 0 16px rgba(255,255,255,0.18));
+  border-radius:999px;
 }
 
-/* “pulse train” look: moving bright packets inside a beam */
+/* pulse packets inside beams */
 .beam::before{
   content:"";
   position:absolute;
   inset:0;
   border-radius:999px;
-  background-size: 140px 100%;
   mix-blend-mode: screen;
   opacity:0.95;
-  animation: packets 1.8s linear infinite;
 }
 
 .beam::after{
-  /* soft outer glow */
   content:"";
   position:absolute;
   inset:-14px;
@@ -112,18 +109,15 @@ a:hover{color:var(--accent)}
   opacity:0.55;
 }
 
-/* ===== Place beams near the marked (top-center) region ===== */
-
-/* Optical pump – normal incidence (vertical), top-center */
+/* Optical pump – vertical, top-center */
 .beam.pump{
-  width: 18px;
-  height: 330px;
-  left: 54%;
-  top: 40px;
-  transform: translateX(-50%);
-  border-radius:999px;
-  background: linear-gradient(to bottom, transparent, rgba(255,80,80,0.85), transparent);
-  animation: pumpFlicker 1.6s ease-in-out infinite;
+  width:18px;
+  height:330px;
+  left:54%;
+  top:40px;
+  transform:translateX(-50%);
+  background:linear-gradient(to bottom, transparent, rgba(255,80,80,0.85), transparent);
+  animation:pumpFlicker 1.6s ease-in-out infinite;
 }
 .beam.pump::before{
   background-image:
@@ -134,24 +128,23 @@ a:hover{color:var(--accent)}
       rgba(255,220,220,0.95) 52px,
       rgba(255,220,220,0.0) 64px
     );
-  background-size: 100% 140px;
-  animation: packetsY 1.25s linear infinite;
+  background-size:100% 140px;
+  animation:packetsY 1.25s linear infinite;
 }
 .beam.pump::after{
-  background: linear-gradient(to bottom, transparent, rgba(255,80,80,0.55), transparent);
+  background:linear-gradient(to bottom, transparent, rgba(255,80,80,0.55), transparent);
 }
 
-/* Probe – angled from left, aimed at the same interaction point */
+/* Probe – angled from left */
 .beam.probe{
-  width: 520px;
-  height: 16px;
-  left: 18%;
-  top: 165px;
-  transform: rotate(18deg);
-  transform-origin: left center;
-  border-radius:999px;
-  background: linear-gradient(to right, transparent, rgba(0,255,160,0.85), transparent);
-  animation: beamBreath 2.0s ease-in-out infinite;
+  width:520px;
+  height:16px;
+  left:18%;
+  top:165px;
+  transform:rotate(18deg);
+  transform-origin:left center;
+  background:linear-gradient(to right, transparent, rgba(0,255,160,0.85), transparent);
+  animation:beamBreath 2.0s ease-in-out infinite;
 }
 .beam.probe::before{
   background-image:
@@ -164,20 +157,19 @@ a:hover{color:var(--accent)}
     );
 }
 .beam.probe::after{
-  background: linear-gradient(to right, transparent, rgba(0,255,160,0.50), transparent);
+  background:linear-gradient(to right, transparent, rgba(0,255,160,0.50), transparent);
 }
 
-/* Diffracted – to the right from the interaction point */
+/* Diffracted – to the right */
 .beam.diff{
-  width: 560px;
-  height: 14px;
-  left: 56%;
-  top: 205px;
-  transform: rotate(-10deg);
-  transform-origin: left center;
-  border-radius:999px;
-  background: linear-gradient(to right, transparent, rgba(255,210,120,0.75), transparent);
-  animation: beamBreath 2.6s ease-in-out infinite;
+  width:560px;
+  height:14px;
+  left:56%;
+  top:205px;
+  transform:rotate(-10deg);
+  transform-origin:left center;
+  background:linear-gradient(to right, transparent, rgba(255,210,120,0.75), transparent);
+  animation:beamBreath 2.6s ease-in-out infinite;
 }
 .beam.diff::before{
   background-image:
@@ -190,36 +182,34 @@ a:hover{color:var(--accent)}
     );
 }
 .beam.diff::after{
-  background: linear-gradient(to right, transparent, rgba(255,210,120,0.45), transparent);
+  background:linear-gradient(to right, transparent, rgba(255,210,120,0.45), transparent);
 }
 
-/* Interaction “spark” at beam crossing (top-center) */
+/* Interaction spark */
 .spark{
   position:absolute;
   z-index:3;
-  width: 70px;
-  height: 70px;
-  left: 54%;
-  top: 215px;
-  transform: translate(-50%,-50%);
-  border-radius: 50%;
+  width:70px;
+  height:70px;
+  left:54%;
+  top:215px;
+  transform:translate(-50%,-50%);
+  border-radius:50%;
   background:
-    radial-gradient(circle, rgba(255,255,255,0.95), rgba(255,160,120,0.55), rgba(255,160,120,0.0) 70%);
+    radial-gradient(circle,
+      rgba(255,255,255,0.95),
+      rgba(255,160,120,0.55),
+      rgba(255,160,120,0.0) 70%);
   filter: blur(10px);
   opacity:0.85;
-  animation: spark 1.6s ease-in-out infinite;
+  animation:spark 1.6s ease-in-out infinite;
 }
 
-/* Animations */
-@keyframes packets{
-  0%{background-position: 0 0; opacity:0.35}
-  50%{opacity:1}
-  100%{background-position: 140px 0; opacity:0.35}
-}
+/* animations */
 @keyframes packetsY{
-  0%{background-position: 0 0; opacity:0.35}
+  0%{background-position:0 0;opacity:0.35}
   50%{opacity:1}
-  100%{background-position: 0 140px; opacity:0.35}
+  100%{background-position:0 140px;opacity:0.35}
 }
 @keyframes beamBreath{
   0%,100%{opacity:0.65}
@@ -230,6 +220,107 @@ a:hover{color:var(--accent)}
   50%{opacity:0.95}
 }
 @keyframes spark{
-  0%,100%{transform:translate(-50%,-50%) scale(0.85); opacity:0.55}
-  50%{transform:translate(-50%,-50%) scale(1.05); opacity:0.95}
+  0%,100%{transform:translate(-50%,-50%) scale(0.85);opacity:0.55}
+  50%{transform:translate(-50%,-50%) scale(1.05);opacity:0.95}
 }
+
+/* ================= CONTENT ================= */
+.content{
+  position:relative;
+  z-index:4;
+  width:min(1100px,92%);
+  display:grid;
+  grid-template-columns:320px 1fr;
+  gap:56px;
+  align-items:center;
+}
+@media (max-width:900px){
+  .content{grid-template-columns:1fr;gap:28px;text-align:center}
+}
+
+.photo{
+  width:300px;
+  height:420px;
+  border-radius:22px;
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,0.18);
+  background:rgba(255,255,255,0.05);
+  box-shadow:0 28px 90px rgba(0,0,0,0.6);
+}
+.photo img{width:100%;height:100%;object-fit:cover}
+
+.text p{
+  margin:0 0 18px 0;
+  font-size:15.5px;
+  line-height:1.9;
+  color:var(--muted);
+}
+.text b{color:var(--text)}
+.text .hl{color:var(--accent);font-weight:700}
+
+.footer{
+  position:absolute;
+  bottom:18px;
+  left:0;right:0;
+  text-align:center;
+  font-size:12px;
+  color:rgba(242,242,242,0.6);
+  z-index:4;
+}
+</style>
+</head>
+
+<body>
+
+<div class="nav">
+  <div class="name">Deepankar Sri Gyan</div>
+  <div class="menu">
+    <a class="active" href="index.html">Home</a>
+    <a href="about.html">About Me</a>
+    <a href="research.html">Research</a>
+    <a href="publications.html">Publications</a>
+    <a href="contact.html">Contact Me</a>
+    <a href="utility.html">Utility Software</a>
+  </div>
+</div>
+
+<section class="hero">
+
+  <!-- beams -->
+  <div class="beam pump"></div>
+  <div class="beam probe"></div>
+  <div class="beam diff"></div>
+  <div class="spark"></div>
+
+  <!-- content -->
+  <div class="content">
+    <div class="photo">
+      <img src="assets/profile.jpg" alt="Profile photo">
+    </div>
+
+    <div class="text">
+      <p>
+        I am a scientist studying the physics of materials, using light to
+        interrogate and manipulate <span class="hl">quantum materials</span>
+        far from equilibrium.
+      </p>
+      <p>
+        My research focuses on ultrafast nonequilibrium phases, ferroic
+        textures, and symmetry-breaking dynamics using pump–probe optics,
+        nonlinear SHG, and time-resolved x-ray scattering.
+      </p>
+      <p style="margin-top:26px;font-size:13px;color:rgba(242,242,242,0.6)">
+        Optical pump · THz probe · X-ray diffraction
+      </p>
+    </div>
+  </div>
+
+  <div class="footer">© <span id="y"></span> Deepankar Sri Gyan</div>
+</section>
+
+<script>
+  document.getElementById("y").textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
