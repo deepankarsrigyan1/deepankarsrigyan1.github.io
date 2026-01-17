@@ -6,7 +6,6 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 
 <style>
-/* ================= BASIC THEME ================= */
 :root{
   --bg:#020306;
   --text:#f2f2f2;
@@ -26,7 +25,7 @@ html,body{
 a{color:inherit;text-decoration:none}
 a:hover{color:var(--accent)}
 
-/* ================= NAV BAR ================= */
+/* ================= NAV ================= */
 .nav{
   position:fixed;
   top:0; left:0; right:0;
@@ -38,29 +37,15 @@ a:hover{color:var(--accent)}
   background:linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0));
 }
 
-.nav .name{
-  font-weight:700;
-  font-size:18px;
-}
-
-.nav .menu{
-  display:flex;
-  gap:22px;
-  font-size:14px;
-  flex-wrap:wrap;
-}
-
-.nav .menu a{
-  opacity:0.85;
-  padding-bottom:3px;
-}
-
+.nav .name{font-weight:700;font-size:18px}
+.nav .menu{display:flex;gap:22px;font-size:14px;flex-wrap:wrap}
+.nav .menu a{opacity:0.85;padding-bottom:3px}
 .nav .menu a.active{
   opacity:1;
   border-bottom:1px solid var(--accent);
 }
 
-/* ================= HERO SECTION ================= */
+/* ================= HERO ================= */
 .hero{
   position:relative;
   min-height:100vh;
@@ -71,98 +56,114 @@ a:hover{color:var(--accent)}
   align-items:center;
 }
 
-/* ---- ATOMIC + TOPOLOGY BACKGROUND ---- */
+/* Background image */
 .hero::before{
   content:"";
   position:absolute;
   inset:0;
   z-index:1;
   background:
-    /* topology hills */
-    radial-gradient(circle at 30% 65%, rgba(120,170,255,0.28), transparent 40%),
-    radial-gradient(circle at 70% 70%, rgba(255,120,200,0.22), transparent 45%),
-    radial-gradient(circle at 50% 85%, rgba(120,255,200,0.18), transparent 50%),
-
-    /* atomic lattice dots */
-    repeating-radial-gradient(circle at center,
-      rgba(255,255,255,0.22) 0px,
-      rgba(255,255,255,0.22) 2px,
-      transparent 3px,
-      transparent 34px
-    ),
-
-    linear-gradient(180deg, #020306, #020306);
+    radial-gradient(900px 560px at 30% 35%, rgba(0,0,0,0.05), rgba(0,0,0,0.65)),
+    linear-gradient(180deg, rgba(0,0,0,0.20), rgba(0,0,0,0.65)),
+    url("assets/quantum-bg.png");
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
+  filter:saturate(1.05) contrast(1.05);
 }
 
-/* dark overlay for readability */
+/* readability overlay */
 .hero::after{
   content:"";
   position:absolute;
   inset:0;
   z-index:2;
-  background:linear-gradient(180deg, rgba(0,0,0,0.10), rgba(0,0,0,0.35));
+  background:linear-gradient(180deg, rgba(0,0,0,0.10), rgba(0,0,0,0.45));
 }
 
 /* ================= BEAMS ================= */
 .beam{
   position:absolute;
-  height:26px;
-  width:900px;
-  filter:blur(10px);
   z-index:3;
-  opacity:0.85;
+  pointer-events:none;
+  filter:blur(8px);
+  opacity:0.7;
 }
 
-.beam.thz{
+/* Optical pump – normal incidence */
+.beam.pump{
+  width:26px;
+  height:520px;
+  left:52%;
+  top:120px;
+  transform:translateX(-50%);
+  background:linear-gradient(to bottom, transparent, #ff4d4d, transparent);
+  animation:pulse 2.0s infinite;
+}
+
+/* Probe – angled from left */
+.beam.probe{
+  width:720px;
+  height:22px;
+  left:-160px;
+  top:380px;
+  transform:rotate(18deg);
+  transform-origin:left center;
   background:linear-gradient(to right, transparent, #00ff99, transparent);
-  transform:rotate(-12deg);
-  top:58%;
-  left:-220px;
-  animation:pulse 2s infinite;
+  animation:pulse 2.6s infinite;
 }
 
-.beam.optical{
-  background:linear-gradient(to right, transparent, #ff5555, transparent);
-  transform:rotate(22deg);
-  top:35%;
-  left:480px;
-  animation:pulse 3s infinite;
-}
-
-.beam.xray{
+/* Diffracted – to the right */
+.beam.diff{
+  width:760px;
+  height:18px;
+  left:620px;
+  top:470px;
+  transform:rotate(-10deg);
+  transform-origin:left center;
   background:linear-gradient(to right, transparent, #ffd27a, transparent);
-  transform:rotate(36deg);
-  top:8%;
-  left:780px;
-  animation:pulse 3.5s infinite;
+  animation:pulse 3.1s infinite;
+}
+
+/* Interaction point */
+.spark{
+  position:absolute;
+  z-index:3;
+  width:36px;
+  height:36px;
+  left:52%;
+  top:420px;
+  transform:translate(-50%,-50%);
+  border-radius:50%;
+  background:radial-gradient(circle,
+    rgba(255,255,255,0.9),
+    rgba(255,200,120,0.6),
+    rgba(255,200,120,0.0)
+  );
+  filter:blur(6px);
 }
 
 @keyframes pulse{
-  0%{opacity:0.2}
+  0%{opacity:0.15}
   50%{opacity:0.95}
-  100%{opacity:0.2}
+  100%{opacity:0.15}
 }
 
 /* ================= CONTENT ================= */
 .content{
   position:relative;
   z-index:4;
-  width:min(1100px, 92%);
+  width:min(1100px,92%);
   display:grid;
-  grid-template-columns: 320px 1fr;
+  grid-template-columns:320px 1fr;
   gap:56px;
   align-items:center;
 }
 
 @media (max-width:900px){
-  .content{
-    grid-template-columns:1fr;
-    gap:28px;
-    text-align:center;
-  }
+  .content{grid-template-columns:1fr;gap:28px;text-align:center}
 }
 
-/* ---- PHOTO CARD ---- */
 .photo{
   width:300px;
   height:420px;
@@ -177,24 +178,21 @@ a:hover{color:var(--accent)}
   width:100%;
   height:100%;
   object-fit:cover;
-  display:block;
 }
 
-/* ---- TEXT ---- */
 .text p{
   margin:0 0 18px 0;
   font-size:15.5px;
   line-height:1.9;
   color:var(--muted);
 }
-
 .text b{color:var(--text)}
 .text .hl{color:var(--accent);font-weight:700}
 
 .footer{
   position:absolute;
   bottom:18px;
-  left:0; right:0;
+  left:0;right:0;
   text-align:center;
   font-size:12px;
   color:rgba(242,242,242,0.6);
@@ -205,7 +203,6 @@ a:hover{color:var(--accent)}
 
 <body>
 
-<!-- ================= NAV ================= -->
 <div class="nav">
   <div class="name">Deepankar Sri Gyan</div>
   <div class="menu">
@@ -218,35 +215,33 @@ a:hover{color:var(--accent)}
   </div>
 </div>
 
-<!-- ================= HERO ================= -->
 <section class="hero">
 
   <!-- beams -->
-  <div class="beam thz"></div>
-  <div class="beam optical"></div>
-  <div class="beam xray"></div>
+  <div class="beam pump"></div>
+  <div class="beam probe"></div>
+  <div class="beam diff"></div>
+  <div class="spark"></div>
 
-  <!-- main content -->
+  <!-- content -->
   <div class="content">
     <div class="photo">
-      <!-- upload your image as assets/profile.jpg -->
       <img src="assets/profile.jpg" alt="Profile photo">
     </div>
 
     <div class="text">
       <p>
-        I am a scientist studying the physics of materials. I use light to interrogate and
-        manipulate the behavior of <span class="hl">quantum materials</span> at ultrafast
-        time scales.
+        I am a scientist studying the physics of materials, using light to
+        interrogate and manipulate <span class="hl">quantum materials</span>
+        far from equilibrium.
       </p>
-
       <p>
-        I am currently a <b>Postdoctoral Research Associate</b> working on nonequilibrium
-        phases, ferroic textures, and ultrafast dynamics in complex oxide materials.
+        My research focuses on ultrafast nonequilibrium phases, ferroic
+        textures, and symmetry-breaking dynamics using pump–probe optics,
+        nonlinear SHG, and time-resolved x-ray scattering.
       </p>
-
       <p style="margin-top:26px;font-size:13px;color:rgba(242,242,242,0.6)">
-        Pulsed optical & THz excitation · Nonlinear SHG · Time-resolved X-ray probes
+        Optical pump · THz probe · X-ray diffraction
       </p>
     </div>
   </div>
