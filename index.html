@@ -4,88 +4,407 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Your Name</title>
-  <meta name="description" content="Academic homepage – quantum materials, ultrafast dynamics, nonlinear optics." />
+  <meta name="description" content="Academic homepage — quantum materials, ultrafast dynamics, nonlinear optics, x-ray scattering." />
+  <!-- Optional: keep site unindexed while building -->
+  <!-- <meta name="robots" content="noindex, nofollow"> -->
+
   <style>
     :root{
-      --bg:#0b1220;
-      --card: rgba(255,255,255,0.06);
-      --text:#e9eefc;
-      --muted: rgba(233,238,252,0.75);
-      --accent:#7aa7ff;
-      --border: rgba(255,255,255,0.12);
+      --bg0:#070b14;
+      --bg1:#0a1326;
+      --text:#eef2ff;
+      --muted:rgba(238,242,255,0.72);
+      --border:rgba(255,255,255,0.12);
+
+      --a:#7aa7ff;   /* blue */
+      --b:#ff7ad6;   /* magenta */
+      --c:#5dffbf;   /* mint */
+      --x:#ffe08a;   /* x-ray accent */
+      --shadow: 0 18px 60px rgba(0,0,0,0.55);
     }
+
     *{box-sizing:border-box}
+    html,body{height:100%}
     body{
       margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
       color:var(--text);
-      background: radial-gradient(1200px 600px at 10% 10%, rgba(122,167,255,0.18), transparent 55%),
-                  radial-gradient(900px 500px at 90% 20%, rgba(255,122,214,0.12), transparent 55%),
-                  radial-gradient(700px 420px at 70% 90%, rgba(82,255,189,0.08), transparent 55%),
-                  var(--bg);
-      min-height:100vh;
-      line-height:1.5;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background:
+        radial-gradient(1200px 720px at 12% 10%, rgba(122,167,255,0.22), transparent 60%),
+        radial-gradient(900px 520px at 85% 18%, rgba(255,122,214,0.14), transparent 60%),
+        radial-gradient(820px 520px at 70% 92%, rgba(93,255,191,0.10), transparent 62%),
+        linear-gradient(180deg, var(--bg0), var(--bg1));
+      overflow-x:hidden;
+      line-height:1.55;
     }
-    a{color:var(--text); text-decoration:none}
-    a:hover{color:var(--accent)}
-    .wrap{max-width:1040px; margin:0 auto; padding:34px 18px 60px}
+
+    a{color:inherit; text-decoration:none}
+    a:hover{color:var(--a)}
+
+    .wrap{max-width:1120px; margin:0 auto; padding:28px 18px 80px; position:relative}
+    .bg{
+      position:fixed; inset:0; pointer-events:none; z-index:-1;
+      opacity:0.95;
+    }
+
+    /* ====== NAV ====== */
     nav{
-      display:flex; gap:18px; align-items:center; justify-content:space-between;
-      padding:12px 14px; border:1px solid var(--border); border-radius:16px;
-      background: rgba(255,255,255,0.03);
-      backdrop-filter: blur(10px);
-      position: sticky; top: 12px;
+      display:flex; justify-content:space-between; align-items:center; gap:16px;
+      padding:12px 14px;
+      border:1px solid var(--border);
+      border-radius:18px;
+      background: rgba(255,255,255,0.04);
+      backdrop-filter: blur(14px);
+      box-shadow: 0 10px 36px rgba(0,0,0,0.35);
+      position: sticky; top: 12px; z-index:10;
     }
-    .nav-left{display:flex; gap:14px; align-items:center}
-    .dot{
-      width:10px; height:10px; border-radius:999px; background:var(--accent);
-      box-shadow: 0 0 18px rgba(122,167,255,0.55);
+    .brand{display:flex; align-items:center; gap:12px; min-width:210px}
+    .mark{
+      width:14px; height:14px; border-radius:999px;
+      background: radial-gradient(circle at 30% 30%, #fff, rgba(255,255,255,0.2) 45%, rgba(255,255,255,0) 70%),
+                  linear-gradient(90deg, var(--a), var(--b));
+      box-shadow: 0 0 22px rgba(122,167,255,0.55), 0 0 26px rgba(255,122,214,0.35);
     }
-    .name{font-weight:650; letter-spacing:0.2px}
-    .nav-links{display:flex; gap:14px; flex-wrap:wrap; justify-content:flex-end}
+    .brand b{letter-spacing:0.2px}
+    .tagline{color:var(--muted); font-size:12.5px; margin-top:1px}
+    .nav-links{display:flex; flex-wrap:wrap; gap:10px; justify-content:flex-end}
     .pill{
-      padding:8px 10px; border-radius:999px; border:1px solid var(--border);
+      padding:9px 12px;
+      border-radius:999px;
+      border:1px solid var(--border);
       background: rgba(255,255,255,0.03);
       font-size:14px;
+      transition: transform .12s ease, background .12s ease, border-color .12s ease;
     }
-    .hero{display:grid; grid-template-columns: 1.2fr 0.8fr; gap:18px; margin-top:22px}
-    @media (max-width: 860px){ .hero{grid-template-columns:1fr} }
+    .pill:hover{transform: translateY(-1px); background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.2)}
+    .pill.active{
+      border-color: rgba(122,167,255,0.55);
+      background: rgba(122,167,255,0.12);
+    }
+
+    /* ====== HERO ====== */
+    .hero{
+      display:grid; grid-template-columns: 1.4fr 0.9fr;
+      gap:16px; margin-top:18px;
+    }
+    @media (max-width: 920px){ .hero{grid-template-columns:1fr} }
+
     .card{
-      border:1px solid var(--border); border-radius:18px;
-      background: var(--card);
-      padding:18px;
-    }
-    h1{margin:0; font-size:38px; letter-spacing:-0.4px}
-    .subtitle{margin-top:10px; color:var(--muted); font-size:16px}
-    .buttons{display:flex; gap:10px; flex-wrap:wrap; margin-top:14px}
-    .btn{
-      display:inline-flex; gap:8px; align-items:center;
-      padding:10px 12px; border-radius:12px;
       border:1px solid var(--border);
+      border-radius:22px;
       background: rgba(255,255,255,0.05);
-      font-weight:600; font-size:14px;
+      backdrop-filter: blur(12px);
+      box-shadow: var(--shadow);
+      padding:18px;
+      position:relative;
+      overflow:hidden;
     }
+    .card::before{
+      content:"";
+      position:absolute; inset:-2px;
+      background: radial-gradient(520px 180px at 12% 0%, rgba(122,167,255,0.16), transparent 55%),
+                  radial-gradient(420px 160px at 88% 0%, rgba(255,122,214,0.12), transparent 55%),
+                  radial-gradient(520px 220px at 40% 120%, rgba(93,255,191,0.08), transparent 62%);
+      opacity:0.9;
+      pointer-events:none;
+    }
+    .card > *{position:relative}
+
+    .kicker{
+      display:inline-flex; gap:10px; align-items:center;
+      color:rgba(255,255,255,0.85);
+      font-size:13px;
+      letter-spacing:0.35px;
+      text-transform:uppercase;
+      margin-bottom:10px;
+    }
+    .kdot{
+      width:10px; height:10px; border-radius:999px;
+      background: linear-gradient(90deg, var(--c), var(--a));
+      box-shadow: 0 0 18px rgba(93,255,191,0.35);
+    }
+
+    h1{
+      margin:0;
+      font-size:46px;
+      line-height:1.1;
+      letter-spacing:-0.8px;
+      text-shadow: 0 1px 0 rgba(0,0,0,0.35);
+    }
+    @media (max-width: 560px){ h1{font-size:38px} }
+
+    .sub{
+      margin-top:12px;
+      color:var(--muted);
+      font-size:16.5px;
+      max-width:64ch;
+    }
+
+    .cta{
+      display:flex; flex-wrap:wrap; gap:10px; margin-top:16px;
+    }
+    .btn{
+      display:inline-flex; align-items:center; gap:9px;
+      padding:11px 13px;
+      border-radius:14px;
+      border:1px solid var(--border);
+      background: rgba(255,255,255,0.04);
+      font-weight:650;
+      font-size:14px;
+      transition: transform .12s ease, background .12s ease, border-color .12s ease;
+    }
+    .btn:hover{transform: translateY(-1px); background: rgba(255,255,255,0.07); border-color: rgba(255,255,255,0.2)}
     .btn.primary{
-      background: rgba(122,167,255,0.16);
-      border-color: rgba(122,167,255,0.45);
+      background: linear-gradient(90deg, rgba(122,167,255,0.18), rgba(255,122,214,0.10));
+      border-color: rgba(122,167,255,0.55);
     }
-    .grid3{display:grid; grid-template-columns: repeat(3, 1fr); gap:14px; margin-top:14px}
-    @media (max-width: 860px){ .grid3{grid-template-columns:1fr} }
-    .small-title{font-weight:700; margin:0 0 6px 0}
+
+    .side{
+      display:flex; flex-direction:column; gap:12px;
+    }
+    .aboutRow{
+      display:grid; grid-template-columns: 56px 1fr; gap:12px; align-items:center;
+      margin-bottom:6px;
+    }
+    .avatar{
+      width:56px; height:56px; border-radius:16px;
+      border:1px solid var(--border);
+      background:
+        radial-gradient(circle at 30% 30%, rgba(255,255,255,0.18), transparent 55%),
+        linear-gradient(135deg, rgba(122,167,255,0.22), rgba(255,122,214,0.14));
+      box-shadow: 0 0 0 6px rgba(255,255,255,0.03);
+      overflow:hidden;
+    }
+    /* If you later add a real headshot: put /assets/profile.jpg and uncomment below
+    .avatar img{width:100%; height:100%; object-fit:cover; display:block}
+    */
+    .miniTitle{font-weight:800; margin:0}
     .muted{color:var(--muted)}
-    footer{margin-top:26px; color:var(--muted); font-size:13px}
+    .list{margin:10px 0 0 0; padding:0; list-style:none; display:grid; gap:8px}
+    .li{
+      display:flex; gap:10px; align-items:flex-start;
+      padding:10px 12px;
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,0.10);
+      background: rgba(0,0,0,0.18);
+    }
+    .chip{
+      width:10px; height:10px; border-radius:999px; margin-top:6px;
+      background: var(--a);
+      box-shadow: 0 0 16px rgba(122,167,255,0.45);
+      flex:0 0 auto;
+    }
+
+    /* ====== SECTIONS ====== */
+    .section{margin-top:16px}
+    .sectionHead{
+      display:flex; justify-content:space-between; align-items:end; gap:12px;
+      margin:18px 2px 10px;
+    }
+    .sectionHead h2{
+      margin:0;
+      font-size:18px;
+      letter-spacing:0.1px;
+    }
+    .sectionHead .hint{color:var(--muted); font-size:13px}
+
+    .grid3{display:grid; grid-template-columns: repeat(3, 1fr); gap:14px}
+    @media (max-width: 920px){ .grid3{grid-template-columns:1fr} }
+
+    .tile{
+      border:1px solid rgba(255,255,255,0.12);
+      border-radius:20px;
+      background: rgba(255,255,255,0.04);
+      padding:16px;
+      box-shadow: 0 10px 36px rgba(0,0,0,0.30);
+      position:relative;
+      overflow:hidden;
+    }
+    .tile::after{
+      content:"";
+      position:absolute; inset:auto -30% -70% -30%;
+      height:240px;
+      background: radial-gradient(closest-side, rgba(122,167,255,0.18), transparent 70%);
+      transform: rotate(-8deg);
+      opacity:0.7;
+    }
+    .tile > *{position:relative}
+    .tTitle{margin:0 0 6px 0; font-weight:850}
+    .tBody{margin:0; color:var(--muted)}
+
+    .featured{
+      display:grid; grid-template-columns: 1fr 1fr;
+      gap:14px;
+    }
+    @media (max-width: 920px){ .featured{grid-template-columns:1fr} }
+    .paper{
+      border:1px solid rgba(255,255,255,0.12);
+      border-radius:20px;
+      background: rgba(0,0,0,0.18);
+      padding:14px 14px 12px;
+    }
+    .paper b{font-weight:900}
+    .paper .meta{color:var(--muted); font-size:13px; margin-top:4px}
+    .paper .why{color:rgba(238,242,255,0.82); margin-top:8px; font-size:14px}
+
+    /* ====== FOOTER + SCROLL CUE ====== */
+    .scrollCue{
+      display:flex; align-items:center; gap:10px;
+      margin: 14px 2px 0;
+      color:var(--muted);
+      font-size:13px;
+    }
+    .mouse{
+      width:22px; height:34px; border-radius:999px;
+      border:1px solid rgba(255,255,255,0.22);
+      position:relative;
+      background: rgba(255,255,255,0.02);
+    }
+    .mouse::after{
+      content:"";
+      width:4px; height:8px; border-radius:999px;
+      background: rgba(255,255,255,0.6);
+      position:absolute; left:50%; top:8px; transform:translateX(-50%);
+      animation: wheel 1.4s infinite ease-in-out;
+    }
+    @keyframes wheel{
+      0%{opacity:0.25; transform:translate(-50%,0)}
+      50%{opacity:0.9; transform:translate(-50%,8px)}
+      100%{opacity:0.25; transform:translate(-50%,0)}
+    }
+
+    footer{
+      margin-top:26px;
+      color:var(--muted);
+      font-size:13px;
+      padding: 6px 2px 0;
+    }
   </style>
 </head>
 
 <body>
+  <!-- Animated SVG background: lattice + orbitals + pump/x-ray/probe beams -->
+  <svg class="bg" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <defs>
+      <radialGradient id="gDot" cx="30%" cy="30%">
+        <stop offset="0%" stop-color="rgba(255,255,255,0.35)"/>
+        <stop offset="45%" stop-color="rgba(255,255,255,0.14)"/>
+        <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+      </radialGradient>
+
+      <linearGradient id="beamPump" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color="rgba(255,122,214,0)"/>
+        <stop offset="40%" stop-color="rgba(255,122,214,0.35)"/>
+        <stop offset="60%" stop-color="rgba(255,122,214,0.35)"/>
+        <stop offset="100%" stop-color="rgba(255,122,214,0)"/>
+      </linearGradient>
+
+      <linearGradient id="beamX" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color="rgba(255,224,138,0)"/>
+        <stop offset="45%" stop-color="rgba(255,224,138,0.28)"/>
+        <stop offset="55%" stop-color="rgba(255,224,138,0.28)"/>
+        <stop offset="100%" stop-color="rgba(255,224,138,0)"/>
+      </linearGradient>
+
+      <linearGradient id="beamProbe" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color="rgba(122,167,255,0)"/>
+        <stop offset="45%" stop-color="rgba(122,167,255,0.26)"/>
+        <stop offset="55%" stop-color="rgba(122,167,255,0.26)"/>
+        <stop offset="100%" stop-color="rgba(122,167,255,0)"/>
+      </linearGradient>
+
+      <filter id="blur12"><feGaussianBlur stdDeviation="12"/></filter>
+      <filter id="blur6"><feGaussianBlur stdDeviation="6"/></filter>
+    </defs>
+
+    <!-- Lattice dots -->
+    <g opacity="0.55">
+      <g id="dots">
+        <!-- a sparse grid of dots -->
+        <circle cx="120" cy="130" r="26" fill="url(#gDot)"/>
+        <circle cx="240" cy="210" r="18" fill="url(#gDot)"/>
+        <circle cx="380" cy="150" r="22" fill="url(#gDot)"/>
+        <circle cx="520" cy="240" r="18" fill="url(#gDot)"/>
+        <circle cx="680" cy="170" r="24" fill="url(#gDot)"/>
+        <circle cx="860" cy="240" r="18" fill="url(#gDot)"/>
+        <circle cx="1020" cy="160" r="22" fill="url(#gDot)"/>
+        <circle cx="1180" cy="240" r="18" fill="url(#gDot)"/>
+
+        <circle cx="160" cy="430" r="18" fill="url(#gDot)"/>
+        <circle cx="320" cy="520" r="22" fill="url(#gDot)"/>
+        <circle cx="520" cy="480" r="18" fill="url(#gDot)"/>
+        <circle cx="720" cy="560" r="24" fill="url(#gDot)"/>
+        <circle cx="900" cy="470" r="18" fill="url(#gDot)"/>
+        <circle cx="1120" cy="540" r="22" fill="url(#gDot)"/>
+
+        <circle cx="220" cy="760" r="22" fill="url(#gDot)"/>
+        <circle cx="420" cy="700" r="18" fill="url(#gDot)"/>
+        <circle cx="650" cy="780" r="24" fill="url(#gDot)"/>
+        <circle cx="900" cy="740" r="18" fill="url(#gDot)"/>
+        <circle cx="1180" cy="780" r="22" fill="url(#gDot)"/>
+      </g>
+      <animateTransform attributeName="transform" type="translate"
+        values="0 0; 0 -10; 0 0" dur="9s" repeatCount="indefinite"/>
+    </g>
+
+    <!-- Orbitals/atoms -->
+    <g opacity="0.8">
+      <g transform="translate(1050 160)">
+        <circle cx="0" cy="0" r="42" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.14)"/>
+        <ellipse cx="0" cy="0" rx="70" ry="28" fill="none" stroke="rgba(122,167,255,0.25)"/>
+        <ellipse cx="0" cy="0" rx="28" ry="70" fill="none" stroke="rgba(255,122,214,0.22)"/>
+        <circle cx="52" cy="-6" r="5" fill="rgba(255,255,255,0.55)"/>
+        <circle cx="-12" cy="58" r="4" fill="rgba(255,255,255,0.45)"/>
+        <animateTransform attributeName="transform" type="rotate"
+          from="0 1050 160" to="360 1050 160" dur="18s" repeatCount="indefinite"/>
+      </g>
+
+      <g transform="translate(320 650)" opacity="0.9">
+        <circle cx="0" cy="0" r="36" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.12)"/>
+        <ellipse cx="0" cy="0" rx="62" ry="24" fill="none" stroke="rgba(93,255,191,0.22)"/>
+        <ellipse cx="0" cy="0" rx="24" ry="62" fill="none" stroke="rgba(122,167,255,0.18)"/>
+        <circle cx="-44" cy="8" r="4" fill="rgba(255,255,255,0.45)"/>
+        <animateTransform attributeName="transform" type="rotate"
+          from="360 320 650" to="0 320 650" dur="22s" repeatCount="indefinite"/>
+      </g>
+    </g>
+
+    <!-- Beams: pump (magenta), x-ray (gold), optical probe (blue) -->
+    <g filter="url(#blur6)" opacity="0.95">
+      <!-- pump -->
+      <rect x="-80" y="300" width="980" height="18" fill="url(#beamPump)" transform="rotate(-8 0 300)">
+        <animate attributeName="opacity" values="0.35;0.75;0.35" dur="2.6s" repeatCount="indefinite"/>
+      </rect>
+      <!-- x-ray -->
+      <rect x="520" y="-60" width="780" height="14" fill="url(#beamX)" transform="rotate(28 520 -60)">
+        <animate attributeName="opacity" values="0.25;0.55;0.25" dur="3.2s" repeatCount="indefinite"/>
+      </rect>
+      <!-- probe -->
+      <rect x="-80" y="520" width="1120" height="16" fill="url(#beamProbe)" transform="rotate(6 0 520)">
+        <animate attributeName="opacity" values="0.22;0.50;0.22" dur="3.0s" repeatCount="indefinite"/>
+      </rect>
+    </g>
+
+    <!-- Soft glow blobs -->
+    <g filter="url(#blur12)" opacity="0.55">
+      <circle cx="260" cy="220" r="120" fill="rgba(122,167,255,0.18)"/>
+      <circle cx="1220" cy="260" r="160" fill="rgba(255,122,214,0.12)"/>
+      <circle cx="860" cy="820" r="180" fill="rgba(93,255,191,0.10)"/>
+    </g>
+  </svg>
+
   <div class="wrap">
     <nav>
-      <div class="nav-left">
-        <div class="dot"></div>
-        <div class="name">Your Name</div>
+      <div class="brand">
+        <div class="mark"></div>
+        <div>
+          <div><b>Your Name</b></div>
+          <div class="tagline">Ultrafast quantum materials · nonlinear optics · x-ray scattering</div>
+        </div>
       </div>
+
       <div class="nav-links">
-        <a class="pill" href="index.html">Home</a>
+        <a class="pill active" href="index.html">Home</a>
         <a class="pill" href="#">Research</a>
         <a class="pill" href="#">Publications</a>
         <a class="pill" href="#">CV</a>
@@ -95,53 +414,91 @@
 
     <section class="hero">
       <div class="card">
+        <div class="kicker"><span class="kdot"></span> nonequilibrium quantum matter</div>
         <h1>Quantum materials, driven far from equilibrium.</h1>
-        <div class="subtitle">
-          I am <b>Your Name</b>, a researcher working on ultrafast dynamics in quantum and complex oxide materials,
-          using nonlinear optics and time-resolved scattering to reveal emergent states under pulsed excitation.
+        <div class="sub">
+          I am <b>Your Name</b>, a <b>Postdoctoral Research Associate</b> studying ultrafast phase transitions and
+          emergent ferroic textures in complex oxides using <b>pump–probe optics</b>, <b>nonlinear SHG</b>, and
+          <b>time-resolved x-ray scattering</b>.
         </div>
 
-        <div class="buttons">
+        <div class="cta">
           <a class="btn primary" href="#">Download CV</a>
           <a class="btn" href="#">Google Scholar</a>
-          <a class="btn" href="#">Email</a>
+          <a class="btn" href="mailto:your@email.com">Email</a>
+        </div>
+
+        <div class="scrollCue">
+          <div class="mouse"></div>
+          <div>Scroll for research themes & highlights</div>
         </div>
       </div>
 
-      <div class="card">
-        <p class="small-title">About</p>
-        <p class="muted" style="margin-top:0">
-          Currently: <b>Postdoctoral Research Associate</b><br/>
-          Department / Lab (add)<br/>
-          University (add)<br/>
-          Location (add)
-        </p>
-        <p class="small-title">Research interests</p>
-        <p class="muted" style="margin-top:0">
-          Ultrafast spectroscopy · Nonlinear optics (SHG) · Pump–probe<br/>
-          X-ray scattering · Ferroic textures · Nonequilibrium phases
-        </p>
+      <div class="side">
+        <div class="card">
+          <div class="aboutRow">
+            <div class="avatar">
+              <!-- later: <img src="assets/profile.jpg" alt="Profile photo"> -->
+            </div>
+            <div>
+              <p class="miniTitle" style="margin:0">About</p>
+              <div class="muted" style="margin-top:4px">
+                Currently: <b>Postdoctoral Research Associate</b><br/>
+                Boston University (add lab/PI)<br/>
+                Boston, MA
+              </div>
+            </div>
+          </div>
+
+          <p class="miniTitle">Research interests</p>
+          <ul class="list">
+            <li class="li"><span class="chip"></span><span><b>Ultrafast nonequilibrium phases</b> in complex oxide heterostructures</span></li>
+            <li class="li"><span class="chip" style="background:var(--b)"></span><span><b>Nonlinear optics (SHG)</b> for symmetry and domain order parameters</span></li>
+            <li class="li"><span class="chip" style="background:var(--x)"></span><span><b>Time-resolved x-ray scattering</b> to track structural dynamics</span></li>
+          </ul>
+        </div>
       </div>
     </section>
 
-    <section class="grid3">
-      <div class="card">
-        <p class="small-title">Theme 1</p>
-        <p class="muted" style="margin-top:0">
-          One sentence about your strongest research direction.
-        </p>
+    <section class="section">
+      <div class="sectionHead">
+        <h2>Research at a glance</h2>
+        <div class="hint">Replace these three tiles with your core themes</div>
       </div>
-      <div class="card">
-        <p class="small-title">Theme 2</p>
-        <p class="muted" style="margin-top:0">
-          One sentence about a second direction (method or material class).
-        </p>
+
+      <div class="grid3">
+        <div class="tile">
+          <p class="tTitle">On-demand non-equilibrium states</p>
+          <p class="tBody">Creating and stabilizing emergent phases with femtosecond excitation beyond equilibrium limits.</p>
+        </div>
+        <div class="tile">
+          <p class="tTitle">Ferroic textures & topological domains</p>
+          <p class="tBody">Vortex / mixed-domain structures in oxide superlattices and their ultrafast switching pathways.</p>
+        </div>
+        <div class="tile">
+          <p class="tTitle">Symmetry-resolved ultrafast probes</p>
+          <p class="tBody">SHG polarimetry + scattering to disentangle electronic/structural order parameters in real time.</p>
+        </div>
       </div>
-      <div class="card">
-        <p class="small-title">Theme 3</p>
-        <p class="muted" style="margin-top:0">
-          One sentence about a third direction (e.g., domain/vortex physics).
-        </p>
+    </section>
+
+    <section class="section">
+      <div class="sectionHead">
+        <h2>Selected highlights</h2>
+        <div class="hint">Later we’ll auto-link to Publications</div>
+      </div>
+
+      <div class="featured">
+        <div class="paper">
+          <b>Title of key paper / result (replace)</b>
+          <div class="meta">Journal / Preprint · Year · Your role</div>
+          <div class="why">One-line takeaway describing what changed in the field or what capability you demonstrated.</div>
+        </div>
+        <div class="paper">
+          <b>Title of second highlight (replace)</b>
+          <div class="meta">Journal / Preprint · Year · Your role</div>
+          <div class="why">One-line takeaway with technique + impact (e.g., SHG symmetry extraction, TR-xray evidence).</div>
+        </div>
       </div>
     </section>
 
