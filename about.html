@@ -15,10 +15,13 @@
   --stroke:rgba(255,255,255,0.14);
 
   --accent:#f3c74b;
-  --accent2:#ff5a5a;
 
   /* Your global tab background image */
   --bgImage: url("assets/bg-template.png");
+
+  /* Logo sizing (about ~5x bigger than small icons, but still usable) */
+  --logoSize: 140px;
+  --logoSizeMobile: 110px;
 }
 
 *{box-sizing:border-box}
@@ -84,19 +87,17 @@ a:hover{color:var(--accent)}
   padding:34px 0 70px;
 }
 
-/* ================= SECTION HEADER (bold underlined) ================= */
+/* ================= SECTION HEADER ================= */
 .sectionTitle{
   margin:22px 0 14px;
   font-weight:900;
-  letter-spacing:0.02em;
-  text-transform:none;
   font-size:18px;
   display:inline-block;
   padding-bottom:6px;
   border-bottom:2px solid rgba(243,199,75,0.75);
 }
 
-/* ================= GLASS BAR / CARDS ================= */
+/* ================= GLASS ================= */
 .glass{
   background:var(--card);
   border:1px solid var(--stroke);
@@ -105,46 +106,59 @@ a:hover{color:var(--accent)}
   backdrop-filter: blur(10px);
 }
 
-.positionBar{
-  padding:18px 18px;
-  display:flex;
-  gap:18px;
-  align-items:center;
-}
-
+/* ================= LOGO (BIG) ================= */
 .logo{
-  width:76px;height:76px; /* larger logo */
-  border-radius:18px;
+  width:var(--logoSize);
+  height:var(--logoSize);
+  border-radius:24px;
   display:grid;
   place-items:center;
-  background:rgba(255,255,255,0.06);
-  border:1px solid rgba(255,255,255,0.14);
+
+  /* IMPORTANT: white plate so transparent logos (UW esp.) show up */
+  background:rgba(255,255,255,0.92);
+
+  border:1px solid rgba(255,255,255,0.18);
   overflow:hidden;
   flex:0 0 auto;
+
+  box-shadow:0 14px 34px rgba(0,0,0,0.35);
 }
 .logo img{
   width:100%;
   height:100%;
   object-fit:contain;
-  padding:12px;
-  filter: drop-shadow(0 12px 18px rgba(0,0,0,0.35));
+
+  /* less padding so the logo is actually visible */
+  padding:10px;
+
+  /* no dimming; keep it crisp */
+  filter:none;
 }
 
-.posText{display:flex;flex-direction:column;gap:6px;min-width:0}
+/* ================= CURRENT POSITION BAR ================= */
+.positionBar{
+  padding:18px;
+  display:flex;
+  gap:18px;
+  align-items:center;
+}
+
+/* text */
+.posText{display:flex;flex-direction:column;gap:8px;min-width:0}
 .posRole{
-  font-size:18px;
+  font-size:20px;
   font-weight:900;
   letter-spacing:-0.01em;
 }
 .posDept{
-  color:rgba(242,242,242,0.78);
+  color:rgba(242,242,242,0.80);
   line-height:1.5;
+  font-size:15px;
 }
 .posMeta{
   display:flex;
   gap:10px;
   flex-wrap:wrap;
-  margin-top:2px;
   color:rgba(242,242,242,0.70);
   font-size:13px;
 }
@@ -155,17 +169,17 @@ a:hover{color:var(--accent)}
   background:rgba(255,255,255,0.06);
 }
 
-/* ================= EDUCATION LIST ================= */
-.eduWrap{
-  padding:16px;
-}
-.eduList{
-  display:flex;
-  flex-direction:column;
-  gap:14px;
+/* project/details paragraph (kept!) */
+.posDetails{
+  margin-top:12px;
+  color:rgba(242,242,242,0.74);
+  line-height:1.75;
+  font-size:14.4px;
 }
 
-/* Each edu row */
+/* ================= EDUCATION ================= */
+.eduWrap{padding:16px}
+.eduList{display:flex;flex-direction:column;gap:14px}
 .eduRow{
   display:flex;
   gap:16px;
@@ -187,8 +201,6 @@ a:hover{color:var(--accent)}
   line-height:1.55;
   font-size:14px;
 }
-
-/* date + thesis line */
 .eduMeta{
   display:flex;
   gap:10px;
@@ -196,10 +208,9 @@ a:hover{color:var(--accent)}
   align-items:center;
   color:rgba(242,242,242,0.70);
   font-size:13px;
-  margin-bottom:8px;
 }
 .eduThesis{
-  margin:0;
+  margin:10px 0 0 0;
   color:rgba(242,242,242,0.80);
   line-height:1.6;
   font-size:13.5px;
@@ -222,9 +233,9 @@ a:hover{color:var(--accent)}
 }
 
 /* responsive */
-@media (max-width: 860px){
+@media (max-width: 900px){
+  :root{ --logoSize: var(--logoSizeMobile); }
   .positionBar{flex-direction:column;align-items:flex-start}
-  .logo{width:72px;height:72px}
 }
 </style>
 </head>
@@ -256,9 +267,15 @@ a:hover{color:var(--accent)}
       <div class="posText">
         <div class="posRole">Postdoctoral Research Associate</div>
         <div class="posDept">Department of Physics, Boston University</div>
+
         <div class="posMeta">
           <span class="pill">Nov. 2024 – Present</span>
           <span class="pill">Boston, MA</span>
+        </div>
+
+        <!-- kept project/details -->
+        <div class="posDetails">
+          (Optional) Add 2–3 lines here later: your core research themes, methods, and what you’re building toward.
         </div>
       </div>
     </section>
@@ -292,7 +309,7 @@ a:hover{color:var(--accent)}
           </div>
         </div>
 
-        <!-- MS -->
+        <!-- MS (no thesis line) -->
         <div class="eduRow">
           <div class="logo" title="University of Wisconsin–Madison">
             <img src="assets/logo-uw.png" alt="UW–Madison logo">
@@ -305,16 +322,10 @@ a:hover{color:var(--accent)}
             <div class="eduMeta">
               <span class="pill">08/2018 – 05/2021</span>
             </div>
-
-            <p class="eduThesis">
-              <b>Thesis:</b> <em>PASTE YOUR MS THESIS TITLE HERE (or “Non-thesis”)</em>
-              &nbsp;·&nbsp;
-              <a href="PASTE_THESIS_LINK_HERE" target="_blank" rel="noopener noreferrer">Link</a>
-            </p>
           </div>
         </div>
 
-        <!-- BTech -->
+        <!-- BTech (no thesis line) -->
         <div class="eduRow">
           <div class="logo" title="IIT (BHU) Varanasi">
             <img src="assets/logo-iitbhu.png" alt="IIT (BHU) Varanasi logo">
@@ -327,12 +338,6 @@ a:hover{color:var(--accent)}
             <div class="eduMeta">
               <span class="pill">07/2013 – 05/2017</span>
             </div>
-
-            <p class="eduThesis">
-              <b>Project:</b> <em>PASTE YOUR B.Tech THESIS/PROJECT TITLE HERE</em>
-              &nbsp;·&nbsp;
-              <a href="PASTE_LINK_HERE" target="_blank" rel="noopener noreferrer">Link</a>
-            </p>
           </div>
         </div>
 
