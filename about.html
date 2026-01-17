@@ -3,37 +3,37 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>About Me · Deepankar Sri Gyan</title>
+<title>About · Deepankar Sri Gyan</title>
 
 <style>
 :root{
   --bg:#020306;
   --text:#f2f2f2;
-  --muted:rgba(242,242,242,0.78);
-  --card:rgba(12,16,26,0.58);
-  --stroke:rgba(255,255,255,0.14);
-  --accent:#f3c74b;
+  --muted:rgba(242,242,242,0.76);
 
-  /* shared background for all tabs */
+  --card:rgba(10,14,22,0.62);
+  --stroke:rgba(255,255,255,0.14);
+
+  --accent:#f3c74b;
+  --accent2:#ff5a5a;
+
+  /* Your global tab background image */
   --bgImage: url("assets/bg-template.png");
 }
 
 *{box-sizing:border-box}
 html,body{
-  margin:0;
-  height:100%;
+  margin:0;height:100%;
   background:var(--bg);
   color:var(--text);
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
 }
-
 a{color:inherit;text-decoration:none}
 a:hover{color:var(--accent)}
 
-/* ================= NAV (same as Home) ================= */
+/* ================= NAV ================= */
 .nav{
-  position:fixed;
-  top:0; left:0; right:0;
+  position:fixed; top:0; left:0; right:0;
   z-index:10;
   display:flex;
   justify-content:space-between;
@@ -44,15 +44,12 @@ a:hover{color:var(--accent)}
 .nav .name{font-weight:700;font-size:18px}
 .nav .menu{display:flex;gap:22px;font-size:14px;flex-wrap:wrap}
 .nav .menu a{opacity:0.86;padding-bottom:3px}
-.nav .menu a.active{
-  opacity:1;
-  border-bottom:1px solid var(--accent);
-}
+.nav .menu a.active{opacity:1;border-bottom:1px solid var(--accent)}
 
-/* ================= PAGE BACKGROUND ================= */
+/* ================= PAGE BG ================= */
 .page{
   min-height:100vh;
-  padding-top:120px;
+  padding-top:96px;
   position:relative;
   overflow:hidden;
 }
@@ -62,8 +59,8 @@ a:hover{color:var(--accent)}
   inset:0;
   z-index:0;
   background:
-    radial-gradient(900px 560px at 30% 35%, rgba(0,0,0,0.08), rgba(0,0,0,0.72)),
-    linear-gradient(180deg, rgba(0,0,0,0.12), rgba(0,0,0,0.65)),
+    radial-gradient(900px 560px at 30% 35%, rgba(0,0,0,0.12), rgba(0,0,0,0.74)),
+    linear-gradient(180deg, rgba(0,0,0,0.10), rgba(0,0,0,0.62)),
     var(--bgImage);
   background-size:cover;
   background-position:center;
@@ -76,7 +73,7 @@ a:hover{color:var(--accent)}
   position:absolute;
   inset:0;
   z-index:0;
-  background:linear-gradient(180deg, rgba(0,0,0,0.08), rgba(0,0,0,0.46));
+  background:linear-gradient(180deg, rgba(0,0,0,0.06), rgba(0,0,0,0.45));
 }
 
 .container{
@@ -84,79 +81,40 @@ a:hover{color:var(--accent)}
   z-index:1;
   width:min(1120px, 92%);
   margin:0 auto;
-  padding-bottom:70px;
+  padding:34px 0 70px;
 }
 
-/* ================= TYPOGRAPHY ================= */
-.kicker{
-  display:inline-flex;
-  gap:10px;
-  align-items:center;
-  font-size:12px;
-  letter-spacing:0.16em;
-  text-transform:uppercase;
-  color:rgba(242,242,242,0.65);
-}
-.kicker::before{
-  content:"";
-  width:10px;height:10px;border-radius:999px;
-  background: radial-gradient(circle, rgba(243,199,75,1), rgba(243,199,75,0.35));
-  box-shadow:0 0 22px rgba(243,199,75,0.35);
+/* ================= SECTION HEADER (bold underlined) ================= */
+.sectionTitle{
+  margin:22px 0 14px;
+  font-weight:900;
+  letter-spacing:0.02em;
+  text-transform:none;
+  font-size:18px;
+  display:inline-block;
+  padding-bottom:6px;
+  border-bottom:2px solid rgba(243,199,75,0.75);
 }
 
-h1{
-  margin:14px 0 8px 0;
-  font-size:42px;
-  line-height:1.1;
-  letter-spacing:-0.02em;
-}
-.subtitle{
-  margin:0 0 28px 0;
-  color:rgba(242,242,242,0.72);
-  line-height:1.8;
-  max-width:70ch;
-}
-
-/* ================= GLASS CARDS ================= */
-.grid{
-  display:grid;
-  grid-template-columns: 1.05fr 0.95fr;
-  gap:22px;
-  align-items:start;
-}
-@media (max-width: 980px){
-  .grid{grid-template-columns:1fr}
-}
-
-.card{
+/* ================= GLASS BAR / CARDS ================= */
+.glass{
   background:var(--card);
   border:1px solid var(--stroke);
   border-radius:22px;
-  padding:20px;
   box-shadow: 0 18px 60px rgba(0,0,0,0.45);
   backdrop-filter: blur(10px);
 }
 
-.card h2{
-  margin:0 0 12px 0;
-  font-size:18px;
-}
-.card p{
-  margin:0;
-  color:var(--muted);
-  line-height:1.85;
-  font-size:14.7px;
-}
-
-/* ================= POSITION CARD ================= */
-.position{
+.positionBar{
+  padding:18px 18px;
   display:flex;
-  gap:14px;
+  gap:18px;
   align-items:center;
 }
+
 .logo{
-  width:54px;height:54px;
-  border-radius:14px;
+  width:76px;height:76px; /* larger logo */
+  border-radius:18px;
   display:grid;
   place-items:center;
   background:rgba(255,255,255,0.06);
@@ -168,77 +126,105 @@ h1{
   width:100%;
   height:100%;
   object-fit:contain;
-  padding:10px;
+  padding:12px;
   filter: drop-shadow(0 12px 18px rgba(0,0,0,0.35));
 }
-.position .title{
-  font-weight:700;
-  font-size:16px;
+
+.posText{display:flex;flex-direction:column;gap:6px;min-width:0}
+.posRole{
+  font-size:18px;
+  font-weight:900;
+  letter-spacing:-0.01em;
 }
-.badge{
-  display:inline-flex;
-  margin-top:8px;
+.posDept{
+  color:rgba(242,242,242,0.78);
+  line-height:1.5;
+}
+.posMeta{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-top:2px;
+  color:rgba(242,242,242,0.70);
+  font-size:13px;
+}
+.pill{
   padding:7px 10px;
   border-radius:999px;
   border:1px solid rgba(255,255,255,0.14);
   background:rgba(255,255,255,0.06);
-  color:rgba(242,242,242,0.78);
-  font-size:12.5px;
 }
 
-/* ================= EDUCATION TIMELINE ================= */
-.timeline{
+/* ================= EDUCATION LIST ================= */
+.eduWrap{
+  padding:16px;
+}
+.eduList{
   display:flex;
   flex-direction:column;
   gap:14px;
 }
+
+/* Each edu row */
 .eduRow{
-  display:grid;
-  grid-template-columns: 56px 1fr;
-  gap:14px;
+  display:flex;
+  gap:16px;
+  align-items:flex-start;
   padding:14px;
   border-radius:18px;
   border:1px solid rgba(255,255,255,0.12);
   background:rgba(0,0,0,0.18);
 }
-.eduMain{
-  display:flex;
-  flex-direction:column;
-  gap:6px;
+.eduMain{flex:1;min-width:0}
+.eduDegree{
+  font-weight:900;
+  font-size:16px;
+  margin:0;
 }
-.eduTop{
-  display:flex;
-  justify-content:space-between;
-  gap:12px;
-  flex-wrap:wrap;
+.eduInst{
+  margin:5px 0 10px 0;
+  color:rgba(242,242,242,0.78);
+  line-height:1.55;
+  font-size:14px;
 }
-.degree{
-  font-weight:800;
-  letter-spacing:-0.01em;
-}
-.inst{
-  color:rgba(242,242,242,0.75);
-}
-.meta{
+
+/* date + thesis line */
+.eduMeta{
   display:flex;
   gap:10px;
   flex-wrap:wrap;
-  color:rgba(242,242,242,0.68);
+  align-items:center;
+  color:rgba(242,242,242,0.70);
   font-size:13px;
+  margin-bottom:8px;
 }
-.pill{
-  padding:6px 10px;
-  border-radius:999px;
-  border:1px solid rgba(255,255,255,0.14);
-  background:rgba(255,255,255,0.05);
+.eduThesis{
+  margin:0;
+  color:rgba(242,242,242,0.80);
+  line-height:1.6;
+  font-size:13.5px;
+}
+.eduThesis a{
+  color:rgba(243,199,75,0.95);
+  border-bottom:1px solid rgba(243,199,75,0.45);
+}
+.eduThesis a:hover{
+  color:#ffd879;
+  border-bottom-color:rgba(255,216,121,0.9);
 }
 
-/* ================= FOOTER ================= */
+/* footer */
 .footer{
-  margin-top:22px;
+  margin-top:24px;
   text-align:center;
   color:rgba(242,242,242,0.55);
   font-size:12px;
+}
+
+/* responsive */
+@media (max-width: 860px){
+  .positionBar{flex-direction:column;align-items:flex-start}
+  .logo{width:72px;height:72px}
 }
 </style>
 </head>
@@ -258,101 +244,100 @@ h1{
 
 <main class="page">
   <div class="container">
-    <div class="kicker">About</div>
-    <h1>About Me</h1>
-    <p class="subtitle">
-      Current position and education. (We can add a short bio + links later: Google Scholar, ORCID, CV, etc.)
-    </p>
 
-    <div class="grid">
-      <!-- Current Position -->
-      <section class="card">
-        <h2>Current position</h2>
-        <div class="position">
-          <div class="logo" title="Boston University">
-            <img src="assets/logo-bu.png" alt="Boston University logo">
+    <!-- ================= CURRENT POSITION ================= -->
+    <div class="sectionTitle">Current position</div>
+
+    <section class="glass positionBar">
+      <div class="logo" title="Boston University">
+        <img src="assets/logo-bu.png" alt="Boston University logo">
+      </div>
+
+      <div class="posText">
+        <div class="posRole">Postdoctoral Research Associate</div>
+        <div class="posDept">Department of Physics, Boston University</div>
+        <div class="posMeta">
+          <span class="pill">Nov. 2024 – Present</span>
+          <span class="pill">Boston, MA</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= EDUCATION ================= -->
+    <div style="height:16px"></div>
+    <div class="sectionTitle">Education</div>
+
+    <section class="glass eduWrap">
+      <div class="eduList">
+
+        <!-- PhD -->
+        <div class="eduRow">
+          <div class="logo" title="University of Wisconsin–Madison">
+            <img src="assets/logo-uw.png" alt="UW–Madison logo">
           </div>
-          <div>
-            <div class="title">Postdoctoral Research Associate</div>
-            <div style="color:rgba(242,242,242,0.72); margin-top:4px;">
-              Department of Physics, Boston University
+
+          <div class="eduMain">
+            <p class="eduDegree">Doctor of Philosophy</p>
+            <p class="eduInst">Materials Science and Engineering · University of Wisconsin–Madison</p>
+
+            <div class="eduMeta">
+              <span class="pill">09/2018 – 10/2024</span>
             </div>
-            <div class="badge">Nov. 2024 – Present · Boston, MA</div>
+
+            <p class="eduThesis">
+              <b>Thesis:</b> <em>PASTE YOUR PhD THESIS TITLE HERE</em>
+              &nbsp;·&nbsp;
+              <a href="PASTE_THESIS_LINK_HERE" target="_blank" rel="noopener noreferrer">Link</a>
+            </p>
           </div>
         </div>
 
-        <div style="height:14px"></div>
-        <p>
-          (Optional) Add 2–3 lines here later: your core research themes, methods, and what you’re building toward.
-        </p>
-      </section>
-
-      <!-- Education -->
-      <section class="card">
-        <h2>Education</h2>
-
-        <div class="timeline">
-
-          <!-- PhD -->
-          <div class="eduRow">
-            <div class="logo" title="University of Wisconsin–Madison">
-              <img src="assets/logo-uw.png" alt="UW–Madison logo">
-            </div>
-            <div class="eduMain">
-              <div class="eduTop">
-                <div>
-                  <div class="degree">Doctor of Philosophy</div>
-                  <div class="inst">Materials Science and Engineering · University of Wisconsin–Madison</div>
-                </div>
-              </div>
-              <div class="meta">
-                <span class="pill">09/2018 – 10/2024</span>
-                <span class="pill">GPA: 3.66 / 4.0</span>
-              </div>
-            </div>
+        <!-- MS -->
+        <div class="eduRow">
+          <div class="logo" title="University of Wisconsin–Madison">
+            <img src="assets/logo-uw.png" alt="UW–Madison logo">
           </div>
 
-          <!-- MS -->
-          <div class="eduRow">
-            <div class="logo" title="University of Wisconsin–Madison">
-              <img src="assets/logo-uw.png" alt="UW–Madison logo">
-            </div>
-            <div class="eduMain">
-              <div class="eduTop">
-                <div>
-                  <div class="degree">Master of Science</div>
-                  <div class="inst">Materials Science and Engineering · University of Wisconsin–Madison</div>
-                </div>
-              </div>
-              <div class="meta">
-                <span class="pill">08/2018 – 05/2021</span>
-                <span class="pill">GPA: 3.66 / 4.0</span>
-              </div>
-            </div>
-          </div>
+          <div class="eduMain">
+            <p class="eduDegree">Master of Science</p>
+            <p class="eduInst">Materials Science and Engineering · University of Wisconsin–Madison</p>
 
-          <!-- BTech -->
-          <div class="eduRow">
-            <div class="logo" title="IIT (BHU) Varanasi">
-              <img src="assets/logo-iitbhu.png" alt="IIT (BHU) Varanasi logo">
+            <div class="eduMeta">
+              <span class="pill">08/2018 – 05/2021</span>
             </div>
-            <div class="eduMain">
-              <div class="eduTop">
-                <div>
-                  <div class="degree">Bachelor of Technology</div>
-                  <div class="inst">Ceramic Engineering · IIT (BHU) Varanasi</div>
-                </div>
-              </div>
-              <div class="meta">
-                <span class="pill">07/2013 – 05/2017</span>
-                <span class="pill">GPA: 8.78 / 10.00</span>
-              </div>
-            </div>
-          </div>
 
+            <p class="eduThesis">
+              <b>Thesis:</b> <em>PASTE YOUR MS THESIS TITLE HERE (or “Non-thesis”)</em>
+              &nbsp;·&nbsp;
+              <a href="PASTE_THESIS_LINK_HERE" target="_blank" rel="noopener noreferrer">Link</a>
+            </p>
+          </div>
         </div>
-      </section>
-    </div>
+
+        <!-- BTech -->
+        <div class="eduRow">
+          <div class="logo" title="IIT (BHU) Varanasi">
+            <img src="assets/logo-iitbhu.png" alt="IIT (BHU) Varanasi logo">
+          </div>
+
+          <div class="eduMain">
+            <p class="eduDegree">Bachelor of Technology</p>
+            <p class="eduInst">Ceramic Engineering · IIT (BHU) Varanasi</p>
+
+            <div class="eduMeta">
+              <span class="pill">07/2013 – 05/2017</span>
+            </div>
+
+            <p class="eduThesis">
+              <b>Project:</b> <em>PASTE YOUR B.Tech THESIS/PROJECT TITLE HERE</em>
+              &nbsp;·&nbsp;
+              <a href="PASTE_LINK_HERE" target="_blank" rel="noopener noreferrer">Link</a>
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </section>
 
     <div class="footer">© <span id="y"></span> Deepankar Sri Gyan</div>
   </div>
