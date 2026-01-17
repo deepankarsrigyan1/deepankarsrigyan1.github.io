@@ -77,215 +77,160 @@ a:hover{color:var(--accent)}
   position:absolute;
   inset:0;
   z-index:2;
-  background:linear-gradient(180deg, rgba(0,0,0,0.08), rgba(0,0,0,0.42));
+  background:linear-gradient(180deg, rgba(0,0,0,0.07), rgba(0,0,0,0.40));
 }
 
-/* ================= CONICAL, PULSED BEAMS ================= */
-/* Intersection point (tune this once) */
+/* ================= PUMP ONLY: BRIGHT RED, SLIGHT TILT, PULSED ================= */
+/* Pump aim point — adjust these two if you ever want to move it */
 :root{
-  --ix: 54%;
-  --iy: 255px;
+  --pumpX: 56%;
+  --pumpY: 210px;
+  --pumpTilt: -8deg; /* slight tilt so it’s not perfectly normal */
 }
 
-/* Beam base */
-.beam{
+.pumpBeam{
   position:absolute;
   z-index:3;
   pointer-events:none;
+
+  /* geometry */
+  width: 28px;
+  height: 430px;
+
+  /* place so the “focus end” lands at (pumpX, pumpY) */
+  left: var(--pumpX);
+  top: calc(var(--pumpY) - 360px);
+
+  /* tilt around the focusing end */
+  transform-origin: 50% 92%;
+  transform: translateX(-50%) rotate(var(--pumpTilt));
+
+  /* glow */
+  filter: drop-shadow(0 0 16px rgba(255,0,0,0.35)) drop-shadow(0 0 34px rgba(255,60,60,0.22));
+  opacity: 0.98;
 }
 
-/* Each beam is a “focused cone”:
-   - wide end (far) -> narrow end (at sample)
-   - plus a bright center line and traveling pulse packets
-*/
-.beam .cone{
+/* conical beam body: wide at top, narrow at bottom */
+.pumpBeam .cone{
   position:absolute;
   inset:0;
   border-radius:999px;
-  opacity:0.95;
+
+  /* super bright red core */
+  background: linear-gradient(to bottom,
+    rgba(255,0,0,0.00),
+    rgba(255,0,0,0.55),
+    rgba(255,40,40,1.00)
+  );
+
+  /* cone shape */
+  clip-path: polygon(0% 0%, 100% 0%, 64% 100%, 36% 100%);
+  filter: blur(0.8px);
   mix-blend-mode: screen;
-  filter: blur(0.2px);
 }
 
-.beam .centerline{
+/* intense centerline */
+.pumpBeam .centerline{
   position:absolute;
   left:50%;
   top:0;
-  width: 3px;
+  width: 4px;
   height: 100%;
   transform: translateX(-50%);
   border-radius:999px;
+  background: linear-gradient(to bottom,
+    rgba(255,255,255,0),
+    rgba(255,230,230,0.95),
+    rgba(255,255,255,0.95)
+  );
   mix-blend-mode: screen;
-  filter: blur(0.4px);
+  filter: blur(0.3px);
 }
 
-.beam .packets{
+/* traveling pulse packets (red) */
+.pumpBeam .packets{
   position:absolute;
   inset:0;
   border-radius:999px;
   mix-blend-mode: screen;
   opacity:0.95;
-  background-size: 140px 100%;
+
+  background-image:
+    repeating-linear-gradient(
+      to bottom,
+      rgba(255,230,230,0.0) 0px,
+      rgba(255,230,230,0.0) 42px,
+      rgba(255,255,255,0.95) 58px,
+      rgba(255,230,230,0.0) 76px
+    );
+  background-size: 100% 150px;
+  animation: packetsY 2.6s linear infinite; /* keep animation */
 }
 
-/* Pulse symbol near the focusing end */
-.pulseMark{
-  position:absolute;
-  z-index:4;
-  font-weight:700;
-  font-size:18px;
-  letter-spacing:0.5px;
-  opacity:0.95;
-  text-shadow: 0 0 18px rgba(0,0,0,0.7);
-  user-select:none;
+/* subtle “flicker” so beam looks alive */
+.pumpBeam{
+  animation: pumpBreath 2.2s ease-in-out infinite;
 }
 
-/* Spark at intersection */
+/* spark at the beam focus */
 .spark{
   position:absolute;
   z-index:4;
-  width:80px;
-  height:80px;
-  left:var(--ix);
-  top:var(--iy);
-  transform:translate(-50%,-50%);
+  width: 86px;
+  height: 86px;
+  left: var(--pumpX);
+  top: var(--pumpY);
+  transform: translate(-50%,-50%);
   border-radius:50%;
-  background:radial-gradient(circle,
+  background: radial-gradient(circle,
     rgba(255,255,255,0.95),
-    rgba(255,190,140,0.55),
-    rgba(255,190,140,0.0) 72%);
-  filter: blur(10px);
-  opacity:0.9;
-  animation: spark 1.8s ease-in-out infinite;
+    rgba(255,120,120,0.65),
+    rgba(255,120,120,0.0) 72%);
+  filter: blur(11px);
+  opacity:0.95;
+  animation: spark 2.2s ease-in-out infinite;
 }
 
-/* ====== PUMP (RED) — SLOWER, vertical, focused to intersection ====== */
-.beam.pump{
-  width: 22px;
-  height: 420px;
-  left: var(--ix);
-  top: calc(var(--iy) - 360px);
-  transform: translateX(-50%);
+/* pulse symbol near the beam (to show pulsed) */
+.pulseMark{
+  position:absolute;
+  z-index:5;
+  left: var(--pumpX);
+  top: calc(var(--pumpY) - 390px);
+  transform: translateX(-50%) rotate(var(--pumpTilt));
+  color: rgba(255,170,170,0.98);
+  font-weight: 800;
+  font-size: 20px;
+  letter-spacing: 0.5px;
+  text-shadow: 0 0 20px rgba(0,0,0,0.75), 0 0 18px rgba(255,0,0,0.25);
+  user-select:none;
+  opacity:0.95;
+  animation: markBlink 2.2s ease-in-out infinite;
 }
 
-/* cone (wide at top, narrow at bottom) */
-.beam.pump .cone{
-  background: linear-gradient(to bottom,
-    rgba(255,90,90,0.00),
-    rgba(255,90,90,0.55),
-    rgba(255,90,90,0.95)
-  );
-  clip-path: polygon(0% 0%, 100% 0%, 62% 100%, 38% 100%);
-  filter: blur(0.8px);
-}
-.beam.pump .centerline{
-  background: linear-gradient(to bottom, transparent, rgba(255,220,220,0.95), rgba(255,255,255,0.95));
-}
-.beam.pump .packets{
-  background-image: repeating-linear-gradient(
-    to bottom,
-    rgba(255,240,240,0.0) 0px,
-    rgba(255,240,240,0.0) 44px,
-    rgba(255,240,240,0.95) 60px,
-    rgba(255,240,240,0.0) 78px
-  );
-  animation: packetsY 2.9s linear infinite; /* slower */
-}
-
-/* ====== PROBE (GREEN) — angled from left, faster ====== */
-/* Angle close to your sketch: steeper down-right */
-.beam.probe{
-  width: 760px;
-  height: 20px;
-  left: calc(var(--ix) - 640px);
-  top: calc(var(--iy) - 120px);
-  transform: rotate(33deg);
-  transform-origin: 92% 50%; /* point near intersection */
-}
-
-/* cone: wide at left, narrow at right (near intersection) */
-.beam.probe .cone{
-  background: linear-gradient(to right,
-    rgba(0,255,160,0.00),
-    rgba(0,255,160,0.55),
-    rgba(0,255,160,0.95)
-  );
-  clip-path: polygon(0% 0%, 0% 100%, 100% 60%, 100% 40%);
-  filter: blur(0.7px);
-}
-.beam.probe .centerline{
-  width: 2.5px;
-  background: linear-gradient(to bottom, transparent, rgba(220,255,245,0.95), rgba(255,255,255,0.95));
-  left: 76%;
-}
-.beam.probe .packets{
-  background-image: repeating-linear-gradient(
-    to right,
-    rgba(220,255,245,0.0) 0px,
-    rgba(220,255,245,0.0) 54px,
-    rgba(220,255,245,0.95) 72px,
-    rgba(220,255,245,0.0) 92px
-  );
-  animation: packetsX 1.6s linear infinite; /* faster */
-}
-
-/* ====== DIFFRACTED (GOLD) — angled to the right (up-right-ish) ====== */
-.beam.diff{
-  width: 820px;
-  height: 16px;
-  left: calc(var(--ix) - 20px);
-  top: calc(var(--iy) - 50px);
-  transform: rotate(-12deg);
-  transform-origin: 0% 50%; /* start at intersection */
-}
-
-.beam.diff .cone{
-  background: linear-gradient(to right,
-    rgba(255,215,130,0.95),
-    rgba(255,215,130,0.55),
-    rgba(255,215,130,0.00)
-  );
-  /* narrow at left, wider to right (diffracted spreads) */
-  clip-path: polygon(0% 40%, 0% 60%, 100% 100%, 100% 0%);
-  filter: blur(0.7px);
-}
-.beam.diff .centerline{
-  width: 2.2px;
-  background: linear-gradient(to bottom, transparent, rgba(255,245,220,0.9), rgba(255,255,255,0.85));
-  left: 18%;
-}
-.beam.diff .packets{
-  background-image: repeating-linear-gradient(
-    to right,
-    rgba(255,245,220,0.0) 0px,
-    rgba(255,245,220,0.0) 62px,
-    rgba(255,245,220,0.9) 80px,
-    rgba(255,245,220,0.0) 100px
-  );
-  animation: packetsX 2.1s linear infinite;
-  opacity:0.85;
-}
-
-/* ================= ANIMATIONS ================= */
-@keyframes packetsX{
-  0%{background-position:0 0; opacity:0.25}
-  50%{opacity:1}
-  100%{background-position:140px 0; opacity:0.25}
-}
+/* animations */
 @keyframes packetsY{
-  0%{background-position:0 0; opacity:0.25}
+  0%{background-position:0 0; opacity:0.30}
   50%{opacity:1}
-  100%{background-position:0 140px; opacity:0.25}
+  100%{background-position:0 150px; opacity:0.30}
+}
+@keyframes pumpBreath{
+  0%,100%{opacity:0.75}
+  50%{opacity:1}
 }
 @keyframes spark{
-  0%,100%{transform:translate(-50%,-50%) scale(0.86); opacity:0.55}
-  50%{transform:translate(-50%,-50%) scale(1.06); opacity:0.95}
+  0%,100%{transform:translate(-50%,-50%) scale(0.86); opacity:0.65}
+  50%{transform:translate(-50%,-50%) scale(1.06); opacity:1}
+}
+@keyframes markBlink{
+  0%,100%{opacity:0.55}
+  50%{opacity:0.98}
 }
 
 /* ================= CONTENT ================= */
 .content{
   position:relative;
-  z-index:5;
+  z-index:6;
   width:min(1100px,92%);
   display:grid;
   grid-template-columns:320px 1fr;
@@ -323,7 +268,7 @@ a:hover{color:var(--accent)}
   text-align:center;
   font-size:12px;
   color:rgba(242,242,242,0.6);
-  z-index:6;
+  z-index:7;
 }
 </style>
 </head>
@@ -344,33 +289,16 @@ a:hover{color:var(--accent)}
 
 <section class="hero">
 
-  <!-- ======= BEAMS (positioned to intersect near the marked point) ======= -->
-  <div class="beam pump" aria-hidden="true">
+  <!-- PUMP ONLY -->
+  <div class="pumpBeam" aria-hidden="true">
     <div class="cone"></div>
     <div class="centerline"></div>
     <div class="packets"></div>
   </div>
-
-  <div class="beam probe" aria-hidden="true">
-    <div class="cone"></div>
-    <div class="centerline"></div>
-    <div class="packets"></div>
-  </div>
-
-  <div class="beam diff" aria-hidden="true">
-    <div class="cone"></div>
-    <div class="centerline"></div>
-    <div class="packets"></div>
-  </div>
-
   <div class="spark" aria-hidden="true"></div>
+  <div class="pulseMark" aria-hidden="true">∿</div>
 
-  <!-- Pulse symbols near the conical focusing ends -->
-  <div class="pulseMark" style="left:54%; top:22px; transform:translateX(-50%); color:rgba(255,160,160,0.95);" aria-hidden="true">∿</div>
-  <div class="pulseMark" style="left:34%; top:150px; transform:rotate(33deg); color:rgba(170,255,230,0.95);" aria-hidden="true">∿</div>
-  <div class="pulseMark" style="left:66%; top:188px; transform:rotate(-12deg); color:rgba(255,235,180,0.95);" aria-hidden="true">∿</div>
-
-  <!-- ======= MAIN CONTENT ======= -->
+  <!-- MAIN CONTENT -->
   <div class="content">
     <div class="photo">
       <img src="assets/profile.jpg" alt="Profile photo">
@@ -388,7 +316,7 @@ a:hover{color:var(--accent)}
         nonlinear SHG, and time-resolved x-ray scattering.
       </p>
       <p style="margin-top:26px;font-size:13px;color:rgba(242,242,242,0.6)">
-        Optical pump · THz probe · X-ray diffraction
+        Optical pump (pulsed) · Nonlinear SHG · Time-resolved x-ray probes
       </p>
     </div>
   </div>
