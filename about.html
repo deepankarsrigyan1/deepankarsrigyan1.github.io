@@ -11,8 +11,7 @@
   --text:#f2f2f2;
   --muted:rgba(242,242,242,0.80);
 
-  /* cards ~60% opaque */
-  --card:rgba(10,14,22,0.60);
+  --card:rgba(10,14,22,0.80);
   --stroke:rgba(255,255,255,0.16);
 
   --accent:#f3c74b;
@@ -59,8 +58,8 @@ a:hover{color:var(--accent)}
   inset:0;
   z-index:0;
   background:
-    radial-gradient(900px 560px at 30% 35%, rgba(0,0,0,0.06), rgba(0,0,0,0.55)),
-    linear-gradient(180deg, rgba(0,0,0,0.08), rgba(0,0,0,0.48)),
+    radial-gradient(900px 560px at 30% 35%, rgba(0,0,0,0.12), rgba(0,0,0,0.74)),
+    linear-gradient(180deg, rgba(0,0,0,0.12), rgba(0,0,0,0.62)),
     var(--bgImage);
   background-size:cover;
   background-position:center;
@@ -81,11 +80,12 @@ a:hover{color:var(--accent)}
   padding:36px 0 80px;
 }
 
-/* ================= SECTION HEADER ================= */
+/* ================= SECTION HEADERS ================= */
+/* Current position +4px, Education +4px */
 .sectionTitle{
   margin:24px 0 16px;
   font-weight:900;
-  font-size:20px;
+  font-size:24px; /* was 20px -> +4px */
   padding-bottom:6px;
   border-bottom:2px solid rgba(243,199,75,0.8);
   display:inline-block;
@@ -121,27 +121,33 @@ a:hover{color:var(--accent)}
 }
 
 /* ================= CURRENT POSITION ================= */
+/* Center text vertically with logo */
 .positionBar{
   padding:20px;
   display:flex;
   gap:20px;
-  align-items:center;
+  align-items:center; /* vertical center */
 }
 
-.posText{display:flex;flex-direction:column;gap:10px}
+.posText{
+  display:flex;
+  flex-direction:column;
+  justify-content:center; /* ensure center even if logo is tall */
+  gap:10px;
+}
 .posRole{
-  font-size:22px;
+  font-size:26px; /* was 22px -> +4px */
   font-weight:900;
 }
 .posDept{
-  font-size:17px;
+  font-size:19px; /* was 17px -> +2px (looks better with role) */
   color:rgba(242,242,242,0.85);
 }
 .posMeta{
   display:flex;
   gap:10px;
   flex-wrap:wrap;
-  font-size:15px;
+  font-size:17px; /* was 15px -> +2px */
   color:rgba(242,242,242,0.75);
 }
 .pill{
@@ -151,15 +157,17 @@ a:hover{color:var(--accent)}
   background:rgba(255,255,255,0.08);
 }
 .posDetails{
-  margin-top:12px;
-  font-size:16px;
-  line-height:1.75;
+  margin-top:10px;
+  font-size:18px; /* was 16px -> +2px */
+  line-height:1.7;
   color:rgba(242,242,242,0.80);
 }
 
 /* ================= EDUCATION ================= */
 .eduWrap{padding:18px}
 .eduList{display:flex;flex-direction:column;gap:16px}
+
+/* Center text vertically with logo */
 .eduRow{
   display:flex;
   gap:18px;
@@ -167,27 +175,36 @@ a:hover{color:var(--accent)}
   border-radius:18px;
   border:1px solid rgba(255,255,255,0.14);
   background:rgba(0,0,0,0.20);
+  align-items:center; /* vertical center */
 }
-.eduMain{flex:1}
+
+.eduMain{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  justify-content:center; /* vertical center block */
+}
+
+/* All texts under Education +2px */
 .eduDegree{
-  font-size:18px;
+  font-size:20px; /* was 18px -> +2px */
   font-weight:900;
 }
 .eduInst{
   margin:6px 0 10px;
-  font-size:16px;
+  font-size:18px; /* was 16px -> +2px */
   color:rgba(242,242,242,0.82);
 }
 .eduMeta{
   display:flex;
   gap:10px;
   flex-wrap:wrap;
-  font-size:15px;
+  font-size:17px; /* was 15px -> +2px */
   color:rgba(242,242,242,0.72);
 }
 .eduThesis{
   margin-top:10px;
-  font-size:15px;
+  font-size:17px; /* was 15px -> +2px */
   color:rgba(242,242,242,0.88);
 }
 .eduThesis a{
@@ -206,6 +223,7 @@ a:hover{color:var(--accent)}
 @media (max-width:900px){
   :root{ --logoSize: var(--logoSizeMobile); }
   .positionBar,.eduRow{flex-direction:column;align-items:flex-start}
+  .posText,.eduMain{justify-content:flex-start}
 }
 </style>
 </head>
@@ -241,7 +259,7 @@ a:hover{color:var(--accent)}
     </div>
     <div class="posDetails">
       Mode-specific excitation of structural dynamics in quantum materials using <i>THz</i> and <i>mid-IR</i> pulses
-  </div>
+    </div>
   </div>
 </section>
 
