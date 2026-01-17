@@ -1,1 +1,284 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Deepankar Sri Gyan</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
 
+<style>
+:root{
+  --bg:#020306;
+  --text:#f2f2f2;
+  --muted:rgba(242,242,242,0.74);
+  --line:rgba(255,255,255,0.14);
+  --accent:#f3c74b;
+}
+
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:var(--bg);color:var(--text);
+font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Arial,sans-serif;}
+
+a{color:inherit;text-decoration:none}
+a:hover{color:var(--accent)}
+
+.nav{
+  position:fixed;top:0;left:0;right:0;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:18px 34px;
+  z-index:10;
+  background:linear-gradient(to bottom, rgba(0,0,0,.65), rgba(0,0,0,0));
+}
+.nav .name{font-weight:700;font-size:18px}
+.nav .menu{display:flex;gap:22px;font-size:14px;flex-wrap:wrap;justify-content:flex-end}
+.nav .menu a{opacity:.85}
+.nav .menu a.active{opacity:1;border-bottom:1px solid var(--accent);padding-bottom:3px}
+
+.hero{
+  min-height:100vh;
+  position:relative;
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding: 110px 18px 70px;
+}
+
+/* background */
+.bg{position:absolute;inset:0;z-index:1}
+
+/* dark gradient overlay for readability */
+.overlay{
+  position:absolute;inset:0;z-index:2;
+  background:
+    radial-gradient(900px 520px at 25% 30%, rgba(0,0,0,0.15), rgba(0,0,0,0.80)),
+    linear-gradient(180deg, rgba(0,0,0,0.35), rgba(0,0,0,0.82));
+}
+
+/* content layout like the example */
+.content{
+  position:relative;
+  z-index:3;
+  width:min(1100px, 100%);
+  display:grid;
+  grid-template-columns: 340px 1fr;
+  gap: 56px;
+  align-items:center;
+}
+@media (max-width: 900px){
+  .content{grid-template-columns:1fr; gap:22px; text-align:center}
+  .portrait{margin:0 auto}
+  .text{margin:0 auto}
+}
+
+/* portrait card */
+.portrait{
+  width: 300px;
+  height: 420px;
+  border-radius: 22px;
+  border: 1px solid var(--line);
+  overflow:hidden;
+  background: rgba(255,255,255,0.06);
+  box-shadow: 0 26px 90px rgba(0,0,0,0.55);
+}
+.portrait img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+
+/* text block */
+.text{
+  max-width: 720px;
+  text-align:center;
+}
+.text p{
+  margin: 0 0 18px 0;
+  font-size: 15.5px;
+  line-height: 1.9;
+  color: var(--muted);
+}
+.text b{color:var(--text)}
+.text .hl{color:var(--accent);font-weight:700}
+
+.footerNote{
+  position:absolute;
+  left:0; right:0; bottom:18px;
+  text-align:center;
+  color:rgba(242,242,242,0.6);
+  font-size:12px;
+  z-index:3;
+}
+</style>
+</head>
+
+<body>
+
+<div class="nav">
+  <div class="name">Deepankar Sri Gyan</div>
+  <div class="menu">
+    <a class="active" href="index.html">Home</a>
+    <a href="about.html">About Me</a>
+    <a href="research.html">Research</a>
+    <a href="publications.html">Publications</a>
+    <a href="contact.html">Contact Me</a>
+    <a href="utility.html">Utility Software</a>
+  </div>
+</div>
+
+<section class="hero">
+
+  <!-- Background: atoms + topology + beams (SVG) -->
+  <svg class="bg" viewBox="0 0 1400 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <defs>
+      <radialGradient id="atom">
+        <stop offset="0%" stop-color="rgba(255,255,255,0.42)"/>
+        <stop offset="60%" stop-color="rgba(255,255,255,0.14)"/>
+        <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+      </radialGradient>
+
+      <linearGradient id="laserR" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color="rgba(255,0,0,0)"/>
+        <stop offset="50%" stop-color="rgba(255,70,70,.62)"/>
+        <stop offset="100%" stop-color="rgba(255,0,0,0)"/>
+      </linearGradient>
+
+      <linearGradient id="laserG" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color="rgba(0,255,150,0)"/>
+        <stop offset="50%" stop-color="rgba(0,255,150,.55)"/>
+        <stop offset="100%" stop-color="rgba(0,255,150,0)"/>
+      </linearGradient>
+
+      <linearGradient id="laserX" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color="rgba(255,215,120,0)"/>
+        <stop offset="50%" stop-color="rgba(255,215,120,.45)"/>
+        <stop offset="100%" stop-color="rgba(255,215,120,0)"/>
+      </linearGradient>
+
+      <filter id="blur10"><feGaussianBlur stdDeviation="10"/></filter>
+      <filter id="blur6"><feGaussianBlur stdDeviation="6"/></filter>
+    </defs>
+
+    <!-- “topological” rippled surface (dark) -->
+    <g opacity="0.55" filter="url(#blur10)">
+      <path d="M0,580 C220,520 360,640 520,600 C680,560 820,490 980,540 C1140,590 1240,660 1400,610 L1400,900 L0,900 Z"
+            fill="rgba(90,120,255,0.10)"/>
+      <path d="M0,640 C240,590 360,720 540,670 C720,620 880,560 1020,600 C1160,640 1260,720 1400,690 L1400,900 L0,900 Z"
+            fill="rgba(255,90,210,0.08)"/>
+    </g>
+
+    <!-- lattice “atoms” -->
+    <g opacity="0.85">
+      <!-- create a dense dotted lattice by hand (fast + reliable) -->
+      <!-- rows -->
+      <!-- You can increase density later -->
+      <g>
+        <!-- simple staggered grid -->
+        <!-- generated-like pattern (manual but compact) -->
+        <!-- top half -->
+        <circle cx="90" cy="420" r="18" fill="url(#atom)"/>
+        <circle cx="150" cy="450" r="14" fill="url(#atom)"/>
+        <circle cx="210" cy="420" r="18" fill="url(#atom)"/>
+        <circle cx="270" cy="450" r="14" fill="url(#atom)"/>
+        <circle cx="330" cy="420" r="18" fill="url(#atom)"/>
+        <circle cx="390" cy="450" r="14" fill="url(#atom)"/>
+        <circle cx="450" cy="420" r="18" fill="url(#atom)"/>
+        <circle cx="510" cy="450" r="14" fill="url(#atom)"/>
+        <circle cx="570" cy="420" r="18" fill="url(#atom)"/>
+        <circle cx="630" cy="450" r="14" fill="url(#atom)"/>
+        <circle cx="690" cy="420" r="18" fill="url(#atom)"/>
+        <circle cx="750" cy="450" r="14" fill="url(#atom)"/>
+        <circle cx="810" cy="420" r="18" fill="url(#atom)"/>
+        <circle cx="870" cy="450" r="14" fill="url(#atom)"/>
+        <circle cx="930" cy="420" r="18" fill="url(#atom)"/>
+        <circle cx="990" cy="450" r="14" fill="url(#atom)"/>
+        <circle cx="1050" cy="420" r="18" fill="url(#atom)"/>
+        <circle cx="1110" cy="450" r="14" fill="url(#atom)"/>
+        <circle cx="1170" cy="420" r="18" fill="url(#atom)"/>
+        <circle cx="1230" cy="450" r="14" fill="url(#atom)"/>
+        <circle cx="1290" cy="420" r="18" fill="url(#atom)"/>
+      </g>
+
+      <!-- bottom half -->
+      <g opacity="0.95">
+        <circle cx="120" cy="560" r="22" fill="url(#atom)"/>
+        <circle cx="200" cy="600" r="18" fill="url(#atom)"/>
+        <circle cx="280" cy="560" r="22" fill="url(#atom)"/>
+        <circle cx="360" cy="600" r="18" fill="url(#atom)"/>
+        <circle cx="440" cy="560" r="22" fill="url(#atom)"/>
+        <circle cx="520" cy="600" r="18" fill="url(#atom)"/>
+        <circle cx="600" cy="560" r="22" fill="url(#atom)"/>
+        <circle cx="680" cy="600" r="18" fill="url(#atom)"/>
+        <circle cx="760" cy="560" r="22" fill="url(#atom)"/>
+        <circle cx="840" cy="600" r="18" fill="url(#atom)"/>
+        <circle cx="920" cy="560" r="22" fill="url(#atom)"/>
+        <circle cx="1000" cy="600" r="18" fill="url(#atom)"/>
+        <circle cx="1080" cy="560" r="22" fill="url(#atom)"/>
+        <circle cx="1160" cy="600" r="18" fill="url(#atom)"/>
+        <circle cx="1240" cy="560" r="22" fill="url(#atom)"/>
+      </g>
+    </g>
+
+    <!-- beams: THz (green pulsed), optical (red), X-ray (gold) -->
+    <g opacity="0.95">
+      <!-- THz beam -->
+      <g filter="url(#blur10)">
+        <rect x="-200" y="260" width="900" height="28" fill="url(#laserG)" transform="rotate(-14 0 260)">
+          <animate attributeName="opacity" values="0.2;0.9;0.2" dur="2.2s" repeatCount="indefinite"/>
+        </rect>
+        <g transform="rotate(-14 0 260)" opacity="0.85">
+          <path d="M200 280 L240 215" stroke="rgba(0,255,150,0.35)" stroke-width="6"/>
+          <path d="M250 290 L290 230" stroke="rgba(0,255,150,0.30)" stroke-width="5"/>
+          <path d="M300 300 L340 245" stroke="rgba(0,255,150,0.25)" stroke-width="4"/>
+        </g>
+      </g>
+
+      <!-- Optical beam -->
+      <g filter="url(#blur6)">
+        <rect x="560" y="120" width="820" height="22" fill="url(#laserR)" transform="rotate(22 560 120)">
+          <animate attributeName="opacity" values="0.25;0.65;0.25" dur="2.8s" repeatCount="indefinite"/>
+        </rect>
+        <circle cx="1040" cy="230" r="26" fill="rgba(255,70,70,0.60)" filter="url(#blur10)"/>
+      </g>
+
+      <!-- X-ray beam -->
+      <g filter="url(#blur6)">
+        <rect x="820" y="-80" width="720" height="16" fill="url(#laserX)" transform="rotate(36 820 -80)">
+          <animate attributeName="opacity" values="0.18;0.45;0.18" dur="3.3s" repeatCount="indefinite"/>
+        </rect>
+      </g>
+    </g>
+
+  </svg>
+
+  <div class="overlay"></div>
+
+  <!-- Foreground content -->
+  <div class="content">
+    <div class="portrait">
+      <img src="assets/profile.jpg" alt="Profile photo">
+    </div>
+
+    <div class="text">
+      <p>
+        I am a scientist studying the physics of materials. I use light to interrogate and manipulate the behavior of
+        <span class="hl">quantum materials</span> at ultrafast time scales.
+      </p>
+      <p>
+        I am currently a <b>Postdoctoral Research Associate</b> at <b>Boston University</b>.
+      </p>
+      <p style="margin-top:26px; font-size:13px; color:rgba(242,242,242,0.62)">
+        Ultrafast optical / THz excitation · Nonlinear SHG · Time-resolved x-ray probes
+      </p>
+    </div>
+  </div>
+
+  <div class="footerNote">© <span id="y"></span> Deepankar Sri Gyan</div>
+</section>
+
+<script>
+  document.getElementById("y").textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
