@@ -9,22 +9,22 @@
 :root{
   --bg:#020306;
   --text:#f2f2f2;
-  --muted:rgba(242,242,242,0.76);
+  --muted:rgba(242,242,242,0.80);
 
-  /* 80% opaque cards so background atoms are visible */
+  /* cards ~80% opaque */
   --card:rgba(10,14,22,0.80);
+  --stroke:rgba(255,255,255,0.16);
 
-  --stroke:rgba(255,255,255,0.14);
   --accent:#f3c74b;
 
-  /* background image used for tabs */
   --bgImage: url("assets/bg-template.png");
 
-  /* Logos 1.5x larger than before */
-  --logoSize: 210px;          /* was 140 */
-  --logoSizeMobile: 165px;    /* was 110 */
+  /* logos (already large) */
+  --logoSize: 210px;
+  --logoSizeMobile: 165px;
 }
 
+/* base */
 *{box-sizing:border-box}
 html,body{
   margin:0;height:100%;
@@ -45,17 +45,16 @@ a:hover{color:var(--accent)}
   padding:18px 36px;
   background:linear-gradient(to bottom, rgba(0,0,0,0.72), rgba(0,0,0,0));
 }
-.nav .name{font-weight:700;font-size:18px}
-.nav .menu{display:flex;gap:22px;font-size:14px;flex-wrap:wrap}
+.nav .name{font-weight:700;font-size:20px}
+.nav .menu{display:flex;gap:22px;font-size:16px;flex-wrap:wrap}
 .nav .menu a{opacity:0.86;padding-bottom:3px}
-.nav .menu a.active{opacity:1;border-bottom:1px solid var(--accent)}
+.nav .menu a.active{opacity:1;border-bottom:2px solid var(--accent)}
 
 /* ================= PAGE BG ================= */
 .page{
   min-height:100vh;
-  padding-top:96px;
+  padding-top:100px;
   position:relative;
-  overflow:hidden;
 }
 .page::before{
   content:"";
@@ -64,13 +63,10 @@ a:hover{color:var(--accent)}
   z-index:0;
   background:
     radial-gradient(900px 560px at 30% 35%, rgba(0,0,0,0.12), rgba(0,0,0,0.74)),
-    linear-gradient(180deg, rgba(0,0,0,0.10), rgba(0,0,0,0.62)),
+    linear-gradient(180deg, rgba(0,0,0,0.12), rgba(0,0,0,0.62)),
     var(--bgImage);
   background-size:cover;
   background-position:center;
-  background-repeat:no-repeat;
-  filter:saturate(1.05) contrast(1.04);
-  transform:scale(1.02);
 }
 .page::after{
   content:"";
@@ -83,153 +79,146 @@ a:hover{color:var(--accent)}
 .container{
   position:relative;
   z-index:1;
-  width:min(1120px, 92%);
+  width:min(1120px,92%);
   margin:0 auto;
-  padding:34px 0 70px;
+  padding:36px 0 80px;
 }
 
 /* ================= SECTION HEADER ================= */
 .sectionTitle{
-  margin:22px 0 14px;
+  margin:24px 0 16px;
   font-weight:900;
-  font-size:18px;
-  display:inline-block;
+  font-size:20px;          /* +2px */
   padding-bottom:6px;
-  border-bottom:2px solid rgba(243,199,75,0.75);
+  border-bottom:2px solid rgba(243,199,75,0.8);
+  display:inline-block;
 }
 
 /* ================= GLASS ================= */
 .glass{
-  background:var(--card); /* 80% opaque */
+  background:var(--card);
   border:1px solid var(--stroke);
   border-radius:22px;
-  box-shadow: 0 18px 60px rgba(0,0,0,0.45);
-  backdrop-filter: blur(10px);
+  box-shadow:0 18px 60px rgba(0,0,0,0.45);
+  backdrop-filter:blur(10px);
 }
 
-/* ================= LOGO (BIGGER + FIT FIX) ================= */
+/* ================= LOGOS (FORCE VISIBILITY) ================= */
 .logo{
   width:var(--logoSize);
   height:var(--logoSize);
   border-radius:26px;
   display:grid;
   place-items:center;
-
-  /* white plate so transparent logos show */
-  background:rgba(255,255,255,0.94);
-
-  border:1px solid rgba(255,255,255,0.18);
+  background:#ffffff;          /* solid white plate */
+  border:2px solid #ffffff;    /* hard edge for contrast */
   overflow:hidden;
   flex:0 0 auto;
-
-  box-shadow:0 14px 34px rgba(0,0,0,0.35);
+  box-shadow:0 14px 34px rgba(0,0,0,0.4);
 }
 
-/* Key change: make ANY aspect ratio fit inside box */
+/* CRITICAL FIX: force logo pixels onto white canvas */
 .logo img{
-  width: 92%;
-  height: 92%;
-  object-fit: contain;
-  object-position: center;
-
-  /* remove padding issues */
-  padding: 0;
-  margin: 0;
-
-  /* make sure it’s not washed out */
-  opacity: 1;
-  filter: none;
-
-  /* prevent “invisible” on some PNGs due to blending */
-  mix-blend-mode: normal;
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  background:#ffffff;          /* THIS fixes UW logo invisibility */
+  opacity:1 !important;
+  filter:none !important;
+  mix-blend-mode:normal !important;
 }
 
-/* ================= CURRENT POSITION BAR ================= */
+/* ================= CURRENT POSITION ================= */
 .positionBar{
-  padding:18px;
+  padding:20px;
   display:flex;
-  gap:18px;
+  gap:20px;
   align-items:center;
 }
 
-.posText{display:flex;flex-direction:column;gap:8px;min-width:0}
+.posText{display:flex;flex-direction:column;gap:10px}
 .posRole{
-  font-size:20px;
+  font-size:22px;              /* +2px */
   font-weight:900;
-  letter-spacing:-0.01em;
 }
 .posDept{
-  color:rgba(242,242,242,0.80);
-  line-height:1.5;
-  font-size:15px;
+  font-size:17px;              /* +2px */
+  color:rgba(242,242,242,0.85);
 }
 .posMeta{
   display:flex;
   gap:10px;
   flex-wrap:wrap;
-  color:rgba(242,242,242,0.70);
-  font-size:13px;
+  font-size:15px;              /* +2px */
+  color:rgba(242,242,242,0.75);
 }
 .pill{
-  padding:7px 10px;
+  padding:8px 12px;
   border-radius:999px;
-  border:1px solid rgba(255,255,255,0.14);
-  background:rgba(255,255,255,0.06);
+  border:1px solid rgba(255,255,255,0.16);
+  background:rgba(255,255,255,0.08);
 }
 
-/* project/details paragraph (kept) */
+/* project/details kept */
 .posDetails{
   margin-top:12px;
-  color:rgba(242,242,242,0.74);
+  font-size:16px;              /* +2px */
   line-height:1.75;
-  font-size:14.4px;
+  color:rgba(242,242,242,0.80);
 }
 
 /* ================= EDUCATION ================= */
-.eduWrap{padding:16px}
-.eduList{display:flex;flex-direction:column;gap:14px}
+.eduWrap{padding:18px}
+.eduList{display:flex;flex-direction:column;gap:16px}
 .eduRow{
   display:flex;
-  gap:16px;
-  align-items:flex-start;
-  padding:14px;
+  gap:18px;
+  padding:16px;
   border-radius:18px;
-  border:1px solid rgba(255,255,255,0.12);
-  background:rgba(0,0,0,0.18);
+  border:1px solid rgba(255,255,255,0.14);
+  background:rgba(0,0,0,0.20);
 }
-.eduMain{flex:1;min-width:0}
+.eduMain{flex:1}
 .eduDegree{
+  font-size:18px;              /* +2px */
   font-weight:900;
-  font-size:16px;
-  margin:0;
 }
 .eduInst{
-  margin:5px 0 10px 0;
-  color:rgba(242,242,242,0.78);
-  line-height:1.55;
-  font-size:14px;
+  margin:6px 0 10px;
+  font-size:16px;              /* +2px */
+  color:rgba(242,242,242,0.82);
 }
 .eduMeta{
   display:flex;
   gap:10px;
   flex-wrap:wrap;
-  align-items:center;
-  color:rgba(242,242,242,0.70);
-  font-size:13px;
+  font-size:15px;              /* +2px */
+  color:rgba(242,242,242,0.72);
+}
+
+/* PhD thesis (RESTORED) */
+.eduThesis{
+  margin-top:10px;
+  font-size:15px;              /* +2px */
+  color:rgba(242,242,242,0.88);
+}
+.eduThesis a{
+  color:var(--accent);
+  border-bottom:1px solid rgba(243,199,75,0.6);
 }
 
 /* footer */
 .footer{
-  margin-top:24px;
+  margin-top:26px;
   text-align:center;
-  color:rgba(242,242,242,0.55);
-  font-size:12px;
+  font-size:14px;              /* +2px */
+  color:rgba(242,242,242,0.6);
 }
 
 /* responsive */
-@media (max-width: 900px){
+@media (max-width:900px){
   :root{ --logoSize: var(--logoSizeMobile); }
-  .positionBar{flex-direction:column;align-items:flex-start}
+  .positionBar,.eduRow{flex-direction:column;align-items:flex-start}
 }
 </style>
 </head>
@@ -248,86 +237,89 @@ a:hover{color:var(--accent)}
 </div>
 
 <main class="page">
-  <div class="container">
+<div class="container">
 
-    <!-- CURRENT POSITION -->
-    <div class="sectionTitle">Current position</div>
+<!-- CURRENT POSITION -->
+<div class="sectionTitle">Current position</div>
 
-    <section class="glass positionBar">
-      <div class="logo" title="Boston University">
-        <img src="assets/logo-bu.png" alt="Boston University logo">
-      </div>
-
-      <div class="posText">
-        <div class="posRole">Postdoctoral Research Associate</div>
-        <div class="posDept">Department of Physics, Boston University</div>
-
-        <div class="posMeta">
-          <span class="pill">Nov. 2024 – Present</span>
-          <span class="pill">Boston, MA</span>
-        </div>
-
-        <div class="posDetails">
-          (Optional) Add 2–3 lines here later: your core research themes, methods, and what you’re building toward.
-        </div>
-      </div>
-    </section>
-
-    <!-- EDUCATION -->
-    <div style="height:16px"></div>
-    <div class="sectionTitle">Education</div>
-
-    <section class="glass eduWrap">
-      <div class="eduList">
-
-        <div class="eduRow">
-          <div class="logo" title="University of Wisconsin–Madison">
-            <img src="assets/logo-uw.png" alt="UW–Madison logo">
-          </div>
-          <div class="eduMain">
-            <p class="eduDegree">Doctor of Philosophy</p>
-            <p class="eduInst">Materials Science and Engineering · University of Wisconsin–Madison</p>
-            <div class="eduMeta">
-              <span class="pill">09/2018 – 10/2024</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="eduRow">
-          <div class="logo" title="University of Wisconsin–Madison">
-            <img src="assets/logo-uw.png" alt="UW–Madison logo">
-          </div>
-          <div class="eduMain">
-            <p class="eduDegree">Master of Science</p>
-            <p class="eduInst">Materials Science and Engineering · University of Wisconsin–Madison</p>
-            <div class="eduMeta">
-              <span class="pill">08/2018 – 05/2021</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="eduRow">
-          <div class="logo" title="IIT (BHU) Varanasi">
-            <img src="assets/logo-iitbhu.png" alt="IIT (BHU) Varanasi logo">
-          </div>
-          <div class="eduMain">
-            <p class="eduDegree">Bachelor of Technology</p>
-            <p class="eduInst">Ceramic Engineering · IIT (BHU) Varanasi</p>
-            <div class="eduMeta">
-              <span class="pill">07/2013 – 05/2017</span>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <div class="footer">© <span id="y"></span> Deepankar Sri Gyan</div>
+<section class="glass positionBar">
+  <div class="logo">
+    <img src="assets/logo-bu.png" alt="Boston University logo">
   </div>
+
+  <div class="posText">
+    <div class="posRole">Postdoctoral Research Associate</div>
+    <div class="posDept">Department of Physics, Boston University</div>
+    <div class="posMeta">
+      <span class="pill">Nov. 2024 – Present</span>
+      <span class="pill">Boston, MA</span>
+    </div>
+    <div class="posDetails">
+      (Optional) Add 2–3 lines here describing your projects, techniques,
+      and scientific direction.
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<div class="sectionTitle">Education</div>
+
+<section class="glass eduWrap">
+<div class="eduList">
+
+<div class="eduRow">
+  <div class="logo">
+    <img src="assets/logo-uw.png" alt="University of Wisconsin–Madison logo">
+  </div>
+  <div class="eduMain">
+    <div class="eduDegree">Doctor of Philosophy</div>
+    <div class="eduInst">Materials Science and Engineering · University of Wisconsin–Madison</div>
+    <div class="eduMeta">
+      <span class="pill">09/2018 – 10/2024</span>
+    </div>
+    <div class="eduThesis">
+      <b>Thesis:</b> <em>PASTE YOUR PhD THESIS TITLE HERE</em>
+      &nbsp;·&nbsp;
+      <a href="PASTE_THESIS_LINK_HERE" target="_blank">Link</a>
+    </div>
+  </div>
+</div>
+
+<div class="eduRow">
+  <div class="logo">
+    <img src="assets/logo-uw.png" alt="University of Wisconsin–Madison logo">
+  </div>
+  <div class="eduMain">
+    <div class="eduDegree">Master of Science</div>
+    <div class="eduInst">Materials Science and Engineering · University of Wisconsin–Madison</div>
+    <div class="eduMeta">
+      <span class="pill">08/2018 – 05/2021</span>
+    </div>
+  </div>
+</div>
+
+<div class="eduRow">
+  <div class="logo">
+    <img src="assets/logo-iitbhu.png" alt="IIT (BHU) Varanasi logo">
+  </div>
+  <div class="eduMain">
+    <div class="eduDegree">Bachelor of Technology</div>
+    <div class="eduInst">Ceramic Engineering · IIT (BHU) Varanasi</div>
+    <div class="eduMeta">
+      <span class="pill">07/2013 – 05/2017</span>
+    </div>
+  </div>
+</div>
+
+</div>
+</section>
+
+<div class="footer">© <span id="y"></span> Deepankar Sri Gyan</div>
+</div>
 </main>
 
 <script>
-  document.getElementById("y").textContent = new Date().getFullYear();
+document.getElementById("y").textContent = new Date().getFullYear();
 </script>
 </body>
 </html>
