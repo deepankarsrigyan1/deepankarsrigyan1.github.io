@@ -11,40 +11,33 @@
   --text:#f2f2f2;
   --muted:rgba(242,242,242,0.78);
   --accent:#f3c74b;
+
+  /* Pump aim point (tweak if needed) */
+  --pumpX: 56%;
+  --pumpY: 230px;
+  --pumpTilt: -8deg;
 }
 
+/* base */
 *{box-sizing:border-box}
-html,body{
-  margin:0;
-  height:100%;
-  background:var(--bg);
-  color:var(--text);
-  font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Arial,sans-serif;
-}
-
+html,body{margin:0;height:100%;background:var(--bg);color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Arial,sans-serif;}
 a{color:inherit;text-decoration:none}
 a:hover{color:var(--accent)}
 
-/* ================= NAV ================= */
+/* nav */
 .nav{
-  position:fixed;
-  top:0; left:0; right:0;
-  z-index:10;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
+  position:fixed;top:0;left:0;right:0;z-index:10;
+  display:flex;justify-content:space-between;align-items:center;
   padding:18px 36px;
   background:linear-gradient(to bottom, rgba(0,0,0,0.72), rgba(0,0,0,0));
 }
 .nav .name{font-weight:700;font-size:18px}
 .nav .menu{display:flex;gap:22px;font-size:14px;flex-wrap:wrap}
 .nav .menu a{opacity:0.86;padding-bottom:3px}
-.nav .menu a.active{
-  opacity:1;
-  border-bottom:1px solid var(--accent);
-}
+.nav .menu a.active{opacity:1;border-bottom:1px solid var(--accent)}
 
-/* ================= HERO ================= */
+/* hero */
 .hero{
   position:relative;
   min-height:100vh;
@@ -55,20 +48,12 @@ a:hover{color:var(--accent)}
   align-items:center;
 }
 
-/* Background image */
-.hero::before{
-  content:"";
+/* drawn background (NO image file) */
+.bgScene{
   position:absolute;
   inset:0;
   z-index:1;
-  background:
-    radial-gradient(900px 560px at 30% 35%, rgba(0,0,0,0.05), rgba(0,0,0,0.62)),
-    linear-gradient(180deg, rgba(0,0,0,0.18), rgba(0,0,0,0.62)),
-    url("assets/quantum-bg.png");
-  background-size:cover;
-  background-position:center;
-  background-repeat:no-repeat;
-  filter:saturate(1.06) contrast(1.05);
+  transform: scale(1.04);
 }
 
 /* readability overlay */
@@ -77,84 +62,63 @@ a:hover{color:var(--accent)}
   position:absolute;
   inset:0;
   z-index:2;
-  background:linear-gradient(180deg, rgba(0,0,0,0.07), rgba(0,0,0,0.40));
+  background:
+    radial-gradient(900px 600px at 35% 30%, rgba(0,0,0,0.10), rgba(0,0,0,0.65)),
+    linear-gradient(180deg, rgba(0,0,0,0.08), rgba(0,0,0,0.45));
 }
 
-/* ================= PUMP ONLY: BRIGHT RED, SLIGHT TILT, PULSED ================= */
-/* Pump aim point — adjust these two if you ever want to move it */
-:root{
-  --pumpX: 56%;
-  --pumpY: 210px;
-  --pumpTilt: -8deg; /* slight tilt so it’s not perfectly normal */
-}
-
+/* ================= PUMP (pulsed, conical, bright red) ================= */
 .pumpBeam{
   position:absolute;
   z-index:3;
   pointer-events:none;
 
-  /* geometry */
   width: 28px;
   height: 430px;
 
-  /* place so the “focus end” lands at (pumpX, pumpY) */
   left: var(--pumpX);
   top: calc(var(--pumpY) - 360px);
 
-  /* tilt around the focusing end */
   transform-origin: 50% 92%;
   transform: translateX(-50%) rotate(var(--pumpTilt));
 
-  /* glow */
-  filter: drop-shadow(0 0 16px rgba(255,0,0,0.35)) drop-shadow(0 0 34px rgba(255,60,60,0.22));
+  filter: drop-shadow(0 0 18px rgba(255,0,0,0.45))
+          drop-shadow(0 0 40px rgba(255,60,60,0.25));
   opacity: 0.98;
+
+  animation: pumpBreath 2.2s ease-in-out infinite;
 }
 
-/* conical beam body: wide at top, narrow at bottom */
 .pumpBeam .cone{
-  position:absolute;
-  inset:0;
-  border-radius:999px;
-
-  /* super bright red core */
+  position:absolute; inset:0; border-radius:999px;
   background: linear-gradient(to bottom,
     rgba(255,0,0,0.00),
     rgba(255,0,0,0.55),
-    rgba(255,40,40,1.00)
+    rgba(255,30,30,1.00)
   );
-
-  /* cone shape */
   clip-path: polygon(0% 0%, 100% 0%, 64% 100%, 36% 100%);
   filter: blur(0.8px);
   mix-blend-mode: screen;
 }
 
-/* intense centerline */
 .pumpBeam .centerline{
-  position:absolute;
-  left:50%;
-  top:0;
-  width: 4px;
-  height: 100%;
+  position:absolute; left:50%; top:0;
+  width: 4px; height: 100%;
   transform: translateX(-50%);
   border-radius:999px;
   background: linear-gradient(to bottom,
     rgba(255,255,255,0),
-    rgba(255,230,230,0.95),
+    rgba(255,235,235,0.95),
     rgba(255,255,255,0.95)
   );
   mix-blend-mode: screen;
-  filter: blur(0.3px);
+  filter: blur(0.35px);
 }
 
-/* traveling pulse packets (red) */
 .pumpBeam .packets{
-  position:absolute;
-  inset:0;
-  border-radius:999px;
+  position:absolute; inset:0; border-radius:999px;
   mix-blend-mode: screen;
   opacity:0.95;
-
   background-image:
     repeating-linear-gradient(
       to bottom,
@@ -164,20 +128,31 @@ a:hover{color:var(--accent)}
       rgba(255,230,230,0.0) 76px
     );
   background-size: 100% 150px;
-  animation: packetsY 2.6s linear infinite; /* keep animation */
+  animation: packetsY 2.6s linear infinite; /* pulsed motion */
 }
 
-/* subtle “flicker” so beam looks alive */
-.pumpBeam{
-  animation: pumpBreath 2.2s ease-in-out infinite;
+/* “pulse” symbol */
+.pulseMark{
+  position:absolute;
+  z-index:4;
+  left: var(--pumpX);
+  top: calc(var(--pumpY) - 395px);
+  transform: translateX(-50%) rotate(var(--pumpTilt));
+  color: rgba(255,175,175,0.98);
+  font-weight: 900;
+  font-size: 20px;
+  letter-spacing: 0.5px;
+  text-shadow: 0 0 18px rgba(0,0,0,0.75), 0 0 20px rgba(255,0,0,0.30);
+  user-select:none;
+  opacity:0.95;
+  animation: markBlink 2.2s ease-in-out infinite;
 }
 
-/* spark at the beam focus */
+/* spark at focus */
 .spark{
   position:absolute;
   z-index:4;
-  width: 86px;
-  height: 86px;
+  width: 86px; height: 86px;
   left: var(--pumpX);
   top: var(--pumpY);
   transform: translate(-50%,-50%);
@@ -191,41 +166,16 @@ a:hover{color:var(--accent)}
   animation: spark 2.2s ease-in-out infinite;
 }
 
-/* pulse symbol near the beam (to show pulsed) */
-.pulseMark{
-  position:absolute;
-  z-index:5;
-  left: var(--pumpX);
-  top: calc(var(--pumpY) - 390px);
-  transform: translateX(-50%) rotate(var(--pumpTilt));
-  color: rgba(255,170,170,0.98);
-  font-weight: 800;
-  font-size: 20px;
-  letter-spacing: 0.5px;
-  text-shadow: 0 0 20px rgba(0,0,0,0.75), 0 0 18px rgba(255,0,0,0.25);
-  user-select:none;
-  opacity:0.95;
-  animation: markBlink 2.2s ease-in-out infinite;
-}
-
 /* animations */
 @keyframes packetsY{
   0%{background-position:0 0; opacity:0.30}
   50%{opacity:1}
   100%{background-position:0 150px; opacity:0.30}
 }
-@keyframes pumpBreath{
-  0%,100%{opacity:0.75}
-  50%{opacity:1}
-}
-@keyframes spark{
-  0%,100%{transform:translate(-50%,-50%) scale(0.86); opacity:0.65}
-  50%{transform:translate(-50%,-50%) scale(1.06); opacity:1}
-}
-@keyframes markBlink{
-  0%,100%{opacity:0.55}
-  50%{opacity:0.98}
-}
+@keyframes pumpBreath{0%,100%{opacity:0.78} 50%{opacity:1}}
+@keyframes spark{0%,100%{transform:translate(-50%,-50%) scale(0.86);opacity:0.65}
+                 50%{transform:translate(-50%,-50%) scale(1.06);opacity:1}}
+@keyframes markBlink{0%,100%{opacity:0.55} 50%{opacity:0.98}}
 
 /* ================= CONTENT ================= */
 .content{
@@ -240,41 +190,54 @@ a:hover{color:var(--accent)}
 @media (max-width:900px){
   .content{grid-template-columns:1fr;gap:28px;text-align:center}
 }
-
 .photo{
-  width:300px;
-  height:420px;
-  border-radius:22px;
-  overflow:hidden;
+  width:300px;height:420px;border-radius:22px;overflow:hidden;
   border:1px solid rgba(255,255,255,0.18);
   background:rgba(255,255,255,0.05);
   box-shadow:0 28px 90px rgba(0,0,0,0.6);
 }
 .photo img{width:100%;height:100%;object-fit:cover}
-
-.text p{
-  margin:0 0 18px 0;
-  font-size:15.5px;
-  line-height:1.9;
-  color:var(--muted);
-}
+.text p{margin:0 0 18px 0;font-size:15.5px;line-height:1.9;color:var(--muted)}
 .text b{color:var(--text)}
 .text .hl{color:var(--accent);font-weight:700}
-
 .footer{
-  position:absolute;
-  bottom:18px;
-  left:0;right:0;
-  text-align:center;
-  font-size:12px;
-  color:rgba(242,242,242,0.6);
-  z-index:7;
+  position:absolute;bottom:18px;left:0;right:0;text-align:center;
+  font-size:12px;color:rgba(242,242,242,0.6);z-index:7;
+}
+
+/* ================= BACKGROUND SVG ANIMATIONS ================= */
+/* gentle shimmer */
+.bgScene .atom{transform-origin:center; animation: float 6s ease-in-out infinite;}
+.bgScene .atom:nth-child(3n){animation-duration:7.5s}
+.bgScene .atom:nth-child(4n){animation-duration:8.5s}
+@keyframes float{
+  0%,100%{transform:translateY(0px) scale(1)}
+  50%{transform:translateY(-6px) scale(1.02)}
+}
+
+/* When pulse "hits": atoms near the interaction brighten/bounce */
+#scene.hit .nearHit{
+  animation: hitPop 0.65s ease-out 1;
+}
+@keyframes hitPop{
+  0%{filter: drop-shadow(0 0 0 rgba(255,255,255,0)); transform:scale(1)}
+  35%{filter: drop-shadow(0 0 18px rgba(255,140,140,0.8)); transform:scale(1.18)}
+  100%{filter: drop-shadow(0 0 0 rgba(255,255,255,0)); transform:scale(1)}
+}
+
+/* wave lines subtly flowing */
+.bgScene .wave{
+  opacity:0.6;
+  animation: waveGlow 4.8s ease-in-out infinite;
+}
+@keyframes waveGlow{
+  0%,100%{opacity:0.35}
+  50%{opacity:0.70}
 }
 </style>
 </head>
 
 <body>
-
 <div class="nav">
   <div class="name">Deepankar Sri Gyan</div>
   <div class="menu">
@@ -289,7 +252,95 @@ a:hover{color:var(--accent)}
 
 <section class="hero">
 
-  <!-- PUMP ONLY -->
+  <!-- ===== Drawn background (NO quantum-bg file) ===== -->
+  <svg class="bgScene" id="scene" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <defs>
+      <!-- soft bokeh -->
+      <filter id="bblur"><feGaussianBlur stdDeviation="18"/></filter>
+
+      <!-- atom glow gradient -->
+      <radialGradient id="gBlue">
+        <stop offset="0%" stop-color="rgba(200,235,255,1)"/>
+        <stop offset="40%" stop-color="rgba(120,190,255,0.75)"/>
+        <stop offset="100%" stop-color="rgba(120,190,255,0)"/>
+      </radialGradient>
+      <radialGradient id="gOrange">
+        <stop offset="0%" stop-color="rgba(255,240,210,1)"/>
+        <stop offset="40%" stop-color="rgba(255,170,90,0.8)"/>
+        <stop offset="100%" stop-color="rgba(255,170,90,0)"/>
+      </radialGradient>
+      <radialGradient id="gMagenta">
+        <stop offset="0%" stop-color="rgba(255,235,255,1)"/>
+        <stop offset="40%" stop-color="rgba(255,120,220,0.75)"/>
+        <stop offset="100%" stop-color="rgba(255,120,220,0)"/>
+      </radialGradient>
+
+      <!-- wave stroke gradient -->
+      <linearGradient id="waveStroke" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color="rgba(140,200,255,0.0)"/>
+        <stop offset="35%" stop-color="rgba(140,200,255,0.75)"/>
+        <stop offset="70%" stop-color="rgba(160,220,255,0.55)"/>
+        <stop offset="100%" stop-color="rgba(140,200,255,0.0)"/>
+      </linearGradient>
+    </defs>
+
+    <!-- subtle bokeh background -->
+    <g filter="url(#bblur)" opacity="0.55">
+      <circle cx="220" cy="120" r="60" fill="rgba(255,120,220,0.35)"/>
+      <circle cx="1420" cy="130" r="80" fill="rgba(255,180,90,0.30)"/>
+      <circle cx="1060" cy="220" r="70" fill="rgba(120,190,255,0.30)"/>
+      <circle cx="360" cy="260" r="55" fill="rgba(255,170,90,0.26)"/>
+      <circle cx="1260" cy="320" r="50" fill="rgba(255,120,220,0.24)"/>
+      <circle cx="820" cy="110" r="45" fill="rgba(255,200,120,0.22)"/>
+    </g>
+
+    <!-- wavy “topology” lattice lines -->
+    <g class="wave" fill="none" stroke="url(#waveStroke)" stroke-width="3">
+      <path d="M-50,520 C200,420 420,620 640,520 C860,420 1080,620 1300,520 C1460,450 1580,540 1700,520" />
+      <path d="M-50,610 C210,510 430,710 650,610 C870,510 1090,710 1310,610 C1470,540 1580,630 1700,610" opacity="0.75"/>
+      <path d="M-50,700 C220,600 440,800 660,700 C880,600 1100,800 1320,700 C1480,630 1580,720 1700,700" opacity="0.55"/>
+      <path d="M-50,460 C180,390 410,520 630,460 C850,400 1080,520 1300,460 C1460,420 1580,480 1700,460" opacity="0.55"/>
+    </g>
+
+    <!-- atoms (glowing spheres) -->
+    <!-- We place a “field” of atoms; some tagged nearHit around the pump focus region -->
+    <g>
+      <!-- row 1 -->
+      <g class="atom"><circle cx="200" cy="520" r="44" fill="url(#gOrange)"/><circle cx="200" cy="520" r="10" fill="rgba(255,255,255,0.9)"/></g>
+      <g class="atom"><circle cx="360" cy="520" r="44" fill="url(#gBlue)"/><circle cx="360" cy="520" r="10" fill="rgba(255,255,255,0.9)"/></g>
+      <g class="atom"><circle cx="520" cy="520" r="44" fill="url(#gMagenta)"/><circle cx="520" cy="520" r="10" fill="rgba(255,255,255,0.9)"/></g>
+      <g class="atom"><circle cx="680" cy="520" r="44" fill="url(#gBlue)"/><circle cx="680" cy="520" r="10" fill="rgba(255,255,255,0.9)"/></g>
+
+      <!-- near the pump hit region (roughly center-right) -->
+      <g class="atom nearHit"><circle cx="900" cy="520" r="48" fill="url(#gOrange)"/><circle cx="900" cy="520" r="12" fill="rgba(255,255,255,0.95)"/></g>
+      <g class="atom nearHit"><circle cx="1060" cy="520" r="44" fill="url(#gBlue)"/><circle cx="1060" cy="520" r="10" fill="rgba(255,255,255,0.92)"/></g>
+
+      <g class="atom"><circle cx="1220" cy="520" r="44" fill="url(#gMagenta)"/><circle cx="1220" cy="520" r="10" fill="rgba(255,255,255,0.9)"/></g>
+      <g class="atom"><circle cx="1380" cy="520" r="44" fill="url(#gOrange)"/><circle cx="1380" cy="520" r="10" fill="rgba(255,255,255,0.9)"/></g>
+
+      <!-- row 2 -->
+      <g class="atom"><circle cx="280" cy="610" r="46" fill="url(#gBlue)"/><circle cx="280" cy="610" r="10" fill="rgba(255,255,255,0.9)"/></g>
+      <g class="atom"><circle cx="440" cy="610" r="46" fill="url(#gOrange)"/><circle cx="440" cy="610" r="10" fill="rgba(255,255,255,0.9)"/></g>
+      <g class="atom"><circle cx="600" cy="610" r="46" fill="url(#gBlue)"/><circle cx="600" cy="610" r="10" fill="rgba(255,255,255,0.9)"/></g>
+
+      <g class="atom nearHit"><circle cx="820" cy="610" r="50" fill="url(#gMagenta)"/><circle cx="820" cy="610" r="12" fill="rgba(255,255,255,0.95)"/></g>
+      <g class="atom nearHit"><circle cx="980" cy="610" r="46" fill="url(#gBlue)"/><circle cx="980" cy="610" r="10" fill="rgba(255,255,255,0.92)"/></g>
+
+      <g class="atom"><circle cx="1140" cy="610" r="46" fill="url(#gOrange)"/><circle cx="1140" cy="610" r="10" fill="rgba(255,255,255,0.9)"/></g>
+      <g class="atom"><circle cx="1300" cy="610" r="46" fill="url(#gBlue)"/><circle cx="1300" cy="610" r="10" fill="rgba(255,255,255,0.9)"/></g>
+
+      <!-- row 3 -->
+      <g class="atom"><circle cx="360" cy="700" r="48" fill="url(#gMagenta)"/><circle cx="360" cy="700" r="11" fill="rgba(255,255,255,0.9)"/></g>
+      <g class="atom"><circle cx="520" cy="700" r="48" fill="url(#gBlue)"/><circle cx="520" cy="700" r="11" fill="rgba(255,255,255,0.9)"/></g>
+      <g class="atom"><circle cx="680" cy="700" r="48" fill="url(#gOrange)"/><circle cx="680" cy="700" r="11" fill="rgba(255,255,255,0.9)"/></g>
+      <g class="atom"><circle cx="840" cy="700" r="48" fill="url(#gBlue)"/><circle cx="840" cy="700" r="11" fill="rgba(255,255,255,0.9)"/></g>
+      <g class="atom"><circle cx="1000" cy="700" r="48" fill="url(#gMagenta)"/><circle cx="1000" cy="700" r="11" fill="rgba(255,255,255,0.9)"/></g>
+      <g class="atom"><circle cx="1160" cy="700" r="48" fill="url(#gBlue)"/><circle cx="1160" cy="700" r="11" fill="rgba(255,255,255,0.9)"/></g>
+      <g class="atom"><circle cx="1320" cy="700" r="48" fill="url(#gOrange)"/><circle cx="1320" cy="700" r="11" fill="rgba(255,255,255,0.9)"/></g>
+    </g>
+  </svg>
+
+  <!-- Pump pulse (drawn) -->
   <div class="pumpBeam" aria-hidden="true">
     <div class="cone"></div>
     <div class="centerline"></div>
@@ -298,9 +349,10 @@ a:hover{color:var(--accent)}
   <div class="spark" aria-hidden="true"></div>
   <div class="pulseMark" aria-hidden="true">∿</div>
 
-  <!-- MAIN CONTENT -->
+  <!-- Foreground content -->
   <div class="content">
     <div class="photo">
+      <!-- keep your profile photo file -->
       <img src="assets/profile.jpg" alt="Profile photo">
     </div>
 
@@ -311,12 +363,12 @@ a:hover{color:var(--accent)}
         far from equilibrium.
       </p>
       <p>
-        My research focuses on ultrafast nonequilibrium phases, ferroic
-        textures, and symmetry-breaking dynamics using pump–probe optics,
-        nonlinear SHG, and time-resolved x-ray scattering.
+        My research focuses on ultrafast nonequilibrium phases, ferroic textures,
+        and symmetry-breaking dynamics using pump–probe optics, nonlinear SHG, and
+        time-resolved x-ray scattering.
       </p>
       <p style="margin-top:26px;font-size:13px;color:rgba(242,242,242,0.6)">
-        Optical pump (pulsed) · Nonlinear SHG · Time-resolved x-ray probes
+        Pulsed optical excitation · Nonlinear SHG · Time-resolved probes
       </p>
     </div>
   </div>
@@ -325,7 +377,26 @@ a:hover{color:var(--accent)}
 </section>
 
 <script>
+  // Year
   document.getElementById("y").textContent = new Date().getFullYear();
+
+  // Pulse-hit animation: briefly "pop" atoms near the interaction point
+  // Sync with packetsY period (2.6s). Trigger slightly after cycle start so it feels like arrival.
+  const scene = document.getElementById("scene");
+  function hit(){
+    scene.classList.remove("hit");
+    // force reflow so animation restarts
+    void scene.offsetWidth;
+    scene.classList.add("hit");
+    // remove class after effect window
+    setTimeout(() => scene.classList.remove("hit"), 800);
+  }
+
+  // Start repeating hits (tweak delay to match your visual)
+  setTimeout(() => {
+    hit();
+    setInterval(hit, 2600);
+  }, 1100);
 </script>
 
 </body>
