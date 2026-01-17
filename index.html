@@ -83,9 +83,9 @@ a:hover{color:var(--accent)}
 /* ================= PUMP ONLY: BRIGHT RED, SLIGHT TILT, PULSED ================= */
 /* Pump aim point — adjust these two if you ever want to move it */
 :root{
-  --pumpX: 56%;
+  --pumpX: 45%;
   --pumpY: 210px;
-  --pumpTilt: -8deg; /* slight tilt so it’s not perfectly normal */
+  --pumpTilt: -20deg; /* slight tilt so it’s not perfectly normal */
 }
 
 .pumpBeam{
@@ -94,7 +94,7 @@ a:hover{color:var(--accent)}
   pointer-events:none;
 
   /* geometry */
-  width: 84px;   /* <-- 3x wider (was 28px) */
+  width: 50px;   /* <-- 3x wider (was 28px) */
   height: 430px;
 
   /* place so the “focus end” lands at (pumpX, pumpY) */
@@ -134,7 +134,7 @@ a:hover{color:var(--accent)}
   position:absolute;
   left:50%;
   top:0;
-  width: 4px;
+  width: 2px;
   height: 100%;
   transform: translateX(-50%);
   border-radius:999px;
