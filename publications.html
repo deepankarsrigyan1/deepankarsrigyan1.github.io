@@ -20,7 +20,8 @@
 
 *{box-sizing:border-box}
 html,body{
-  margin:0;height:100%;
+  margin:0;
+  min-height:100%;
   background:var(--bg);
   color:var(--text);
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
@@ -43,30 +44,35 @@ a:hover{color:var(--accent)}
 .nav .menu a{opacity:0.86;padding-bottom:3px}
 .nav .menu a.active{opacity:1;border-bottom:2px solid var(--accent)}
 
-/* ================= PAGE BG ================= */
+/* ================= PAGE BG (Scrollable + More Visible) ================= */
 .page{
   min-height:100vh;
-  padding-top:100px;
+  padding-top:110px;
   position:relative;
 }
+
+/* Background now scrolls with page */
 .page::before{
   content:"";
   position:absolute;
   inset:0;
   z-index:0;
   background:
-    radial-gradient(900px 560px at 30% 35%, rgba(0,0,0,0.12), rgba(0,0,0,0.74)),
-    linear-gradient(180deg, rgba(0,0,0,0.12), rgba(0,0,0,0.62)),
+    radial-gradient(900px 560px at 30% 35%, rgba(0,0,0,0.06), rgba(0,0,0,0.45)),
+    linear-gradient(180deg, rgba(0,0,0,0.08), rgba(0,0,0,0.38)),
     var(--bgImage);
   background-size:cover;
-  background-position:center;
+  background-position:center top;
+  background-repeat:no-repeat;
 }
+
+/* Lighter overlay so image is more visible */
 .page::after{
   content:"";
   position:absolute;
   inset:0;
   z-index:0;
-  background:linear-gradient(180deg, rgba(0,0,0,0.06), rgba(0,0,0,0.45));
+  background:linear-gradient(180deg, rgba(0,0,0,0.04), rgba(0,0,0,0.28));
 }
 
 .container{
@@ -79,11 +85,11 @@ a:hover{color:var(--accent)}
 
 /* ================= SECTION HEADERS ================= */
 .sectionTitle{
-  margin:24px 0 16px;
+  margin:24px 0 12px;
   font-weight:900;
-  font-size:24px;
+  font-size:28px;
   padding-bottom:6px;
-  border-bottom:2px solid rgba(243,199,75,0.8);
+  border-bottom:2px solid rgba(243,199,75,0.9);
   display:inline-block;
 }
 
@@ -96,16 +102,53 @@ a:hover{color:var(--accent)}
   backdrop-filter:blur(10px);
 }
 
+/* ================= SCHOLAR BAR ================= */
+.scholarBar{
+  margin:18px 0 26px;
+  padding:14px 18px;
+  border-radius:16px;
+  border:1px solid rgba(243,199,75,0.35);
+  background:rgba(243,199,75,0.08);
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.scholarBar span{
+  font-size:17px;
+  color:rgba(242,242,242,0.9);
+}
+
+.scholarLink{
+  margin-left:auto;
+  padding:8px 14px;
+  border-radius:999px;
+  border:1px solid rgba(243,199,75,0.7);
+  color:var(--accent);
+  font-weight:700;
+  font-size:15px;
+}
+.scholarLink:hover{
+  background:rgba(243,199,75,0.12);
+}
+
 /* ================= PUBLICATIONS ================= */
-.pubWrap{padding:18px 22px}
-.yearBlock{margin-bottom:28px}
-.pubList{display:flex;flex-direction:column;gap:16px}
+.pubWrap{padding:20px 22px}
+.yearBlock{margin-bottom:34px}
+.pubList{display:flex;flex-direction:column;gap:18px}
 
 .pubItem{
   padding:16px;
   border-radius:18px;
   border:1px solid rgba(255,255,255,0.14);
-  background:rgba(0,0,0,0.20);
+  background:rgba(0,0,0,0.22);
+}
+
+.pubYear{
+  color:var(--accent);
+  font-size:21px;
+  font-weight:900;
+  margin-bottom:12px;
 }
 
 .pubAuthors{
@@ -134,7 +177,7 @@ a:hover{color:var(--accent)}
 
 /* footer */
 .footer{
-  margin-top:26px;
+  margin-top:36px;
   text-align:center;
   font-size:14px;
   color:rgba(242,242,242,0.6);
@@ -142,6 +185,8 @@ a:hover{color:var(--accent)}
 
 @media (max-width:900px){
   .pubTitle{font-size:17px}
+  .scholarBar{flex-direction:column;align-items:flex-start}
+  .scholarLink{margin-left:0}
 }
 </style>
 </head>
@@ -165,12 +210,20 @@ a:hover{color:var(--accent)}
 
 <div class="sectionTitle">Publications</div>
 
+<!-- ===== Google Scholar Bar ===== -->
+<div class="scholarBar">
+  <span>Complete list, citation metrics, and updates available on Google Scholar</span>
+  <a class="scholarLink" href="https://scholar.google.co.in/citations?user=B6FFurUAAAAJ&hl=en" target="_blank">
+    View Google Scholar →
+  </a>
+</div>
+
 <section class="glass pubWrap">
 <div class="pubList">
 
 <!-- ================== 2025 ================== -->
 <div class="yearBlock">
-  <div class="pubAuthors" style="color:var(--accent);font-size:20px;">2025</div>
+  <div class="pubYear">2025</div>
 
   <div class="pubItem">
     <div class="pubAuthors"><strong>D. Sri Gyan</strong>, H. J. Lee, X. Guo, et al.</div>
@@ -191,7 +244,7 @@ a:hover{color:var(--accent)}
 
 <!-- ================== 2024 ================== -->
 <div class="yearBlock">
-  <div class="pubAuthors" style="color:var(--accent);font-size:20px;">2024</div>
+  <div class="pubYear">2024</div>
 
   <div class="pubItem">
     <div class="pubAuthors">N. Li, H. J. Lee, <strong>D. Sri Gyan</strong>, et al.</div>
@@ -212,7 +265,7 @@ a:hover{color:var(--accent)}
 
 <!-- ================== 2022 ================== -->
 <div class="yearBlock">
-  <div class="pubAuthors" style="color:var(--accent);font-size:20px;">2022</div>
+  <div class="pubYear">2022</div>
 
   <div class="pubItem">
     <div class="pubAuthors"><strong>D. Sri Gyan</strong>, D. Mannix, et al.</div>
@@ -241,7 +294,7 @@ a:hover{color:var(--accent)}
 
 <!-- ================== 2020 ================== -->
 <div class="yearBlock">
-  <div class="pubAuthors" style="color:var(--accent);font-size:20px;">2020</div>
+  <div class="pubYear">2020</div>
 
   <div class="pubItem">
     <div class="pubAuthors"><strong>D. Sri Gyan</strong>, P. Sharma, A. Dwivedi</div>
@@ -270,7 +323,7 @@ a:hover{color:var(--accent)}
 
 <!-- ================== 2019 ================== -->
 <div class="yearBlock">
-  <div class="pubAuthors" style="color:var(--accent);font-size:20px;">2019</div>
+  <div class="pubYear">2019</div>
 
   <div class="pubItem">
     <div class="pubAuthors">K. Tanwar*, <strong>D. Sri Gyan*</strong>, et al.</div>
@@ -299,7 +352,7 @@ a:hover{color:var(--accent)}
 
 <!-- ================== 2018–2015 ================== -->
 <div class="yearBlock">
-  <div class="pubAuthors" style="color:var(--accent);font-size:20px;">2018–2015</div>
+  <div class="pubYear">2018–2015</div>
 
   <div class="pubItem">
     <div class="pubAuthors"><strong>D. Sri Gyan</strong>, P. Roy, T. Maiti</div>
