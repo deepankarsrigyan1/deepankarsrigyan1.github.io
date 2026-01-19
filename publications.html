@@ -1,187 +1,350 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Publications | D. Sri Gyan</title>
-  <link rel="stylesheet" href="assets/css/style.css">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Publications · Deepankar Sri Gyan</title>
+
+<style>
+:root{
+  --bg:#020306;
+  --text:#f2f2f2;
+  --muted:rgba(242,242,242,0.80);
+
+  --card:rgba(10,14,22,0.80);
+  --stroke:rgba(255,255,255,0.16);
+
+  --accent:#f3c74b;
+  --bgImage: url("assets/bg-template.png");
+}
+
+*{box-sizing:border-box}
+html,body{
+  margin:0;height:100%;
+  background:var(--bg);
+  color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+}
+a{color:inherit;text-decoration:none}
+a:hover{color:var(--accent)}
+
+/* ================= NAV ================= */
+.nav{
+  position:fixed; top:0; left:0; right:0;
+  z-index:10;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:18px 36px;
+  background:linear-gradient(to bottom, rgba(0,0,0,0.72), rgba(0,0,0,0));
+}
+.nav .name{font-weight:700;font-size:20px}
+.nav .menu{display:flex;gap:22px;font-size:16px;flex-wrap:wrap}
+.nav .menu a{opacity:0.86;padding-bottom:3px}
+.nav .menu a.active{opacity:1;border-bottom:2px solid var(--accent)}
+
+/* ================= PAGE BG ================= */
+.page{
+  min-height:100vh;
+  padding-top:100px;
+  position:relative;
+}
+.page::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:0;
+  background:
+    radial-gradient(900px 560px at 30% 35%, rgba(0,0,0,0.12), rgba(0,0,0,0.74)),
+    linear-gradient(180deg, rgba(0,0,0,0.12), rgba(0,0,0,0.62)),
+    var(--bgImage);
+  background-size:cover;
+  background-position:center;
+}
+.page::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:0;
+  background:linear-gradient(180deg, rgba(0,0,0,0.06), rgba(0,0,0,0.45));
+}
+
+.container{
+  position:relative;
+  z-index:1;
+  width:min(1120px,92%);
+  margin:0 auto;
+  padding:36px 0 80px;
+}
+
+/* ================= SECTION HEADERS ================= */
+.sectionTitle{
+  margin:24px 0 16px;
+  font-weight:900;
+  font-size:24px;
+  padding-bottom:6px;
+  border-bottom:2px solid rgba(243,199,75,0.8);
+  display:inline-block;
+}
+
+/* ================= GLASS ================= */
+.glass{
+  background:var(--card);
+  border:1px solid var(--stroke);
+  border-radius:22px;
+  box-shadow:0 18px 60px rgba(0,0,0,0.45);
+  backdrop-filter:blur(10px);
+}
+
+/* ================= PUBLICATIONS ================= */
+.pubWrap{padding:18px 22px}
+.yearBlock{margin-bottom:28px}
+.pubList{display:flex;flex-direction:column;gap:16px}
+
+.pubItem{
+  padding:16px;
+  border-radius:18px;
+  border:1px solid rgba(255,255,255,0.14);
+  background:rgba(0,0,0,0.20);
+}
+
+.pubAuthors{
+  font-size:17px;
+  font-weight:600;
+}
+
+.pubTitle{
+  margin:6px 0 6px;
+  font-size:18px;
+  font-style:italic;
+  color:#fff;
+}
+
+.pubJournal{
+  font-size:16px;
+  color:rgba(242,242,242,0.75);
+}
+
+.pubLink{
+  margin-left:8px;
+  font-size:15px;
+  color:var(--accent);
+  border-bottom:1px solid rgba(243,199,75,0.6);
+}
+
+/* footer */
+.footer{
+  margin-top:26px;
+  text-align:center;
+  font-size:14px;
+  color:rgba(242,242,242,0.6);
+}
+
+@media (max-width:900px){
+  .pubTitle{font-size:17px}
+}
+</style>
 </head>
+
 <body>
 
-<!-- ======= Navigation (match your other pages) ======= -->
-<nav>
-  <a href="index.html">Home</a> |
-  <a href="about.html">About</a> |
-  <a href="publications.html">Publications</a> |
-  <a href="https://scholar.google.com/citations?user=YOUR_SCHOLAR_ID" target="_blank">Google Scholar</a>
-</nav>
+<div class="nav">
+  <div class="name">Deepankar Sri Gyan</div>
+  <div class="menu">
+    <a href="index.html">Home</a>
+    <a href="about.html">About Me</a>
+    <a href="research.html">Research</a>
+    <a class="active" href="publications.html">Publications</a>
+    <a href="contact.html">Contact Me</a>
+    <a href="utility.html">Utility Software</a>
+  </div>
+</div>
 
-<section class="publications">
+<main class="page">
+<div class="container">
 
-  <h1>Publications</h1>
+<div class="sectionTitle">Publications</div>
 
-  <p class="scholar-link">
-    <a href="https://scholar.google.com/citations?user=YOUR_SCHOLAR_ID" target="_blank">
-      View my Google Scholar profile →
-    </a>
-  </p>
+<section class="glass pubWrap">
+<div class="pubList">
 
-  <p class="pub-intro">
-    My research explores ultrafast light–matter interactions, emergent nonequilibrium phases, and symmetry-breaking dynamics in quantum materials, using nonlinear optics and time-resolved x-ray probes.
-  </p>
+<!-- ================== 2025 ================== -->
+<div class="yearBlock">
+  <div class="pubAuthors" style="color:var(--accent);font-size:20px;">2025</div>
 
-  <!-- ================== 2025 ================== -->
-  <h2>2025</h2>
-  <ul>
-    <li>
-      <strong>D. Sri Gyan</strong>, H. J. Lee, X. Guo, Y. Ahn, S. D. Marks, M. H. Yusuf, M. Dawber, D. Zhu, T. Sato, S. Song, H. Wen, J. Hu, and P. G. Evans<br>
-      <em>Transient Terahertz Oscillations During Photoinduced Polarization Topology Reconfiguration in Ferroelectric Superlattices</em><br>
-      Advanced Science (Accepted, 2025)
-      <a href="LINK_HERE" target="_blank">[Paper]</a>
-    </li>
+  <div class="pubItem">
+    <div class="pubAuthors"><strong>D. Sri Gyan</strong>, H. J. Lee, X. Guo, et al.</div>
+    <div class="pubTitle">Transient Terahertz Oscillations During Photoinduced Polarization Topology Reconfiguration in Ferroelectric Superlattices</div>
+    <div class="pubJournal">Advanced Science (Accepted, 2025)
+      <a class="pubLink" href="LINK_HERE" target="_blank">[Paper]</a>
+    </div>
+  </div>
 
-    <li>
-      <strong>D. Sri Gyan</strong>, N. Li, Z. Chen, S. Geprägs, M. Dietlein, R. Gross, T. Sato, Y. Sun, M. C. Hoffmann, D. Zhu, D. Haskel, J. Strempfer, M. Li, D. Mannix, and P. G. Evans<br>
-      <em>Ultrafast low-temperature metal–insulator interface phonon dynamics and heat transport in a Pt/Gd₃Fe₅O₁₂ heterostructure</em><br>
-      Structural Dynamics 12, 065101 (2025)
-      <a href="LINK_HERE" target="_blank">[Paper]</a>
-    </li>
-  </ul>
+  <div class="pubItem">
+    <div class="pubAuthors"><strong>D. Sri Gyan</strong>, N. Li, Z. Chen, et al.</div>
+    <div class="pubTitle">Ultrafast low-temperature metal–insulator interface phonon dynamics and heat transport in a Pt/Gd₃Fe₅O₁₂ heterostructure</div>
+    <div class="pubJournal">Structural Dynamics 12, 065101 (2025)
+      <a class="pubLink" href="LINK_HERE" target="_blank">[Paper]</a>
+    </div>
+  </div>
+</div>
 
-  <!-- ================== 2024 ================== -->
-  <h2>2024</h2>
-  <ul>
-    <li>
-      N. Li, H. J. Lee, <strong>D. Sri Gyan</strong>, Y. Ahn, E. C. Landahl, J. Carnis, J. Y. Lee, T. Y. Kim, S. Unithrattil, J. Y. Jo, S. H. Chun, S. Kim, S. Y. Park, I. Eom, C. Adamo, S. J. Li, J. Z. Kaaret, D. G. Schlom, H. Wen, N. A. Benedek, and P. G. Evans<br>
-      <em>Ultrafast optically induced perturbation of oxygen octahedral rotations in multiferroic BiFeO₃ thin films</em><br>
-      Nano Letters 24(21), 6417–6424 (2024)
-      <a href="LINK_HERE" target="_blank">[Paper]</a>
-    </li>
+<!-- ================== 2024 ================== -->
+<div class="yearBlock">
+  <div class="pubAuthors" style="color:var(--accent);font-size:20px;">2024</div>
 
-    <li>
-      R. Liu, T. D. Janicki, S. D. Marks, <strong>D. Sri Gyan</strong>, P. Zuo, D. E. Savage, T. Zhou, Z. Cai, M. Holt, S. Butun, S. Lu, N. Basit, X. Hu, T. Abbott, N. Kabat, W. Li, Q. Li, K. P. Kelley, R. K. Vasudevan, J. R. Schmidt, S. E. Babcock, and P. G. Evans<br>
-      <em>Optical and electronic functionality arising from controlled defect formation in nanoscale complex oxide lateral epitaxy</em><br>
-      Science Advances 10(30), eadk5509 (2024)
-      <a href="LINK_HERE" target="_blank">[Paper]</a>
-    </li>
-  </ul>
+  <div class="pubItem">
+    <div class="pubAuthors">N. Li, H. J. Lee, <strong>D. Sri Gyan</strong>, et al.</div>
+    <div class="pubTitle">Ultrafast optically induced perturbation of oxygen octahedral rotations in multiferroic BiFeO₃ thin films</div>
+    <div class="pubJournal">Nano Letters 24, 6417–6424 (2024)
+      <a class="pubLink" href="LINK_HERE" target="_blank">[Paper]</a>
+    </div>
+  </div>
 
-  <!-- ================== 2022 ================== -->
-  <h2>2022</h2>
-  <ul>
-    <li>
-      <strong>D. Sri Gyan</strong>, D. Mannix, D. Carbone, S. Geprägs, M. Dietlein, R. Gross, A. Jurgilaitis, T. Pham, D. Haskel, J. Strempfer, and P. G. Evans<br>
-      <em>Low-temperature nanoscale heat transport in a gadolinium iron garnet heterostructure probed by ultrafast x-ray diffraction</em><br>
-      Structural Dynamics 9(4), 045101 (2022)
-      <a href="LINK_HERE" target="_blank">[Paper]</a>
-    </li>
+  <div class="pubItem">
+    <div class="pubAuthors">R. Liu, T. D. Janicki, <strong>D. Sri Gyan</strong>, et al.</div>
+    <div class="pubTitle">Optical and electronic functionality arising from controlled defect formation in nanoscale complex oxide lateral epitaxy</div>
+    <div class="pubJournal">Science Advances 10, eadk5509 (2024)
+      <a class="pubLink" href="LINK_HERE" target="_blank">[Paper]</a>
+    </div>
+  </div>
+</div>
 
-    <li>
-      H. J. Lee, Y. Ahn, S. D. Marks, <strong>D. Sri Gyan</strong>, E. C. Landahl, J. Y. Lee, T. Y. Kim, S. Unithrattil, J. Y. Jo, S. H. Chun, S. Kim, S. Y. Park, I. Eom, C. Adamo, D. G. Schlom, H. Wen, and P. G. Evans<br>
-      <em>Sub-picosecond optical stress generation in multiferroic BiFeO₃</em><br>
-      Nano Letters 22(11), 4294–4300 (2022)
-      <a href="LINK_HERE" target="_blank">[Paper]</a>
-    </li>
+<!-- ================== 2022 ================== -->
+<div class="yearBlock">
+  <div class="pubAuthors" style="color:var(--accent);font-size:20px;">2022</div>
 
-    <li>
-      <strong>D. Sri Gyan</strong>, H. J. Lee, Y. Ahn, J. Carnis, T. Y. Kim, S. Unithrattil, J. Y. Lee, S. H. Chun, S. Kim, I. Eom, M. Kim, S. Y. Park, K. S. Kim, H. N. Lee, J. Y. Jo, and P. G. Evans<br>
-      <em>Optically induced picosecond lattice compression in the dielectric component of a strongly coupled ferroelectric/dielectric superlattice</em><br>
-      Advanced Electronic Materials 8(6), 2101051 (2022)
-      <a href="LINK_HERE" target="_blank">[Paper]</a>
-    </li>
-  </ul>
+  <div class="pubItem">
+    <div class="pubAuthors"><strong>D. Sri Gyan</strong>, D. Mannix, et al.</div>
+    <div class="pubTitle">Low-temperature nanoscale heat transport in a gadolinium iron garnet heterostructure probed by ultrafast x-ray diffraction</div>
+    <div class="pubJournal">Structural Dynamics 9, 045101 (2022)
+      <a class="pubLink" href="LINK_HERE" target="_blank">[Paper]</a>
+    </div>
+  </div>
 
-  <!-- ================== 2020 ================== -->
-  <h2>2020</h2>
-  <ul>
-    <li>
-      <strong>D. Sri Gyan</strong>, P. Sharma, and A. Dwivedi<br>
-      <em>Effect of octahedral tilting on antiferroelectric phase stabilization in (1−x) NaNbO₃−xCdTiO₃ ceramics</em><br>
-      Journal of Physics D: Applied Physics 53(33), 335305 (2020)
-      <a href="LINK_HERE" target="_blank">[Paper]</a>
-    </li>
+  <div class="pubItem">
+    <div class="pubAuthors">H. J. Lee, Y. Ahn, <strong>D. Sri Gyan</strong>, et al.</div>
+    <div class="pubTitle">Sub-picosecond optical stress generation in multiferroic BiFeO₃</div>
+    <div class="pubJournal">Nano Letters 22, 4294–4300 (2022)
+      <a class="pubLink" href="LINK_HERE" target="_blank">[Paper]</a>
+    </div>
+  </div>
 
-    <li>
-      <strong>D. Sri Gyan</strong>, M. Saxena, R. Eremina, I. Fazlizhanov, D. Mamedov, I. Yatsyk, A. K. Shukla, A. Dwivedi, and T. Maiti<br>
-      <em>Magnetic and electron spin resonance properties of BaxSr₂−xTiFeO₆ double perovskites</em><br>
-      Physica Status Solidi (b) 257(5), 1900341 (2020)
-      <a href="LINK_HERE" target="_blank">[Paper]</a>
-    </li>
+  <div class="pubItem">
+    <div class="pubAuthors"><strong>D. Sri Gyan</strong>, H. J. Lee, Y. Ahn, et al.</div>
+    <div class="pubTitle">Optically induced picosecond lattice compression in ferroelectric/dielectric superlattices</div>
+    <div class="pubJournal">Advanced Electronic Materials 8, 2101051 (2022)
+      <a class="pubLink" href="LINK_HERE" target="_blank">[Paper]</a>
+    </div>
+  </div>
+</div>
 
-    <li>
-      <strong>D. Sri Gyan</strong>, V. Sundaram, A. Dwivedi, S. Bhowmick, and T. Maiti<br>
-      <em>Effect of B-site cation ordering on high-temperature thermoelectric behavior of BaxSr₂−xTiFeO₆ double perovskites</em><br>
-      Journal of Physics: Condensed Matter 32(23), 235401 (2020)
-      <a href="LINK_HERE" target="_blank">[Paper]</a>
-    </li>
-  </ul>
+<!-- ================== 2020 ================== -->
+<div class="yearBlock">
+  <div class="pubAuthors" style="color:var(--accent);font-size:20px;">2020</div>
 
-  <!-- ================== 2019 ================== -->
-  <h2>2019</h2>
-  <ul>
-    <li>
-      K. Tanwar*, <strong>D. Sri Gyan*</strong>, S. Bhattacharya, S. Vitta, A. Dwivedi, and T. Maiti (*equal contribution)<br>
-      <em>Enhancement of thermoelectric power factor by inducing octahedral ordering in La₂−xSrₓCoFeO₆ double perovskites</em><br>
-      Physical Review B 99(17), 174105 (2019)
-      <a href="LINK_HERE" target="_blank">[Paper]</a>
-    </li>
+  <div class="pubItem">
+    <div class="pubAuthors"><strong>D. Sri Gyan</strong>, P. Sharma, A. Dwivedi</div>
+    <div class="pubTitle">Effect of octahedral tilting on antiferroelectric phase stabilization in (1−x) NaNbO₃−xCdTiO₃ ceramics</div>
+    <div class="pubJournal">Journal of Physics D 53, 335305 (2020)
+      <a class="pubLink" href="LINK_HERE" target="_blank">[Paper]</a>
+    </div>
+  </div>
 
-    <li>
-      <strong>D. Sri Gyan</strong>, A. A. Goyal, Y. Tamrakar, and A. Dwivedi<br>
-      <em>Stabilization of anti-ferroelectric Pbcm phase over ferroelectric P2₁ma phase in intermittent ferroelectric NaNbO₃ by incorporating CaTiO₃</em><br>
-      Journal of Physics D: Applied Physics 52(16), 165304 (2019)
-      <a href="LINK_HERE" target="_blank">[Paper]</a>
-    </li>
+  <div class="pubItem">
+    <div class="pubAuthors"><strong>D. Sri Gyan</strong>, M. Saxena, et al.</div>
+    <div class="pubTitle">Magnetic and electron spin resonance properties of BaxSr₂−xTiFeO₆ double perovskites</div>
+    <div class="pubJournal">Physica Status Solidi (b) 257, 1900341 (2020)
+      <a class="pubLink" href="LINK_HERE" target="_blank">[Paper]</a>
+    </div>
+  </div>
 
-    <li>
-      <strong>D. Sri Gyan</strong> and A. Dwivedi<br>
-      <em>Structural and electrical characterization of NaNbO₃–PVDF nanocomposites fabricated by cold sintering synthesis route</em><br>
-      Journal of Applied Physics 125(2), 024103 (2019)
-      <a href="LINK_HERE" target="_blank">[Paper]</a>
-    </li>
-  </ul>
+  <div class="pubItem">
+    <div class="pubAuthors"><strong>D. Sri Gyan</strong>, V. Sundaram, et al.</div>
+    <div class="pubTitle">Effect of B-site cation ordering on high-temperature thermoelectric behavior of BaxSr₂−xTiFeO₆ double perovskites</div>
+    <div class="pubJournal">Journal of Physics: Condensed Matter 32, 235401 (2020)
+      <a class="pubLink" href="LINK_HERE" target="_blank">[Paper]</a>
+    </div>
+  </div>
+</div>
 
-  <!-- ================== 2018 ================== -->
-  <h2>2018</h2>
-  <ul>
-    <li>
-      <strong>D. Sri Gyan</strong>, A. Dwivedi, P. Roy, and T. Maiti<br>
-      <em>Synthesis and thermoelectric properties of Ba₂TiFeO₆ double perovskite with insight into the crystal structure</em><br>
-      Ferroelectrics 536(1), 146–155 (2018)
-      <a href="LINK_HERE" target="_blank">[Paper]</a>
-    </li>
+<!-- ================== 2019 ================== -->
+<div class="yearBlock">
+  <div class="pubAuthors" style="color:var(--accent);font-size:20px;">2019</div>
 
-    <li>
-      K. Tanwar, <strong>D. Sri Gyan</strong>, P. Gupta, S. Pandey, Om Prakash, and D. Kumar<br>
-      <em>Investigation of crystal structure, microstructure and magnetic properties of cerium and zinc co-doped barium hexaferrites</em><br>
-      RSC Advances 8, 19600–19609 (2018)
-      <a href="LINK_HERE" target="_blank">[Paper]</a>
-    </li>
-  </ul>
+  <div class="pubItem">
+    <div class="pubAuthors">K. Tanwar*, <strong>D. Sri Gyan*</strong>, et al.</div>
+    <div class="pubTitle">Enhancement of thermoelectric power factor by inducing octahedral ordering in La₂−xSrₓCoFeO₆</div>
+    <div class="pubJournal">Physical Review B 99, 174105 (2019)
+      <a class="pubLink" href="LINK_HERE" target="_blank">[Paper]</a>
+    </div>
+  </div>
 
-  <!-- ================== 2016 ================== -->
-  <h2>2016</h2>
-  <ul>
-    <li>
-      <strong>D. Sri Gyan</strong> and K. Balasubramanian<br>
-      <em>Ionic liquid microseeded WC/RF ablative composite for heat shielding</em><br>
-      RSC Advances 6(69), 65152–65161 (2016)
-      <a href="LINK_HERE" target="_blank">[Paper]</a>
-    </li>
-  </ul>
+  <div class="pubItem">
+    <div class="pubAuthors"><strong>D. Sri Gyan</strong>, A. A. Goyal, et al.</div>
+    <div class="pubTitle">Stabilization of anti-ferroelectric phase in NaNbO₃ by incorporating CaTiO₃</div>
+    <div class="pubJournal">Journal of Physics D 52, 165304 (2019)
+      <a class="pubLink" href="LINK_HERE" target="_blank">[Paper]</a>
+    </div>
+  </div>
 
-  <!-- ================== 2015 ================== -->
-  <h2>2015</h2>
-  <ul>
-    <li>
-      <strong>D. Sri Gyan</strong>, R. Gupta, and P. K. Roy<br>
-      <em>Comparison of GDC electrolyte–LSCF cathode IT-SOFC system with conventional power sources</em><br>
-      IEEE Energy Economics and Environment Conference (2015)<br>
-      DOI: 10.1109/EnergyEconomics.2015.7235109
-      <a href="https://doi.org/10.1109/EnergyEconomics.2015.7235109" target="_blank">[Paper]</a>
-    </li>
-  </ul>
+  <div class="pubItem">
+    <div class="pubAuthors"><strong>D. Sri Gyan</strong>, A. Dwivedi</div>
+    <div class="pubTitle">Structural and electrical characterization of NaNbO₃–PVDF nanocomposites</div>
+    <div class="pubJournal">Journal of Applied Physics 125, 024103 (2019)
+      <a class="pubLink" href="LINK_HERE" target="_blank">[Paper]</a>
+    </div>
+  </div>
+</div>
 
+<!-- ================== 2018–2015 ================== -->
+<div class="yearBlock">
+  <div class="pubAuthors" style="color:var(--accent);font-size:20px;">2018–2015</div>
+
+  <div class="pubItem">
+    <div class="pubAuthors"><strong>D. Sri Gyan</strong>, P. Roy, T. Maiti</div>
+    <div class="pubTitle">Synthesis and thermoelectric properties of Ba₂TiFeO₆ double perovskite</div>
+    <div class="pubJournal">Ferroelectrics 536, 146–155 (2018)
+      <a class="pubLink" href="LINK_HERE" target="_blank">[Paper]</a>
+    </div>
+  </div>
+
+  <div class="pubItem">
+    <div class="pubAuthors">K. Tanwar, <strong>D. Sri Gyan</strong>, et al.</div>
+    <div class="pubTitle">Magnetic properties of cerium and zinc co-doped barium hexaferrites</div>
+    <div class="pubJournal">RSC Advances 8, 19600–19609 (2018)
+      <a class="pubLink" href="LINK_HERE" target="_blank">[Paper]</a>
+    </div>
+  </div>
+
+  <div class="pubItem">
+    <div class="pubAuthors"><strong>D. Sri Gyan</strong>, K. Balasubramanian</div>
+    <div class="pubTitle">Ionic liquid microseeded WC/RF ablative composite for heat shielding</div>
+    <div class="pubJournal">RSC Advances 6, 65152–65161 (2016)
+      <a class="pubLink" href="LINK_HERE" target="_blank">[Paper]</a>
+    </div>
+  </div>
+
+  <div class="pubItem">
+    <div class="pubAuthors"><strong>D. Sri Gyan</strong>, R. Gupta, P. K. Roy</div>
+    <div class="pubTitle">Comparison of GDC–LSCF IT-SOFC system with conventional power sources</div>
+    <div class="pubJournal">IEEE Energy Economics and Environment (2015)
+      <a class="pubLink" href="https://doi.org/10.1109/EnergyEconomics.2015.7235109" target="_blank">[Paper]</a>
+    </div>
+  </div>
+</div>
+
+</div>
 </section>
+
+<div class="footer">© <span id="y"></span> Deepankar Sri Gyan</div>
+
+</div>
+</main>
+
+<script>
+document.getElementById("y").textContent = new Date().getFullYear();
+</script>
 
 </body>
 </html>
