@@ -9,11 +9,8 @@
 :root{
   --bg:#020306;
   --text:#f2f2f2;
-  --muted:rgba(242,242,242,0.80);
-
   --card:rgba(10,14,22,0.80);
   --stroke:rgba(255,255,255,0.16);
-
   --accent:#f3c74b;
   --bgImage: url("assets/bg-template.png");
 }
@@ -25,7 +22,7 @@ html,body{
   color:var(--text);
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
 }
-a{color:inherit;text-decoration:none}
+a{text-decoration:none}
 
 /* ================= NAV ================= */
 .nav{
@@ -39,7 +36,7 @@ a{color:inherit;text-decoration:none}
 }
 .nav .name{font-weight:700;font-size:20px}
 .nav .menu{display:flex;gap:22px;font-size:16px;flex-wrap:wrap}
-.nav .menu a{opacity:0.86;padding-bottom:3px}
+.nav .menu a{color:#fff;opacity:0.86;padding-bottom:3px}
 .nav .menu a.active{opacity:1;border-bottom:2px solid var(--accent)}
 
 /* ================= PAGE BG ================= */
@@ -59,7 +56,6 @@ a{color:inherit;text-decoration:none}
     var(--bgImage);
   background-size:cover;
   background-position:center top;
-  background-repeat:no-repeat;
 }
 .page::after{
   content:"";
@@ -77,7 +73,7 @@ a{color:inherit;text-decoration:none}
   padding:36px 0 80px;
 }
 
-/* ================= SECTION TITLE ================= */
+/* ================= TITLE ================= */
 .sectionTitle{
   margin:24px 0 12px;
   font-weight:900;
@@ -96,7 +92,7 @@ a{color:inherit;text-decoration:none}
   backdrop-filter:blur(10px);
 }
 
-/* ================= LAYOUT ================= */
+/* ================= GRID ================= */
 .grid{
   display:grid;
   grid-template-columns: 1fr 1fr;
@@ -104,47 +100,41 @@ a{color:inherit;text-decoration:none}
   margin-top:18px;
 }
 
-/* Left icon panel */
+/* ================= ICON PANEL ================= */
 .iconPanel{
-  padding:18px 20px;
+  padding:20px;
   display:flex;
-  align-items:center;
   justify-content:center;
+  align-items:center;
 }
-
 .iconGrid{
   width:100%;
   display:grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap:16px;
-  padding:10px;
+  grid-template-columns: repeat(3, 1fr);
+  gap:18px;
 }
-
 .iconBtn{
   display:grid;
   place-items:center;
-  height:96px;
+  height:100px;
   border-radius:18px;
   border:1px solid rgba(255,255,255,0.14);
   background:rgba(0,0,0,0.22);
-  transition: transform 0.12s ease, border-color 0.12s ease, background 0.12s ease;
+  transition:all 0.15s ease;
 }
 .iconBtn:hover{
-  transform: translateY(-2px);
-  border-color: rgba(243,199,75,0.55);
-  background: rgba(243,199,75,0.08);
+  transform:translateY(-3px);
+  border-color:rgba(243,199,75,0.55);
+  background:rgba(243,199,75,0.08);
 }
 .iconBtn img{
-  width:44px;
-  height:44px;
+  width:46px;
+  height:46px;
   object-fit:contain;
-  filter: drop-shadow(0 10px 18px rgba(0,0,0,0.45));
 }
 
-/* Right form */
-.formWrap{
-  padding:18px 20px;
-}
+/* ================= FORM ================= */
+.formWrap{padding:18px}
 .formEmbed{
   width:100%;
   height:760px;
@@ -153,7 +143,7 @@ a{color:inherit;text-decoration:none}
   background:rgba(0,0,0,0.15);
 }
 
-/* footer */
+/* ================= FOOTER ================= */
 .footer{
   margin-top:36px;
   text-align:center;
@@ -163,7 +153,6 @@ a{color:inherit;text-decoration:none}
 
 @media (max-width:900px){
   .grid{grid-template-columns:1fr}
-  .iconGrid{grid-template-columns: repeat(3, 1fr)}
   .formEmbed{height:860px}
 }
 </style>
@@ -190,16 +179,16 @@ a{color:inherit;text-decoration:none}
 
 <div class="grid">
 
-  <!-- ===== Left: ICONS ONLY ===== -->
-  <section class="glass iconPanel" aria-label="Contact icons">
+  <!-- ===== ICONS ONLY (LEFT) ===== -->
+  <section class="glass iconPanel">
     <div class="iconGrid">
 
       <!-- Emails -->
-      <a class="iconBtn" href="mailto:deepankarsrigyan1@gmail.com" title="Email (Gmail)">
+      <a class="iconBtn" href="mailto:deepankarsrigyan1@gmail.com" title="Gmail">
         <img src="assets/assets/icons/gmail.png" alt="Gmail">
       </a>
 
-      <a class="iconBtn" href="mailto:dsrigyan@bu.edu" title="Email (Outlook)">
+      <a class="iconBtn" href="mailto:dsrigyan@bu.edu" title="Outlook">
         <img src="assets/assets/icons/outlook.png" alt="Outlook">
       </a>
 
@@ -212,7 +201,7 @@ a{color:inherit;text-decoration:none}
         <img src="assets/assets/icons/researchgate.png" alt="ResearchGate">
       </a>
 
-      <a class="iconBtn" href="https://x.com/d_sri_gyan" target="_blank" title="X (Twitter)">
+      <a class="iconBtn" href="https://x.com/d_sri_gyan" target="_blank" title="X">
         <img src="assets/assets/icons/x.png" alt="X">
       </a>
 
@@ -220,11 +209,15 @@ a{color:inherit;text-decoration:none}
         <img src="assets/assets/icons/facebook.png" alt="Facebook">
       </a>
 
+      <a class="iconBtn" href="https://www.instagram.com/YOUR_HANDLE" target="_blank" title="Instagram">
+        <img src="assets/assets/icons/instagram.png" alt="Instagram">
+      </a>
+
     </div>
   </section>
 
-  <!-- ===== Right: Google Form ===== -->
-  <section class="glass formWrap" aria-label="Google Form">
+  <!-- ===== GOOGLE FORM (RIGHT) ===== -->
+  <section class="glass formWrap">
     <iframe
       class="formEmbed"
       src="PASTE_GOOGLE_FORM_EMBED_URL_HERE"
