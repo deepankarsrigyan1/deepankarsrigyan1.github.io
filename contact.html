@@ -9,8 +9,8 @@
 :root{
   --bg:#020306;
   --text:#f2f2f2;
-  --card:rgba(10,14,22,0.80);
-  --stroke:rgba(255,255,255,0.16);
+  --card:rgba(10,14,22,0.78);
+  --stroke:rgba(255,255,255,0.14);
   --accent:#f3c74b;
   --bgImage: url("assets/bg-template.png");
 }
@@ -24,13 +24,10 @@ html,body{
 }
 a{text-decoration:none}
 
-/* ================= NAV ================= */
+/* NAV */
 .nav{
-  position:fixed; top:0; left:0; right:0;
-  z-index:10;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
+  position:fixed; top:0; left:0; right:0; z-index:10;
+  display:flex; justify-content:space-between; align-items:center;
   padding:18px 36px;
   background:linear-gradient(to bottom, rgba(0,0,0,0.72), rgba(0,0,0,0));
 }
@@ -39,51 +36,36 @@ a{text-decoration:none}
 .nav .menu a{color:#fff;opacity:0.86;padding-bottom:3px}
 .nav .menu a.active{opacity:1;border-bottom:2px solid var(--accent)}
 
-/* ================= PAGE BG ================= */
-.page{
-  min-height:100vh;
-  padding-top:110px;
-  position:relative;
-}
+/* BG */
+.page{min-height:100vh; padding-top:110px; position:relative;}
 .page::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  z-index:0;
+  content:""; position:absolute; inset:0; z-index:0;
   background:
     radial-gradient(900px 560px at 30% 35%, rgba(0,0,0,0.06), rgba(0,0,0,0.45)),
     linear-gradient(180deg, rgba(0,0,0,0.08), rgba(0,0,0,0.38)),
     var(--bgImage);
-  background-size:cover;
-  background-position:center top;
+  background-size:cover; background-position:center top; background-repeat:no-repeat;
 }
 .page::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  z-index:0;
+  content:""; position:absolute; inset:0; z-index:0;
   background:linear-gradient(180deg, rgba(0,0,0,0.04), rgba(0,0,0,0.28));
 }
 
 .container{
-  position:relative;
-  z-index:1;
+  position:relative; z-index:1;
   width:min(1120px,92%);
   margin:0 auto;
   padding:36px 0 80px;
 }
 
-/* ================= TITLE ================= */
 .sectionTitle{
   margin:24px 0 12px;
-  font-weight:900;
-  font-size:28px;
+  font-weight:900; font-size:28px;
   padding-bottom:6px;
   border-bottom:2px solid rgba(243,199,75,0.9);
   display:inline-block;
 }
 
-/* ================= GLASS ================= */
 .glass{
   background:var(--card);
   border:1px solid var(--stroke);
@@ -92,49 +74,46 @@ a{text-decoration:none}
   backdrop-filter:blur(10px);
 }
 
-/* ================= GRID ================= */
+/* LAYOUT */
 .grid{
   display:grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 420px 1fr;
   gap:18px;
   margin-top:18px;
 }
-
-/* ================= ICON PANEL ================= */
-.iconPanel{
-  padding:20px;
-  display:flex;
-  justify-content:center;
-  align-items:center;
+@media (max-width:900px){
+  .grid{grid-template-columns:1fr}
 }
+
+/* ICONS */
+.iconPanel{padding:18px;}
 .iconGrid{
-  width:100%;
   display:grid;
   grid-template-columns: repeat(3, 1fr);
-  gap:18px;
+  gap:14px;
 }
 .iconBtn{
+  height:86px;
+  border-radius:16px;
+  border:1px solid rgba(255,255,255,0.12);
+  background:rgba(0,0,0,0.16);
   display:grid;
   place-items:center;
-  height:100px;
-  border-radius:18px;
-  border:1px solid rgba(255,255,255,0.14);
-  background:rgba(0,0,0,0.22);
-  transition:all 0.15s ease;
+  transition: transform 0.12s ease, border-color 0.12s ease, background 0.12s ease;
 }
 .iconBtn:hover{
-  transform:translateY(-3px);
-  border-color:rgba(243,199,75,0.55);
-  background:rgba(243,199,75,0.08);
+  transform: translateY(-2px);
+  border-color: rgba(243,199,75,0.55);
+  background: rgba(243,199,75,0.08);
 }
 .iconBtn img{
-  width:46px;
-  height:46px;
+  width:38px;
+  height:38px;
   object-fit:contain;
 }
 
-/* ================= FORM ================= */
-.formWrap{padding:18px}
+/* FORM */
+.formWrap{padding:18px;}
 .formEmbed{
   width:100%;
   height:760px;
@@ -142,24 +121,20 @@ a{text-decoration:none}
   border-radius:18px;
   background:rgba(0,0,0,0.15);
 }
+@media (max-width:900px){
+  .formEmbed{height:860px}
+}
 
-/* ================= FOOTER ================= */
 .footer{
   margin-top:36px;
   text-align:center;
   font-size:14px;
   color:rgba(242,242,242,0.6);
 }
-
-@media (max-width:900px){
-  .grid{grid-template-columns:1fr}
-  .formEmbed{height:860px}
-}
 </style>
 </head>
 
 <body>
-
 <div class="nav">
   <div class="name">Deepankar Sri Gyan</div>
   <div class="menu">
@@ -179,44 +154,36 @@ a{text-decoration:none}
 
 <div class="grid">
 
-  <!-- ===== ICONS ONLY (LEFT) ===== -->
+  <!-- LEFT: 2 rows of icons (3x2) -->
   <section class="glass iconPanel">
     <div class="iconGrid">
-
-      <!-- Emails -->
       <a class="iconBtn" href="mailto:deepankarsrigyan1@gmail.com" title="Gmail">
-        <img src="assets/assets/icons/gmail.png" alt="Gmail">
+        <img src="assets/assets/assets/icons/gmail.png" alt="Gmail">
       </a>
 
       <a class="iconBtn" href="mailto:dsrigyan@bu.edu" title="Outlook">
-        <img src="assets/assets/icons/outlook.png" alt="Outlook">
+        <img src="assets/assets/assets/icons/outlook.png" alt="Outlook">
       </a>
 
-      <!-- Profiles -->
-      <a class="iconBtn" href="https://www.linkedin.com/in/YOUR_HANDLE" target="_blank" title="LinkedIn">
-        <img src="assets/assets/icons/linkedin.png" alt="LinkedIn">
+      <a class="iconBtn" href="https://www.linkedin.com/in/PASTE_YOUR_LINKEDIN_HANDLE" target="_blank" title="LinkedIn">
+        <img src="assets/assets/assets/icons/linkedin.png" alt="LinkedIn">
       </a>
 
       <a class="iconBtn" href="https://www.researchgate.net/profile/Deepankar-Sri-Gyan?ev=hdr_xprf" target="_blank" title="ResearchGate">
-        <img src="assets/assets/icons/researchgate.png" alt="ResearchGate">
+        <img src="assets/assets/assets/icons/researchgate.png" alt="ResearchGate">
       </a>
 
       <a class="iconBtn" href="https://x.com/d_sri_gyan" target="_blank" title="X">
-        <img src="assets/assets/icons/x.png" alt="X">
+        <img src="assets/assets/assets/icons/x.png" alt="X">
       </a>
 
       <a class="iconBtn" href="https://www.facebook.com/deepankar.srigyan.1" target="_blank" title="Facebook">
-        <img src="assets/assets/icons/facebook.png" alt="Facebook">
+        <img src="assets/assets/assets/icons/facebook.png" alt="Facebook">
       </a>
-
-      <a class="iconBtn" href="https://www.instagram.com/YOUR_HANDLE" target="_blank" title="Instagram">
-        <img src="assets/assets/icons/instagram.png" alt="Instagram">
-      </a>
-
     </div>
   </section>
 
-  <!-- ===== GOOGLE FORM (RIGHT) ===== -->
+  <!-- RIGHT: Google Form -->
   <section class="glass formWrap">
     <iframe
       class="formEmbed"
@@ -230,13 +197,11 @@ a{text-decoration:none}
 </div>
 
 <div class="footer">© <span id="y"></span> Deepankar Sri Gyan</div>
-
 </div>
 </main>
 
 <script>
 document.getElementById("y").textContent = new Date().getFullYear();
 </script>
-
 </body>
 </html>
