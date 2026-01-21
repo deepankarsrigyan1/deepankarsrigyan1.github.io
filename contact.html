@@ -26,7 +26,6 @@ html,body{
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
 }
 a{color:inherit;text-decoration:none}
-a:hover{color:var(--accent)}
 
 /* ================= NAV ================= */
 .nav{
@@ -97,7 +96,7 @@ a:hover{color:var(--accent)}
   backdrop-filter:blur(10px);
 }
 
-/* ================= CONTACT LAYOUT ================= */
+/* ================= LAYOUT ================= */
 .grid{
   display:grid;
   grid-template-columns: 1fr 1fr;
@@ -105,83 +104,50 @@ a:hover{color:var(--accent)}
   margin-top:18px;
 }
 
-.card{
+/* Left icon panel */
+.iconPanel{
   padding:18px 20px;
-}
-
-.lead{
-  color:var(--muted);
-  font-size:17px;
-  line-height:1.7;
-  margin:10px 0 0;
-}
-
-.label{
-  font-weight:900;
-  font-size:16px;
-  margin:0 0 10px;
-  color:rgba(242,242,242,0.95);
-}
-
-.item{
   display:flex;
   align-items:center;
-  justify-content:space-between;
-  gap:12px;
-  padding:12px 12px;
-  border-radius:16px;
+  justify-content:center;
+}
+
+.iconGrid{
+  width:100%;
+  display:grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap:16px;
+  padding:10px;
+}
+
+.iconBtn{
+  display:grid;
+  place-items:center;
+  height:96px;
+  border-radius:18px;
   border:1px solid rgba(255,255,255,0.14);
   background:rgba(0,0,0,0.22);
-  margin-bottom:10px;
+  transition: transform 0.12s ease, border-color 0.12s ease, background 0.12s ease;
+}
+.iconBtn:hover{
+  transform: translateY(-2px);
+  border-color: rgba(243,199,75,0.55);
+  background: rgba(243,199,75,0.08);
+}
+.iconBtn img{
+  width:44px;
+  height:44px;
+  object-fit:contain;
+  filter: drop-shadow(0 10px 18px rgba(0,0,0,0.45));
 }
 
-.item .left{
-  display:flex;
-  flex-direction:column;
-  gap:2px;
-  min-width:0;
-}
-.item .title{
-  font-weight:800;
-  font-size:16px;
-}
-.item .sub{
-  font-size:14px;
-  color:rgba(242,242,242,0.70);
-  overflow:hidden;
-  text-overflow:ellipsis;
-  white-space:nowrap;
-  max-width:520px;
-}
-
-.pillBtn{
-  padding:8px 12px;
-  border-radius:999px;
-  border:1px solid rgba(243,199,75,0.7);
-  color:var(--accent);
-  font-weight:800;
-  font-size:14px;
-  white-space:nowrap;
-}
-.pillBtn:hover{
-  background:rgba(243,199,75,0.12);
-}
-
+/* Right form */
 .formWrap{
   padding:18px 20px;
 }
-
-.formNote{
-  margin:0 0 12px;
-  color:rgba(242,242,242,0.78);
-  font-size:15px;
-  line-height:1.6;
-}
-
-/* Embed responsive */
 .formEmbed{
   width:100%;
-  height:720px;
+  height:760px;
   border:0;
   border-radius:18px;
   background:rgba(0,0,0,0.15);
@@ -197,8 +163,8 @@ a:hover{color:var(--accent)}
 
 @media (max-width:900px){
   .grid{grid-template-columns:1fr}
-  .item .sub{max-width:260px}
-  .formEmbed{height:820px}
+  .iconGrid{grid-template-columns: repeat(3, 1fr)}
+  .formEmbed{height:860px}
 }
 </style>
 </head>
@@ -221,76 +187,44 @@ a:hover{color:var(--accent)}
 <div class="container">
 
 <div class="sectionTitle">Contact</div>
-<p class="lead">
-  For collaborations, talks, or questions about ultrafast dynamics, nonlinear optics, and time-resolved x-ray studies,
-  feel free to reach out.
-</p>
 
 <div class="grid">
 
-  <!-- ===== Left: Emails + Social ===== -->
-  <section class="glass card">
-    <div class="label">Email</div>
+  <!-- ===== Left: ICONS ONLY ===== -->
+  <section class="glass iconPanel" aria-label="Contact icons">
+    <div class="iconGrid">
 
-    <div class="item">
-      <div class="left">
-        <div class="title">Email (Primary)</div>
-        <div class="sub">dsrigyan@bu.edu</div>
-      </div>
-      <a class="pillBtn" href="mailto:dsrigyan@bu.edu">Email</a>
-    </div>
+      <!-- Emails -->
+      <a class="iconBtn" href="mailto:deepankarsrigyan1@gmail.com" title="Email (Gmail)">
+        <img src="assets/icons/gmail.png" alt="Gmail">
+      </a>
 
-    <div class="item">
-      <div class="left">
-        <div class="title">Email (Secondary)</div>
-        <div class="sub">deepankarsrigyan1@gmail.com</div>
-      </div>
-      <a class="pillBtn" href="mailto:deepankarsrigyan1@gmail.com">Email</a>
-    </div>
+      <a class="iconBtn" href="mailto:dsrigyan@bu.edu" title="Email (Outlook)">
+        <img src="assets/icons/outlook.png" alt="Outlook">
+      </a>
 
-    <div class="label" style="margin-top:18px;">Profiles</div>
+      <!-- Profiles -->
+      <a class="iconBtn" href="https://www.linkedin.com/in/YOUR_HANDLE" target="_blank" title="LinkedIn">
+        <img src="assets/icons/linkedin.png" alt="LinkedIn">
+      </a>
 
-    <div class="item">
-      <div class="left">
-        <div class="title">LinkedIn</div>
-        <div class="sub">https://www.linkedin.com/in/YOUR_HANDLE</div>
-      </div>
-      <a class="pillBtn" href="https://www.linkedin.com/in/YOUR_HANDLE" target="_blank">Open</a>
-    </div>
+      <a class="iconBtn" href="https://www.researchgate.net/profile/Deepankar-Sri-Gyan?ev=hdr_xprf" target="_blank" title="ResearchGate">
+        <img src="assets/icons/researchgate.png" alt="ResearchGate">
+      </a>
 
-    <div class="item">
-      <div class="left">
-        <div class="title">ResearchGate</div>
-        <div class="sub">https://www.researchgate.net/profile/Deepankar-Sri-Gyan?ev=hdr_xprf</div>
-      </div>
-      <a class="pillBtn" href="https://www.researchgate.net/profile/Deepankar-Sri-Gyan?ev=hdr_xprf" target="_blank">Open</a>
-    </div>
+      <a class="iconBtn" href="https://x.com/d_sri_gyan" target="_blank" title="X (Twitter)">
+        <img src="assets/icons/x.png" alt="X">
+      </a>
 
-    <div class="item">
-      <div class="left">
-        <div class="title">X (Twitter)</div>
-        <div class="sub">https://x.com/d_sri_gyan</div>
-      </div>
-      <a class="pillBtn" href="https://x.com/d_sri_gyan" target="_blank">Open</a>
-    </div>
+      <a class="iconBtn" href="https://www.facebook.com/deepankar.srigyan.1" target="_blank" title="Facebook">
+        <img src="assets/icons/facebook.png" alt="Facebook">
+      </a>
 
-    <div class="item" style="margin-bottom:0;">
-      <div class="left">
-        <div class="title">Facebook</div>
-        <div class="sub">https://www.facebook.com/deepankar.srigyan.1</div>
-      </div>
-      <a class="pillBtn" href="https://www.facebook.com/deepankar.srigyan.1" target="_blank">Open</a>
     </div>
   </section>
 
   <!-- ===== Right: Google Form ===== -->
-  <section class="glass formWrap">
-    <div class="label">Message Form</div>
-    <p class="formNote">
-      Prefer a form? Use the Google Form below. (You can disable this section if you don’t want a form on the site.)
-    </p>
-
-    <!-- Replace the src with your Google Form embed link -->
+  <section class="glass formWrap" aria-label="Google Form">
     <iframe
       class="formEmbed"
       src="PASTE_GOOGLE_FORM_EMBED_URL_HERE"
