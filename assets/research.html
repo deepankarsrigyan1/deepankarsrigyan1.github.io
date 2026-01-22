@@ -1,0 +1,437 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Research · Deepankar Sri Gyan</title>
+
+<style>
+:root{
+  --bg:#020306;
+  --text:#f2f2f2;
+  --muted:rgba(242,242,242,0.80);
+  --accent:#f3c74b;
+
+  --card:rgba(10,14,22,0.80);      /* ~80% opaque */
+  --stroke:rgba(255,255,255,0.16);
+  --soft:rgba(255,255,255,0.10);
+
+  /* same background as About */
+  --bgImage:url("assets/bg-template.png");
+}
+
+*{box-sizing:border-box}
+html,body{
+  margin:0;height:100%;
+  background:var(--bg);
+  color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+}
+a{color:inherit;text-decoration:none}
+a:hover{color:var(--accent)}
+
+/* ================= NAV ================= */
+.nav{
+  position:fixed; top:0; left:0; right:0;
+  z-index:10;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:18px 36px;
+  background:linear-gradient(to bottom, rgba(0,0,0,0.72), rgba(0,0,0,0));
+}
+.nav .name{font-weight:700;font-size:20px}
+.nav .menu{display:flex;gap:22px;font-size:16px;flex-wrap:wrap}
+.nav .menu a{opacity:0.86;padding-bottom:3px}
+.nav .menu a.active{opacity:1;border-bottom:2px solid var(--accent)}
+
+/* ================= PAGE BG ================= */
+.page{
+  min-height:100vh;
+  padding-top:100px;
+  position:relative;
+}
+.page::before{
+  content:"";
+  position:absolute; inset:0; z-index:0;
+  background:
+    radial-gradient(900px 560px at 30% 35%, rgba(0,0,0,0.12), rgba(0,0,0,0.74)),
+    linear-gradient(180deg, rgba(0,0,0,0.12), rgba(0,0,0,0.62)),
+    var(--bgImage);
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
+}
+.page::after{
+  content:"";
+  position:absolute; inset:0; z-index:0;
+  background:linear-gradient(180deg, rgba(0,0,0,0.06), rgba(0,0,0,0.45));
+}
+
+.container{
+  position:relative;
+  z-index:1;
+  width:min(1180px,92%);
+  margin:0 auto;
+  padding:18px 0 90px;
+}
+
+/* ================= SECTION HEADINGS ================= */
+.sectionTitle{
+  margin:28px 0 10px;
+  font-weight:900;
+  font-size:30px;
+  padding-bottom:8px;
+  border-bottom:2px solid rgba(243,199,75,0.85);
+}
+.sectionDesc{
+  margin:10px 0 18px;
+  font-size:15px;
+  line-height:1.8;
+  color:rgba(242,242,242,0.72);
+  max-width:980px;
+}
+
+/* ================= CARDS / FIGURES ================= */
+.grid2{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:18px;
+  align-items:stretch;
+}
+@media (max-width: 980px){
+  .grid2{grid-template-columns:1fr}
+}
+
+.projectCard{
+  background:var(--card);
+  border:1px solid var(--stroke);
+  border-radius:18px;
+  overflow:hidden;
+  box-shadow:0 14px 45px rgba(0,0,0,0.35);
+  backdrop-filter:blur(10px);
+  display:grid;
+  grid-template-columns: 280px 1fr;
+  min-height:180px;
+}
+@media (max-width: 760px){
+  .projectCard{grid-template-columns:1fr}
+}
+
+.figBox{
+  position:relative;
+  background:rgba(255,255,255,0.05);
+  border-right:1px solid rgba(255,255,255,0.12);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:12px;
+}
+@media (max-width: 760px){
+  .figBox{border-right:none;border-bottom:1px solid rgba(255,255,255,0.12)}
+}
+.figBox img{
+  width:100%;
+  height:100%;
+  max-height:210px;
+  object-fit:cover;
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,0.14);
+  background:rgba(0,0,0,0.25);
+}
+
+.contentBox{
+  padding:16px 16px 14px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  gap:10px;
+}
+.projTitle{
+  font-weight:900;
+  font-size:18px;
+  line-height:1.3;
+  margin:0;
+}
+.projText{
+  margin:0;
+  font-size:14.5px;
+  line-height:1.75;
+  color:rgba(242,242,242,0.76);
+}
+
+/* references list */
+.refs{
+  margin:0;
+  padding-left:18px;
+  color:rgba(242,242,242,0.74);
+  font-size:14px;
+  line-height:1.65;
+}
+.refs li{margin:6px 0}
+.refs a{
+  color:rgba(243,199,75,0.95);
+  font-weight:800;
+}
+.refs a:hover{color:var(--accent); text-decoration:underline}
+
+/* center “hero figure” between 4 tiles like your sketch */
+.heroWrap{
+  margin:16px 0 6px;
+  display:grid;
+  grid-template-columns:1fr;
+  justify-items:center;
+}
+.heroFigure{
+  width:min(720px,96%);
+  border-radius:18px;
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,0.16);
+  background:rgba(255,255,255,0.05);
+  box-shadow:0 18px 60px rgba(0,0,0,0.45);
+}
+.heroFigure img{
+  width:100%;
+  height:auto;
+  display:block;
+}
+
+/* single wide card */
+.wideCard{
+  margin-top:14px;
+}
+.wideCard .projectCard{
+  grid-template-columns: 360px 1fr;
+}
+@media (max-width: 760px){
+  .wideCard .projectCard{grid-template-columns:1fr}
+}
+
+/* 4-up row */
+.grid4{
+  display:grid;
+  grid-template-columns:repeat(4, 1fr);
+  gap:18px;
+}
+@media (max-width: 1100px){
+  .grid4{grid-template-columns:repeat(2, 1fr)}
+}
+@media (max-width: 640px){
+  .grid4{grid-template-columns:1fr}
+}
+.miniCard{
+  background:var(--card);
+  border:1px solid var(--stroke);
+  border-radius:18px;
+  overflow:hidden;
+  box-shadow:0 14px 45px rgba(0,0,0,0.35);
+  backdrop-filter:blur(10px);
+  display:flex;
+  flex-direction:column;
+}
+.miniFig{
+  padding:12px;
+  border-bottom:1px solid rgba(255,255,255,0.12);
+}
+.miniFig img{
+  width:100%;
+  height:210px;
+  object-fit:cover;
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,0.14);
+  background:rgba(0,0,0,0.25);
+}
+.miniBody{
+  padding:14px 14px 12px;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+.footer{
+  margin-top:26px;
+  text-align:center;
+  font-size:14px;
+  color:rgba(242,242,242,0.6);
+}
+</style>
+</head>
+
+<body>
+<div class="nav">
+  <div class="name">Deepankar Sri Gyan</div>
+  <div class="menu">
+    <a href="index.html">Home</a>
+    <a href="about.html">About Me</a>
+    <a class="active" href="research.html">Research</a>
+    <a href="publications.html">Publications</a>
+    <a href="contact.html">Contact Me</a>
+    <a href="utility.html">Utility Software</a>
+  </div>
+</div>
+
+<main class="page">
+  <div class="container">
+
+    <!-- ================= LIGHT–MATTER ================= -->
+    <div class="sectionTitle">Light–matter interaction</div>
+    <div class="sectionDesc">
+      Add a short overview here: what questions you ask, what platforms you use (ultrafast optical / THz / mid-IR,
+      nonlinear probes, time-resolved x-ray diffraction/scattering), and the key phenomena (symmetry, topology, dynamics).
+    </div>
+
+    <!-- four tiles -->
+    <div class="grid2">
+      <div class="projectCard">
+        <div class="figBox">
+          <img src="assets/research/acoustic-phonons.png" alt="Acoustic and thermal phonons project figure">
+        </div>
+        <div class="contentBox">
+          <p class="projTitle">Acoustic & thermal phonons: propagation through interfaces</p>
+          <p class="projText">Short project description goes here (2–4 lines). What is measured, what is controlled, what is learned.</p>
+          <ul class="refs">
+            <li><b>Ref:</b> Title, Journal (Year) — <a href="PASTE_LINK_HERE" target="_blank">paper link</a></li>
+            <li><b>Ref:</b> Another relevant work — <a href="PASTE_LINK_HERE" target="_blank">paper link</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="projectCard">
+        <div class="figBox">
+          <img src="assets/research/ferroelectric-dynamics.png" alt="Photoinduced dynamics in ferroelectrics figure">
+        </div>
+        <div class="contentBox">
+          <p class="projTitle">Photoinduced dynamics in ferroelectric thin films & superlattices</p>
+          <p class="projText">Short project description goes here (2–4 lines).</p>
+          <ul class="refs">
+            <li><b>Ref:</b> Title, Journal (Year) — <a href="PASTE_LINK_HERE" target="_blank">paper link</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="projectCard">
+        <div class="figBox">
+          <img src="assets/research/magnon-phonon.png" alt="Magnon-phonon interactions figure">
+        </div>
+        <div class="contentBox">
+          <p class="projTitle">Magnon–phonon interactions in magnetic thin-film heterostructures</p>
+          <p class="projText">Short project description goes here (2–4 lines).</p>
+          <ul class="refs">
+            <li><b>Ref:</b> Title, Journal (Year) — <a href="PASTE_LINK_HERE" target="_blank">paper link</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="projectCard">
+        <div class="figBox">
+          <img src="assets/research/midir-nonlinear.png" alt="Mid-IR driven nonlinearity figure">
+        </div>
+        <div class="contentBox">
+          <p class="projTitle"><i>Mid-IR</i>-driven nonlinearity & nonlinear phononics in ferroelectrics</p>
+          <p class="projText">Short project description goes here (2–4 lines).</p>
+          <ul class="refs">
+            <li><b>Ref:</b> Title, Journal (Year) — <a href="PASTE_LINK_HERE" target="_blank">paper link</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- center “hero” figure -->
+    <div class="heroWrap">
+      <div class="heroFigure">
+        <img src="assets/research/light-matter-hero.png" alt="Light–matter interaction overview figure">
+      </div>
+    </div>
+
+    <!-- ================= CDW ================= -->
+    <div class="sectionTitle">Electric-field-driven domain fluctuation in charge-density-wave materials</div>
+    <div class="sectionDesc">
+      Add your 2–4 sentence overview here. Mention the material system, the stimulus (electric field), and what is learned
+      about domain dynamics and emergent configurations.
+    </div>
+
+    <div class="wideCard">
+      <div class="projectCard">
+        <div class="figBox">
+          <img src="assets/research/cdw-figure.png" alt="CDW project figure">
+        </div>
+        <div class="contentBox">
+          <p class="projTitle">Electric-field-induced fluctuation of charge-density-wave configuration</p>
+          <p class="projText">Short project description goes here (2–5 lines). Mention technique(s) and key result(s).</p>
+          <ul class="refs">
+            <li><b>Ref:</b> Title, Journal (Year) — <a href="PASTE_LINK_HERE" target="_blank">paper link</a></li>
+            <li><b>Ref:</b> Another related work — <a href="PASTE_LINK_HERE" target="_blank">paper link</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================= POLYCRYSTALLINE ================= -->
+    <div class="sectionTitle">Polycrystalline ferroelectric, magnetic, thermoelectric & energy-storage materials</div>
+    <div class="sectionDesc">
+      Add a general description here. You can highlight synthesis/processing, structure–property relations, and
+      functional optimization (thermoelectric, energy storage, magnetism, etc.).
+    </div>
+
+    <div class="grid4">
+      <div class="miniCard">
+        <div class="miniFig">
+          <img src="assets/research/poly-1.png" alt="Polycrystalline project figure 1">
+        </div>
+        <div class="miniBody">
+          <p class="projTitle" style="margin:0">Project / material theme 1</p>
+          <p class="projText">1–3 line description.</p>
+          <ul class="refs">
+            <li><b>Ref:</b> Title — <a href="PASTE_LINK_HERE" target="_blank">paper link</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="miniCard">
+        <div class="miniFig">
+          <img src="assets/research/poly-2.png" alt="Polycrystalline project figure 2">
+        </div>
+        <div class="miniBody">
+          <p class="projTitle" style="margin:0">Project / material theme 2</p>
+          <p class="projText">1–3 line description.</p>
+          <ul class="refs">
+            <li><b>Ref:</b> Title — <a href="PASTE_LINK_HERE" target="_blank">paper link</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="miniCard">
+        <div class="miniFig">
+          <img src="assets/research/poly-3.png" alt="Polycrystalline project figure 3">
+        </div>
+        <div class="miniBody">
+          <p class="projTitle" style="margin:0">Project / material theme 3</p>
+          <p class="projText">1–3 line description.</p>
+          <ul class="refs">
+            <li><b>Ref:</b> Title — <a href="PASTE_LINK_HERE" target="_blank">paper link</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="miniCard">
+        <div class="miniFig">
+          <img src="assets/research/poly-4.png" alt="Polycrystalline project figure 4">
+        </div>
+        <div class="miniBody">
+          <p class="projTitle" style="margin:0">Project / material theme 4</p>
+          <p class="projText">1–3 line description.</p>
+          <ul class="refs">
+            <li><b>Ref:</b> Title — <a href="PASTE_LINK_HERE" target="_blank">paper link</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">© <span id="y"></span> Deepankar Sri Gyan</div>
+  </div>
+</main>
+
+<script>
+  document.getElementById("y").textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
