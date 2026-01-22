@@ -316,6 +316,80 @@ a:hover{color:var(--accent)}
 }
 .refs a:hover{text-decoration:underline}
 
+/* ================= ADDITIONAL PROJECTS (below orbit) ================= */
+.projectWide{
+  margin-top:22px;
+  background:rgba(10,14,22,0.78);
+  border:1px solid rgba(255,255,255,0.16);
+  border-radius:22px;
+  padding:18px;
+  display:grid;
+  grid-template-columns:1.3fr 1fr;
+  gap:22px;
+  box-shadow:0 18px 55px rgba(0,0,0,0.45);
+  backdrop-filter:blur(10px);
+}
+.projectWide img{
+  width:100%;
+  height:320px;
+  object-fit:cover;
+  border-radius:16px;
+  border:1px solid rgba(255,255,255,0.14);
+  background:rgba(0,0,0,0.25);
+}
+@media (max-width: 900px){
+  .projectWide{grid-template-columns:1fr}
+  .projectWide img{height:260px}
+}
+.projectText p{
+  margin:0 0 10px;
+  color:rgba(242,242,242,0.82);
+  line-height:1.75;
+  font-size:15px;
+}
+
+/* Grid of 4 cards */
+.grid4{
+  margin-top:24px;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:18px;
+}
+@media (max-width:1100px){
+  .grid4{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:600px){
+  .grid4{grid-template-columns:1fr}
+}
+.pcard{
+  background:rgba(10,14,22,0.78);
+  border:1px solid rgba(255,255,255,0.16);
+  border-radius:20px;
+  padding:14px;
+  box-shadow:0 14px 45px rgba(0,0,0,0.35);
+  backdrop-filter:blur(10px);
+}
+.pcard img{
+  width:100%;
+  height:180px;
+  object-fit:cover;
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,0.14);
+  margin-bottom:10px;
+  background:rgba(0,0,0,0.25);
+}
+.pTitle{
+  font-weight:950;
+  font-size:17px;
+  margin:4px 0 6px;
+}
+.pText{
+  font-size:14px;
+  color:rgba(242,242,242,0.75);
+  line-height:1.6;
+  margin:0 0 10px;
+}
+
 .footer{
   margin-top:26px;
   text-align:center;
@@ -342,10 +416,11 @@ a:hover{color:var(--accent)}
   <div class="container">
     <div class="sectionTitle">Research</div>
     <div class="sectionDesc">
-      Click a topic to see details, figures, and multiple references.
-      Replace the placeholder images in <b>assets/research/</b> with your real figures.
+      Click a topic to see details, figures, and multiple references. Upload your images to
+      <b>assets/research/</b> and update filenames in this file if needed.
     </div>
 
+    <!-- ================= ORBIT TOP (Hero center + 4 topics) ================= -->
     <section class="orbit" aria-label="Research topics around a central overview">
 
       <!-- TOP-LEFT -->
@@ -413,6 +488,108 @@ a:hover{color:var(--accent)}
 
     </section>
 
+    <!-- ================= ADDITIONAL PROJECTS (down under) ================= -->
+
+    <!-- ===== SECTION: CDW ===== -->
+    <section style="margin-top:64px;">
+      <div class="sectionTitle">Electric-field–driven domain fluctuations in charge-density-wave materials</div>
+      <div class="sectionDesc">
+        Ultrafast and field-driven manipulation of charge order and domain configurations,
+        explored using time-resolved diffraction and scattering techniques.
+      </div>
+
+      <div class="projectWide">
+        <img src="assets/research/cdw-domain.png" alt="CDW domain dynamics figure">
+        <div class="projectText">
+          <p>
+            I investigate how external electric fields perturb and reorganize charge-density-wave domains
+            in correlated quantum materials, revealing nonequilibrium fluctuation pathways and metastable
+            configurations.
+          </p>
+          <ul class="refs">
+            <li>
+              <b>Ref:</b> Electric-field-induced fluctuation of the charge-density wave configuration in 1T-TaS₂ —
+              <a href="PASTE_LINK_HERE" target="_blank">paper link</a>
+            </li>
+            <li>
+              <b>Ref:</b> (Optional) Add another related paper —
+              <a href="PASTE_LINK_HERE" target="_blank">paper link</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SECTION: POLYCRYSTALLINE ===== -->
+    <section style="margin-top:72px;">
+      <div class="sectionTitle">Polycrystalline ferroelectric, magnetic, thermoelectric, and energy-storage materials</div>
+      <div class="sectionDesc">
+        Structure–property correlations and functional optimization in bulk and polycrystalline oxide materials.
+      </div>
+
+      <div class="grid4">
+        <div class="pcard">
+          <img src="assets/research/poly-1.png" alt="Ferroelectric/antiferroelectric ceramics figure">
+          <div class="pTitle">Ferroelectric & antiferroelectric oxides</div>
+          <div class="pText">
+            Octahedral tilting, phase stabilization, and electrical response in perovskite ceramics.
+          </div>
+          <ul class="refs">
+            <li><b>Ref:</b> Effect of octahedral tilting on antiferroelectric phase stabilization (2020) —
+              <a href="PASTE_LINK_HERE" target="_blank">paper link</a></li>
+            <li><b>Ref:</b> Stabilization of antiferroelectric Pbcm phase in NaNbO3 by incorporating CaTiO3 (2019) —
+              <a href="PASTE_LINK_HERE" target="_blank">paper link</a></li>
+            <li><b>Ref:</b> Structural and electrical characterization of NaNbO3-PVDF nanocomposites (2019) —
+              <a href="PASTE_LINK_HERE" target="_blank">paper link</a></li>
+          </ul>
+        </div>
+
+        <div class="pcard">
+          <img src="assets/research/poly-2.png" alt="Thermoelectric double perovskites figure">
+          <div class="pTitle">Thermoelectric double perovskites</div>
+          <div class="pText">
+            B-site cation ordering and transport optimization in complex oxides.
+          </div>
+          <ul class="refs">
+            <li><b>Ref:</b> Effect of B-site cation ordering on thermoelectric behavior (2020) —
+              <a href="PASTE_LINK_HERE" target="_blank">paper link</a></li>
+            <li><b>Ref:</b> Enhancement of thermoelectric power factor by octahedral ordering in La2−xSrxCoFeO6 (2019) —
+              <a href="PASTE_LINK_HERE" target="_blank">paper link</a></li>
+            <li><b>Ref:</b> Synthesis and thermoelectric properties of Ba2TiFeO6 double perovskite (2018) —
+              <a href="PASTE_LINK_HERE" target="_blank">paper link</a></li>
+          </ul>
+        </div>
+
+        <div class="pcard">
+          <img src="assets/research/poly-3.png" alt="Magnetic and ESR properties figure">
+          <div class="pTitle">Magnetic & spin-related properties</div>
+          <div class="pText">
+            Magnetic ordering and electron spin resonance in functional oxides.
+          </div>
+          <ul class="refs">
+            <li><b>Ref:</b> Magnetic and electron spin resonance properties of BaxSr2−xTiFeO6 (2020) —
+              <a href="PASTE_LINK_HERE" target="_blank">paper link</a></li>
+            <li><b>Ref:</b> Magnetic properties of Cerium and Zinc co-doped Barium Hexaferrites (2018) —
+              <a href="PASTE_LINK_HERE" target="_blank">paper link</a></li>
+          </ul>
+        </div>
+
+        <div class="pcard">
+          <img src="assets/research/poly-4.png" alt="Energy/functional materials figure">
+          <div class="pTitle">Functional & energy materials</div>
+          <div class="pText">
+            Structural, thermal, and functional properties of energy-relevant oxide systems.
+          </div>
+          <ul class="refs">
+            <li><b>Ref:</b> Ionic liquid microseeded WC/RF ablative composite for heat shielding (2016) —
+              <a href="PASTE_LINK_HERE" target="_blank">paper link</a></li>
+            <li><b>Ref:</b> Comparison of IT-SOFC system with conventional power sources (IEEE, 2015) —
+              <a href="PASTE_LINK_HERE" target="_blank">paper link</a></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
     <div class="footer">© <span id="y"></span> Deepankar Sri Gyan</div>
   </div>
 </main>
@@ -429,10 +606,7 @@ a:hover{color:var(--accent)}
       <div class="modalFig">
         <img id="modalImg" src="" alt="Project figure">
       </div>
-
-      <div class="modalText" id="modalText">
-        <!-- injected -->
-      </div>
+      <div class="modalText" id="modalText"></div>
     </div>
   </div>
 </div>
@@ -440,7 +614,7 @@ a:hover{color:var(--accent)}
 <script>
   document.getElementById("y").textContent = new Date().getFullYear();
 
-  // ====== Put your project descriptions + multiple references here ======
+  // ====== Project descriptions + references shown in modal ======
   const TOPICS = {
     acoustic: {
       title: "Acoustic & thermal phonons: propagation through interfaces",
@@ -451,12 +625,13 @@ a:hover{color:var(--accent)}
           Mention key techniques (ultrafast x-ray diffraction, time-resolved scattering, optical pump–probe, etc.).
         </p>
         <ul class="refs">
-          <li><b>Ref:</b> Paper title, Journal (Year) — <a href="PASTE_LINK_HERE" target="_blank">paper link</a></li>
-          <li><b>Ref:</b> Another paper title — <a href="PASTE_LINK_HERE" target="_blank">paper link</a></li>
+          <li><b>Ref:</b> Ultrafast low-temperature metal–insulator interface phonon dynamics and heat transport in a Pt/Gd3Fe5O12 heterostructure (Struct. Dyn., 2025) —
+              <a href="PASTE_LINK_HERE" target="_blank">paper link</a></li>
+          <li><b>Ref:</b> Low-temperature nanoscale heat transport in a gadolinium iron garnet heterostructure probed by ultrafast x-ray diffraction (Structural Dynamics, 2022) —
+              <a href="PASTE_LINK_HERE" target="_blank">paper link</a></li>
         </ul>
       `
     },
-
     ferro: {
       title: "Photoinduced dynamics in ferroelectric thin films and superlattices",
       img: "assets/research/ferroelectric-dynamics.png",
@@ -465,40 +640,40 @@ a:hover{color:var(--accent)}
           Add description: topology reconfiguration, transient oscillations, symmetry-resolved nonlinear optics, etc.
         </p>
         <ul class="refs">
-          <li><b>Ref:</b> Transient Terahertz Oscillations…, Advanced Science (2025) — <a href="PASTE_LINK_HERE" target="_blank">paper link</a></li>
-          <li><b>Ref:</b> Optically induced picosecond lattice compression…, Adv. Electronic Materials (2022) — <a href="PASTE_LINK_HERE" target="_blank">paper link</a></li>
+          <li><b>Ref:</b> Transient Terahertz Oscillations During Photoinduced Polarization Topology Reconfiguration in Ferroelectric Superlattices (Advanced Science, 2025, Accepted) —
+              <a href="PASTE_LINK_HERE" target="_blank">paper link</a></li>
+          <li><b>Ref:</b> Optically induced picosecond lattice compression in the dielectric component of a strongly coupled ferroelectric/dielectric superlattice (Adv. Electronic Materials, 2022) —
+              <a href="PASTE_LINK_HERE" target="_blank">paper link</a></li>
         </ul>
       `
     },
-
     magnon: {
       title: "Magnon–phonon interactions in magnetic thin film heterostructures",
       img: "assets/research/magnon-phonon.png",
       html: `
         <p>
-          Add description: coupled magnon/phonon/strain dynamics, interface control, ultrafast heat transport, etc.
+          Add description: coupled magnon/phonon/strain dynamics, interface control, ultrafast lattice/spin excitations, etc.
         </p>
         <ul class="refs">
-          <li><b>Ref:</b> Ultrafast low-temperature metal–insulator interface phonon dynamics…, Structural Dynamics (2025) —
-            <a href="PASTE_LINK_HERE" target="_blank">paper link</a>
-          </li>
-          <li><b>Ref:</b> Low-temperature nanoscale heat transport in GdIG…, Structural Dynamics (2022) —
-            <a href="PASTE_LINK_HERE" target="_blank">paper link</a>
-          </li>
+          <li><b>Ref:</b> Ultrafast optically induced perturbation of oxygen octahedral rotations in multiferroic BiFeO3 thin films (Nano Letters, 2024) —
+              <a href="PASTE_LINK_HERE" target="_blank">paper link</a></li>
+          <li><b>Ref:</b> Sub-Picosecond Optical Stress Generation in Multiferroic BiFeO3 (Nano Letters, 2022) —
+              <a href="PASTE_LINK_HERE" target="_blank">paper link</a></li>
         </ul>
       `
     },
-
     midir: {
-      title: "Mid-IR driven nonlinearity and nonlinear phononics in ferroics",
+      title: "Mid-IR driven nonlinearity and nonlinear phononics",
       img: "assets/research/midir-nonlinear.png",
       html: `
         <p>
           Add description: mode-selective excitation, nonlinear phononics, emergent phases, lattice control with THz/mid-IR.
         </p>
         <ul class="refs">
-          <li><b>Ref:</b> (Add your most relevant paper here) — <a href="PASTE_LINK_HERE" target="_blank">paper link</a></li>
-          <li><b>Ref:</b> Another relevant paper — <a href="PASTE_LINK_HERE" target="_blank">paper link</a></li>
+          <li><b>Ref:</b> (Add your most relevant mid-IR/THz paper here) —
+              <a href="PASTE_LINK_HERE" target="_blank">paper link</a></li>
+          <li><b>Ref:</b> Another relevant paper —
+              <a href="PASTE_LINK_HERE" target="_blank">paper link</a></li>
         </ul>
       `
     }
@@ -521,7 +696,6 @@ a:hover{color:var(--accent)}
     overlay.style.display = "block";
     document.body.style.overflow = "hidden";
   }
-
   function closeModal(){
     overlay.style.display = "none";
     document.body.style.overflow = "";
@@ -535,8 +709,6 @@ a:hover{color:var(--accent)}
   overlay.addEventListener("click", (e)=>{
     if(e.target === overlay) closeModal();
   });
-
-  // Escape key closes modal
   document.addEventListener("keydown", (e)=>{
     if(e.key === "Escape" && overlay.style.display === "block") closeModal();
   });
