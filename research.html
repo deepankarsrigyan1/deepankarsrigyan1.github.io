@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Ultrafast light–matter interaction · Deepankar Sri Gyan</title>
+<title>Research · Deepankar Sri Gyan</title>
 
 <style>
 :root{
@@ -69,14 +69,13 @@ html,body{
 .sectionTitle{
   font-weight:950;
   font-size:36px;
-  line-height:1.15;
   margin:40px 0 14px;
 }
 .sectionTitle::after{
   content:"";
   display:block;
-  width:100%;
   height:2px;
+  width:100%;
   background:var(--accent);
   margin-top:14px;
 }
@@ -88,91 +87,102 @@ html,body{
   max-width:950px;
 }
 
-/* ================= SECTIONS ================= */
-.sectionBlock{
-  margin-top:90px;
+/* ================= ORBIT (ULTRAFAST SECTION) ================= */
+.orbit{
+  margin-top:28px;
+  display:grid;
+  grid-template-columns:1fr 1.2fr 1fr;
+  grid-template-rows:1fr 1fr;
+  gap:18px;
+  min-height:520px;
 }
 
-/* ================= PROJECT WIDE ================= */
+.heroCard{
+  grid-column:2;
+  grid-row:1 / span 2;
+  background:rgba(10,14,22,0.55);
+  border:1px solid var(--stroke);
+  border-radius:22px;
+  padding:10px;
+}
+.heroMedia{
+  width:100%;
+  aspect-ratio:16/10;
+  background:rgba(0,0,0,0.25);
+  border-radius:16px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.heroMedia img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+}
+
+.tile{
+  position:relative;
+  background:var(--card);
+  border:1px solid var(--stroke);
+  border-radius:20px;
+  overflow:hidden;
+}
+.tile img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+.tile .label{
+  position:absolute;
+  bottom:0; left:0; right:0;
+  padding:12px;
+  background:linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+  font-weight:900;
+}
+
+.tl{grid-column:1;grid-row:1}
+.tr{grid-column:3;grid-row:1}
+.bl{grid-column:1;grid-row:2}
+.br{grid-column:3;grid-row:2}
+
+/* ================= CONTENT SECTIONS ================= */
+.sectionBlock{margin-top:90px}
+
 .projectWide{
   margin-top:28px;
-  background:rgba(10,14,22,0.78);
+  background:var(--card);
   border:1px solid var(--stroke);
   border-radius:22px;
   padding:18px;
   display:grid;
   grid-template-columns:1.3fr 1fr;
   gap:22px;
-  box-shadow:0 18px 55px rgba(0,0,0,0.45);
 }
 .projectWide img{
   width:100%;
   height:320px;
   object-fit:cover;
   border-radius:16px;
-  border:1px solid rgba(255,255,255,0.14);
-}
-@media (max-width:900px){
-  .projectWide{grid-template-columns:1fr}
-  .projectWide img{height:260px}
-}
-.projectText p{
-  font-size:15px;
-  line-height:1.75;
-  color:rgba(242,242,242,0.82);
 }
 
-/* ================= GRID 4 ================= */
 .grid4{
-  margin-top:34px;
+  margin-top:32px;
   display:grid;
   grid-template-columns:repeat(4,1fr);
   gap:18px;
 }
-@media (max-width:1100px){
-  .grid4{grid-template-columns:repeat(2,1fr)}
-}
-@media (max-width:600px){
-  .grid4{grid-template-columns:1fr}
-}
 .pcard{
-  background:rgba(10,14,22,0.78);
+  background:var(--card);
   border:1px solid var(--stroke);
   border-radius:20px;
   padding:14px;
-  box-shadow:0 14px 45px rgba(0,0,0,0.35);
 }
 .pcard img{
   width:100%;
   height:180px;
   object-fit:cover;
   border-radius:14px;
-  margin-bottom:10px;
-  border:1px solid rgba(255,255,255,0.14);
 }
-.pTitle{
-  font-weight:950;
-  font-size:17px;
-}
-.pText{
-  font-size:14px;
-  line-height:1.6;
-  color:rgba(242,242,242,0.75);
-}
-
-/* ================= REFERENCES ================= */
-.refs{
-  margin-top:10px;
-  padding-left:18px;
-  font-size:14px;
-  line-height:1.6;
-}
-.refs a{
-  color:var(--accent);
-  font-weight:800;
-  text-decoration:none;
-}
-.refs a:hover{text-decoration:underline}
 
 /* ================= FOOTER ================= */
 .footer{
@@ -190,86 +200,83 @@ html,body{
   <div class="name">Deepankar Sri Gyan</div>
   <div class="menu">
     <a href="index.html">Home</a>
-    <a href="about.html">About Me</a>
+    <a href="about.html">About</a>
     <a class="active" href="research.html">Research</a>
     <a href="publications.html">Publications</a>
-    <a href="contact.html">Contact Me</a>
-    <a href="utility.html">Utility Software</a>
+    <a href="contact.html">Contact</a>
   </div>
 </div>
 
 <main class="page">
 <div class="container">
 
-  <!-- ================= SECTION 1 ================= -->
-  <section class="sectionBlock">
-    <div class="sectionTitle">
-      Electric-field–driven domain fluctuations in charge-density-wave materials
+  <!-- ================= ULTRAFAST ================= -->
+  <div class="sectionTitle">Ultrafast light–matter interaction</div>
+
+  <section class="orbit">
+    <div class="tile tl">
+      <img src="assets/research/acoustic-phonons.png">
+      <div class="label">Acoustic & thermal phonons</div>
     </div>
-    <div class="sectionDesc">
-      Ultrafast and field-driven manipulation of charge order and domain configurations,
-      explored using time-resolved diffraction and scattering techniques.
+    <div class="tile tr">
+      <img src="assets/research/ferroelectric-dynamics.png">
+      <div class="label">Ferroelectric dynamics</div>
     </div>
 
-    <div class="projectWide">
-      <img src="assets/research/cdw-domain.png" alt="CDW domain dynamics">
-      <div class="projectText">
-        <p>
-          I investigate how external electric fields perturb and reorganize charge-density-wave
-          domains in correlated quantum materials, revealing nonequilibrium fluctuation pathways
-          and metastable configurations.
-        </p>
-        <ul class="refs">
-          <li>
-            <b>Ref:</b> Electric-field-induced fluctuation of the charge-density wave configuration in 1T-TaS₂ —
-            <a href="PASTE_LINK_HERE" target="_blank">paper link</a>
-          </li>
-        </ul>
+    <div class="heroCard">
+      <div class="heroMedia">
+        <img src="assets/research/light-matter-hero.png">
       </div>
+    </div>
+
+    <div class="tile bl">
+      <img src="assets/research/magnon-phonon.png">
+      <div class="label">Magnon–phonon coupling</div>
+    </div>
+    <div class="tile br">
+      <img src="assets/research/midir-nonlinear.png">
+      <div class="label">Mid-IR nonlinear phononics</div>
     </div>
   </section>
 
-  <!-- ================= SECTION 2 ================= -->
+  <!-- ================= CDW ================= -->
+  <section class="sectionBlock">
+    <div class="sectionTitle">Electric-field–driven domain fluctuations in charge-density-wave materials</div>
+    <div class="sectionDesc">
+      Ultrafast and field-driven manipulation of charge order and domain configurations.
+    </div>
+
+    <div class="projectWide">
+      <img src="assets/research/cdw-domain.png">
+      <p>
+        Electric-field control of CDW domains revealing nonequilibrium pathways.
+      </p>
+    </div>
+  </section>
+
+  <!-- ================= POLY ================= -->
   <section class="sectionBlock">
     <div class="sectionTitle">
       Polycrystalline ferroelectric, magnetic, thermoelectric, and energy-storage materials
     </div>
     <div class="sectionDesc">
-      Structure–property correlations and functional optimization in bulk and polycrystalline
-      oxide materials.
+      Structure–property correlations in bulk oxide materials.
     </div>
 
     <div class="grid4">
-      <div class="pcard">
-        <img src="assets/research/poly-1.png">
-        <div class="pTitle">Ferroelectric & antiferroelectric oxides</div>
-        <div class="pText">Octahedral tilting, phase stabilization, and electrical response.</div>
-      </div>
-      <div class="pcard">
-        <img src="assets/research/poly-2.png">
-        <div class="pTitle">Thermoelectric double perovskites</div>
-        <div class="pText">Cation ordering and transport optimization.</div>
-      </div>
-      <div class="pcard">
-        <img src="assets/research/poly-3.png">
-        <div class="pTitle">Magnetic & spin properties</div>
-        <div class="pText">Magnetic ordering and ESR studies.</div>
-      </div>
-      <div class="pcard">
-        <img src="assets/research/poly-4.png">
-        <div class="pTitle">Functional & energy materials</div>
-        <div class="pText">Thermal, structural, and functional properties.</div>
-      </div>
+      <div class="pcard"><img src="assets/research/poly-1.png"></div>
+      <div class="pcard"><img src="assets/research/poly-2.png"></div>
+      <div class="pcard"><img src="assets/research/poly-3.png"></div>
+      <div class="pcard"><img src="assets/research/poly-4.png"></div>
     </div>
   </section>
 
   <div class="footer">© <span id="y"></span> Deepankar Sri Gyan</div>
-
 </div>
 </main>
 
 <script>
-document.getElementById("y").textContent = new Date().getFullYear();
+document.getElementById("y").textContent=new Date().getFullYear();
 </script>
 
 </body>
