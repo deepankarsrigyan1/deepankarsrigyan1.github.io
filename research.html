@@ -28,6 +28,13 @@ html,body{
 a{color:inherit;text-decoration:none}
 a:hover{color:var(--accent)}
 
+/* nicer focus ring for accessibility */
+:focus-visible{
+  outline:2px solid rgba(243,199,75,0.85);
+  outline-offset:3px;
+  border-radius:12px;
+}
+
 /* ================= NAV ================= */
 .nav{
   position:fixed; top:0; left:0; right:0;
@@ -36,9 +43,9 @@ a:hover{color:var(--accent)}
   justify-content:space-between;
   align-items:center;
   padding:18px 36px;
-  background:linear-gradient(to bottom, rgba(0,0,0,0.72), rgba(0,0,0,0));
+  background:linear-gradient(to bottom, rgba(0,0,0,0.78), rgba(0,0,0,0));
 }
-.nav .name{font-weight:700;font-size:20px}
+.nav .name{font-weight:750;font-size:20px;letter-spacing:.2px}
 .nav .menu{display:flex;gap:22px;font-size:16px;flex-wrap:wrap}
 .nav .menu a{opacity:0.86;padding-bottom:3px}
 .nav .menu a.active{opacity:1;border-bottom:2px solid var(--accent)}
@@ -54,17 +61,21 @@ a:hover{color:var(--accent)}
   content:"";
   position:absolute; inset:0; z-index:0;
   background:
-    radial-gradient(900px 560px at 30% 35%, rgba(0,0,0,0.12), rgba(0,0,0,0.76)),
-    linear-gradient(180deg, rgba(0,0,0,0.12), rgba(0,0,0,0.62)),
+    radial-gradient(980px 620px at 30% 35%, rgba(0,0,0,0.08), rgba(0,0,0,0.80)),
+    linear-gradient(180deg, rgba(0,0,0,0.10), rgba(0,0,0,0.65)),
     var(--bgImage);
   background-size:cover;
   background-position:center;
   background-repeat:no-repeat;
+  transform:scale(1.02);
 }
 .page::after{
   content:"";
   position:absolute; inset:0; z-index:0;
-  background:linear-gradient(180deg, rgba(0,0,0,0.06), rgba(0,0,0,0.45));
+  background:
+    radial-gradient(820px 520px at 70% 22%, rgba(243,199,75,0.08), rgba(0,0,0,0) 60%),
+    linear-gradient(180deg, rgba(0,0,0,0.02), rgba(0,0,0,0.45));
+  pointer-events:none;
 }
 
 .container{
@@ -82,6 +93,8 @@ a:hover{color:var(--accent)}
   padding-bottom:10px;
   border-bottom:2px solid rgba(243,199,75,0.85);
   margin:16px 0 18px;
+  letter-spacing:0.2px;
+  text-shadow:0 2px 18px rgba(0,0,0,0.35);
 }
 
 /* ================= ORBIT LAYOUT ================= */
@@ -90,12 +103,10 @@ a:hover{color:var(--accent)}
   width:min(1120px, 96%);
   margin:26px auto 0;
   display:grid;
-  grid-template-columns: 1fr 1.18fr 1fr; /* hero only slightly bigger */
+  grid-template-columns: 1fr 1.18fr 1fr;
   grid-template-rows: 1fr 1fr;
   gap:18px;
   align-items:stretch;
-
-  /* keeps the whole block compact (not giant) */
   min-height: clamp(460px, 44vw, 520px);
 }
 
@@ -103,15 +114,13 @@ a:hover{color:var(--accent)}
 .heroCard{
   grid-column:2;
   grid-row:1 / span 2;
-  background:rgba(10,14,22,0.52);
+  background:rgba(10,14,22,0.50);
   border:1px solid rgba(255,255,255,0.13);
   border-radius:22px;
   overflow:hidden;
-  box-shadow:0 18px 60px rgba(0,0,0,0.50);
+  box-shadow:0 18px 60px rgba(0,0,0,0.52);
   backdrop-filter: blur(10px);
   position:relative;
-
-  /* hug the content so it is only slightly bigger than image */
   padding:10px;
   display:flex;
 }
@@ -120,15 +129,12 @@ a:hover{color:var(--accent)}
 .heroMedia{
   width:100%;
   border-radius:16px;
-  background:rgba(0,0,0,0.22);
+  background:rgba(0,0,0,0.18);
   border:1px solid rgba(255,255,255,0.10);
   overflow:hidden;
-
   display:flex;
   align-items:center;
   justify-content:center;
-
-  /* consistent hero shape; image never cut */
   aspect-ratio: 16 / 10;
   margin:auto;
 }
@@ -136,19 +142,35 @@ a:hover{color:var(--accent)}
 .heroMedia img{
   width:100%;
   height:100%;
-  object-fit:contain; /* IMPORTANT: no cutting */
+  object-fit:contain;
   display:block;
   filter:saturate(1.06) contrast(1.06);
-  background:rgba(0,0,0,0.18);
+  background:rgba(0,0,0,0.14);
 }
 
 .heroGlow{
   position:absolute; inset:0;
-  background: radial-gradient(460px 320px at 52% 48%, rgba(243,199,75,0.10), rgba(0,0,0,0.0) 70%);
+  background:
+    radial-gradient(520px 360px at 52% 48%, rgba(243,199,75,0.11), rgba(0,0,0,0.0) 70%),
+    radial-gradient(720px 520px at 50% 60%, rgba(255,255,255,0.04), rgba(0,0,0,0) 60%);
   pointer-events:none;
 }
 
-/* ================= TILES: maximize image + move text to bottom ================= */
+/* subtle “ring” around hero on hover */
+.heroCard::after{
+  content:"";
+  position:absolute; inset:8px;
+  border-radius:18px;
+  border:1px solid rgba(243,199,75,0.0);
+  transition:border-color .18s ease, box-shadow .18s ease;
+  pointer-events:none;
+}
+.heroCard:hover::after{
+  border-color:rgba(243,199,75,0.28);
+  box-shadow:0 0 0 6px rgba(243,199,75,0.05) inset;
+}
+
+/* ================= TILES ================= */
 .tile{
   background:var(--card);
   border:1px solid var(--stroke);
@@ -161,11 +183,15 @@ a:hover{color:var(--accent)}
   position:relative;
   min-height:0;
   display:flex;
+  user-select:none;
 }
 .tile:hover{
   transform: translateY(-2px);
   border-color: rgba(243,199,75,0.35);
   box-shadow:0 18px 58px rgba(0,0,0,0.45);
+}
+.tile:active{
+  transform: translateY(-1px);
 }
 
 /* image fills almost entire tile */
@@ -181,6 +207,13 @@ a:hover{color:var(--accent)}
   border:1px solid rgba(255,255,255,0.12);
   background:rgba(0,0,0,0.25);
   display:block;
+  transform:scale(1.01);
+  transition: transform .22s ease, filter .22s ease;
+  filter:saturate(1.02) contrast(1.02);
+}
+.tile:hover .thumb img{
+  transform:scale(1.03);
+  filter:saturate(1.06) contrast(1.06);
 }
 
 /* text anchored to bottom */
@@ -191,10 +224,9 @@ a:hover{color:var(--accent)}
   display:flex;
   flex-direction:column;
   gap:8px;
-
   background:linear-gradient(
     to top,
-    rgba(0,0,0,0.80),
+    rgba(0,0,0,0.82),
     rgba(0,0,0,0.48) 55%,
     rgba(0,0,0,0.00)
   );
@@ -204,11 +236,13 @@ a:hover{color:var(--accent)}
   font-weight:950;
   font-size:17px;
   line-height:1.22;
+  text-shadow:0 2px 12px rgba(0,0,0,0.35);
 }
 
-/* remove “hint” text entirely */
+/* remove hint text entirely */
 .tile .hint{display:none}
 
+/* CTA */
 .tile .cta{
   display:inline-flex;
   align-items:center;
@@ -230,7 +264,7 @@ a:hover{color:var(--accent)}
 .sectionDesc{
   margin:10px 0 20px;
   font-size:15px;
-  line-height:1.8;
+  line-height:1.85;
   color:rgba(242,242,242,0.72);
   max-width:980px;
 }
@@ -264,7 +298,7 @@ a:hover{color:var(--accent)}
 .projectText p{
   margin:0 0 10px;
   color:rgba(242,242,242,0.82);
-  line-height:1.75;
+  line-height:1.78;
   font-size:15px;
 }
 
@@ -288,6 +322,12 @@ a:hover{color:var(--accent)}
   padding:14px;
   box-shadow:0 14px 45px rgba(0,0,0,0.35);
   backdrop-filter:blur(10px);
+  transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease;
+}
+.pcard:hover{
+  transform: translateY(-2px);
+  border-color: rgba(243,199,75,0.30);
+  box-shadow:0 18px 58px rgba(0,0,0,0.45);
 }
 .pcard img{
   width:100%;
@@ -344,13 +384,20 @@ a:hover{color:var(--accent)}
   padding:22px;
 }
 .modal{
-  width:min(880px, 96%);
-  margin:40px auto;
-  background:rgba(12,16,26,0.92);
+  width:min(900px, 96%);
+  margin:44px auto;
+  background:rgba(12,16,26,0.93);
   border:1px solid rgba(255,255,255,0.18);
   border-radius:22px;
-  box-shadow:0 30px 120px rgba(0,0,0,0.75);
+  box-shadow:0 30px 120px rgba(0,0,0,0.78);
   overflow:hidden;
+  transform: translateY(8px);
+  opacity:0;
+  transition: transform .16s ease, opacity .16s ease;
+}
+.modalOverlay.show .modal{
+  transform: translateY(0);
+  opacity:1;
 }
 .modalTop{
   padding:16px 18px;
@@ -415,6 +462,11 @@ a:hover{color:var(--accent)}
   .tl,.tr,.bl,.br{grid-column:auto; grid-row:auto;}
   .tile{min-height:240px;}
 }
+
+/* Reduce motion preference */
+@media (prefers-reduced-motion: reduce){
+  *{transition:none!important; scroll-behavior:auto!important}
+}
 </style>
 </head>
 
@@ -436,13 +488,12 @@ a:hover{color:var(--accent)}
 
     <!-- ================= TOP SECTION ================= -->
     <div class="sectionTitle">Ultrafast light–matter interaction</div>
-    <!-- (blue instruction text removed as requested) -->
 
     <section class="orbit" aria-label="Research topics around a central overview">
 
-      <article class="tile tl" data-topic="acoustic">
+      <article class="tile tl" data-topic="acoustic" role="button" tabindex="0" aria-label="Open details: Acoustic and thermal phonons">
         <div class="thumb">
-          <img src="assets/research/acoustic-phonons.png" alt="Acoustic/thermal phonons figure">
+          <img src="assets/research/acoustic-phonons.png" alt="Acoustic/thermal phonons figure" loading="lazy" decoding="async">
         </div>
         <div class="body">
           <h3 class="title">Acoustic & thermal phonons through interfaces</h3>
@@ -450,9 +501,9 @@ a:hover{color:var(--accent)}
         </div>
       </article>
 
-      <article class="tile tr" data-topic="ferro">
+      <article class="tile tr" data-topic="ferro" role="button" tabindex="0" aria-label="Open details: Ferroelectric dynamics">
         <div class="thumb">
-          <img src="assets/research/ferroelectric-dynamics.png" alt="Ferroelectric dynamics figure">
+          <img src="assets/research/ferroelectric-dynamics.png" alt="Ferroelectric dynamics figure" loading="lazy" decoding="async">
         </div>
         <div class="body">
           <h3 class="title">Photoinduced dynamics in ferroelectric thin films & superlattices</h3>
@@ -462,14 +513,14 @@ a:hover{color:var(--accent)}
 
       <div class="heroCard" aria-label="Central overview figure">
         <div class="heroMedia">
-          <img src="assets/research/light-matter-hero.png" alt="Central research overview">
+          <img src="assets/research/light-matter-hero.png" alt="Central research overview" loading="eager" decoding="async">
         </div>
         <div class="heroGlow"></div>
       </div>
 
-      <article class="tile bl" data-topic="magnon">
+      <article class="tile bl" data-topic="magnon" role="button" tabindex="0" aria-label="Open details: Magnon phonon interactions">
         <div class="thumb">
-          <img src="assets/research/magnon-phonon.png" alt="Magnon-phonon figure">
+          <img src="assets/research/magnon-phonon.png" alt="Magnon-phonon figure" loading="lazy" decoding="async">
         </div>
         <div class="body">
           <h3 class="title">Magnon–phonon interactions in magnetic heterostructures</h3>
@@ -477,9 +528,9 @@ a:hover{color:var(--accent)}
         </div>
       </article>
 
-      <article class="tile br" data-topic="midir">
+      <article class="tile br" data-topic="midir" role="button" tabindex="0" aria-label="Open details: Mid-IR nonlinear phononics">
         <div class="thumb">
-          <img src="assets/research/midir-nonlinear.png" alt="Mid-IR nonlinear phononics figure">
+          <img src="assets/research/midir-nonlinear.png" alt="Mid-IR nonlinear phononics figure" loading="lazy" decoding="async">
         </div>
         <div class="body">
           <h3 class="title"><i>Mid-IR</i> driven nonlinearity & nonlinear phononics</h3>
@@ -497,9 +548,8 @@ a:hover{color:var(--accent)}
         explored using time-resolved diffraction and scattering techniques.
       </div>
 
-      <!-- (RIGHT-SIDE IMAGES REMOVED as requested) -->
       <div class="projectWide">
-        <img src="assets/research/cdw-domain.png" alt="CDW domain dynamics figure">
+        <img src="assets/research/cdw-domain.png" alt="CDW domain dynamics figure" loading="lazy" decoding="async">
         <div class="projectText">
           <p>
             I investigate how external electric fields perturb and reorganize charge-density-wave domains
@@ -527,10 +577,9 @@ a:hover{color:var(--accent)}
         Structure–property correlations and functional optimization in bulk and polycrystalline oxide materials.
       </div>
 
-      <!-- (RIGHT-SIDE IMAGES REMOVED as requested) -->
       <div class="grid4">
         <div class="pcard">
-          <img src="assets/research/poly-1.png" alt="Ferroelectric/antiferroelectric ceramics figure">
+          <img src="assets/research/poly-1.png" alt="Ferroelectric/antiferroelectric ceramics figure" loading="lazy" decoding="async">
           <div class="pTitle">Ferroelectric & antiferroelectric oxides</div>
           <div class="pText">Octahedral tilting, phase stabilization, and electrical response in perovskite ceramics.</div>
           <ul class="refs">
@@ -539,7 +588,7 @@ a:hover{color:var(--accent)}
         </div>
 
         <div class="pcard">
-          <img src="assets/research/poly-2.png" alt="Thermoelectric double perovskites figure">
+          <img src="assets/research/poly-2.png" alt="Thermoelectric double perovskites figure" loading="lazy" decoding="async">
           <div class="pTitle">Thermoelectric double perovskites</div>
           <div class="pText">B-site cation ordering and transport optimization in complex oxides.</div>
           <ul class="refs">
@@ -548,7 +597,7 @@ a:hover{color:var(--accent)}
         </div>
 
         <div class="pcard">
-          <img src="assets/research/poly-3.png" alt="Magnetic and ESR properties figure">
+          <img src="assets/research/poly-3.png" alt="Magnetic and ESR properties figure" loading="lazy" decoding="async">
           <div class="pTitle">Magnetic & spin-related properties</div>
           <div class="pText">Magnetic ordering and electron spin resonance in functional oxides.</div>
           <ul class="refs">
@@ -557,7 +606,7 @@ a:hover{color:var(--accent)}
         </div>
 
         <div class="pcard">
-          <img src="assets/research/poly-4.png" alt="Energy/functional materials figure">
+          <img src="assets/research/poly-4.png" alt="Energy/functional materials figure" loading="lazy" decoding="async">
           <div class="pTitle">Functional & energy materials</div>
           <div class="pText">Structural, thermal, and functional properties of energy-relevant oxide systems.</div>
           <ul class="refs">
@@ -652,16 +701,27 @@ a:hover{color:var(--accent)}
     modalImg.alt = t.title;
     modalText.innerHTML = t.html;
     overlay.style.display = "block";
+    overlay.classList.add("show");
     document.body.style.overflow = "hidden";
+    closeBtn.focus();
   }
   function closeModal(){
     overlay.style.display = "none";
+    overlay.classList.remove("show");
     document.body.style.overflow = "";
   }
 
-  document.querySelectorAll(".tile").forEach(tile=>{
-    tile.addEventListener("click", ()=> openModal(tile.dataset.topic));
-  });
+  function bindTile(tile){
+    const key = tile.dataset.topic;
+    tile.addEventListener("click", ()=> openModal(key));
+    tile.addEventListener("keydown", (e)=>{
+      if(e.key === "Enter" || e.key === " "){
+        e.preventDefault();
+        openModal(key);
+      }
+    });
+  }
+  document.querySelectorAll(".tile").forEach(bindTile);
 
   closeBtn.addEventListener("click", closeModal);
   overlay.addEventListener("click", (e)=>{
@@ -671,8 +731,7 @@ a:hover{color:var(--accent)}
     if(e.key === "Escape" && overlay.style.display === "block") closeModal();
   });
 
-  /* OPTIONAL: If you do NOT want any placeholder “Image coming soon”, then DO NOTHING here.
-     This block avoids broken-image icons by just hiding missing images quietly. */
+  /* Hide broken images quietly (keeps layout clean if an image is missing) */
   document.querySelectorAll('img').forEach(img=>{
     img.addEventListener('error', ()=>{
       img.style.display = 'none';
