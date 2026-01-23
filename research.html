@@ -15,7 +15,6 @@
   --card:rgba(10,14,22,0.78);
   --stroke:rgba(255,255,255,0.16);
 
-  /* Same background as About */
   --bgImage:url("assets/bg-template.png");
 }
 
@@ -85,64 +84,71 @@ a:hover{color:var(--accent)}
   margin:16px 0 18px;
 }
 
-/* ================= ORBIT LAYOUT (UPDATED) ================= */
+/* ================= ORBIT LAYOUT ================= */
 .orbit{
   position:relative;
   width:min(1120px, 96%);
-  margin:30px auto 0;              /* keeps distance from sectionDesc */
+  margin:26px auto 0;
   display:grid;
-  grid-template-columns: 1fr 1.35fr 1fr;  /* hero gets more room */
+  grid-template-columns: 1fr 1.18fr 1fr; /* hero only slightly bigger */
+  grid-template-rows: 1fr 1fr;
   gap:18px;
-
-  /* Stable row heights so tiles + hero align perfectly */
-  grid-auto-rows: clamp(230px, 22vw, 280px);
   align-items:stretch;
+
+  /* slightly shorter rows so center doesn't feel huge */
+  min-height: clamp(460px, 44vw, 520px);
 }
 
 /* Center hero spans both rows in middle column */
 .heroCard{
   grid-column:2;
   grid-row:1 / span 2;
-  background:rgba(10,14,22,0.60);
-  border:1px solid rgba(255,255,255,0.14);
+  background:rgba(10,14,22,0.52);
+  border:1px solid rgba(255,255,255,0.13);
   border-radius:22px;
   overflow:hidden;
-  box-shadow:0 22px 70px rgba(0,0,0,0.55);
+  box-shadow:0 18px 60px rgba(0,0,0,0.50);
   backdrop-filter: blur(10px);
   position:relative;
-  min-height: calc(2 * clamp(230px, 22vw, 280px) + 18px); /* 2 rows + gap */
+
+  /* hug the content */
+  padding:10px;
+  display:flex;
 }
 
-/* Hero media fills the card without cropping */
+/* Hero media: small frame around image, no cropping */
 .heroMedia{
   width:100%;
-  height:100%;
+  border-radius:16px;
   background:rgba(0,0,0,0.22);
+  border:1px solid rgba(255,255,255,0.10);
+  overflow:hidden;
+
   display:flex;
   align-items:center;
   justify-content:center;
-  padding:12px;
+
+  /* keeps the hero looking consistent */
+  aspect-ratio: 16 / 10;
+  margin:auto; /* centers within the card */
 }
 
-/* IMPORTANT: contain = no cutting */
 .heroMedia img{
   width:100%;
   height:100%;
-  object-fit:contain;              /* <- no crop */
+  object-fit:contain; /* IMPORTANT: no cutting */
   display:block;
-  border-radius:16px;
-  border:1px solid rgba(255,255,255,0.12);
-  background:rgba(0,0,0,0.18);
   filter:saturate(1.06) contrast(1.06);
+  background:rgba(0,0,0,0.18);
 }
 
 .heroGlow{
   position:absolute; inset:0;
-  background: radial-gradient(520px 340px at 52% 48%, rgba(243,199,75,0.10), rgba(0,0,0,0.0) 70%);
+  background: radial-gradient(460px 320px at 52% 48%, rgba(243,199,75,0.10), rgba(0,0,0,0.0) 70%);
   pointer-events:none;
 }
 
-/* Project tiles around */
+/* ================= TILES: maximize image + move text to bottom ================= */
 .tile{
   background:var(--card);
   border:1px solid var(--stroke);
@@ -150,49 +156,63 @@ a:hover{color:var(--accent)}
   overflow:hidden;
   box-shadow:0 14px 45px rgba(0,0,0,0.35);
   backdrop-filter:blur(10px);
-  display:flex;
-  flex-direction:column;
   transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease;
   cursor:pointer;
-  min-height:0; /* grid/flex stability */
+  position:relative;
+  min-height: 0;
+  display:flex;
 }
+
 .tile:hover{
   transform: translateY(-2px);
   border-color: rgba(243,199,75,0.35);
   box-shadow:0 18px 58px rgba(0,0,0,0.45);
 }
+
+/* Thumb now fills almost entire tile */
 .tile .thumb{
-  padding:12px;
-  border-bottom:1px solid rgba(255,255,255,0.10);
+  position:absolute; inset:0;
+  padding:10px;
 }
+
 .tile .thumb img{
   width:100%;
-  height: clamp(120px, 10vw, 150px);
+  height:100%;
   object-fit:cover;
   border-radius:14px;
-  border:1px solid rgba(255,255,255,0.14);
+  border:1px solid rgba(255,255,255,0.12);
   background:rgba(0,0,0,0.25);
   display:block;
 }
+
+/* Text overlay anchored to bottom (more room for image) */
 .tile .body{
-  padding:14px 14px 16px;
+  position:absolute;
+  left:0; right:0; bottom:0;
+  padding:14px 14px 14px;
   display:flex;
   flex-direction:column;
-  gap:10px;
+  gap:8px;
+
+  background:linear-gradient(
+    to top,
+    rgba(0,0,0,0.80),
+    rgba(0,0,0,0.48) 55%,
+    rgba(0,0,0,0.00)
+  );
 }
+
 .tile .title{
   margin:0;
   font-weight:950;
   font-size:17px;
-  line-height:1.25;
+  line-height:1.22;
 }
 
-/* REMOVE the text in blue circles = remove “hint” text entirely */
+/* remove blue hint text completely (already not in HTML, but keep safe) */
 .tile .hint{display:none}
 
-/* Keep “Click for details” */
 .tile .cta{
-  margin-top:auto; /* anchor CTA at bottom */
   display:inline-flex;
   align-items:center;
   gap:8px;
@@ -209,29 +229,166 @@ a:hover{color:var(--accent)}
 .bl{grid-column:1; grid-row:2;}
 .br{grid-column:3; grid-row:2;}
 
-/* Responsive */
+/* ================= SECTION BLOCKS BELOW: add pictures too ================= */
+.sectionBlock{
+  margin-top:64px;
+}
+.sectionHead{
+  display:grid;
+  grid-template-columns: 1.25fr 1fr;
+  gap:18px;
+  align-items:stretch;
+  margin:0 0 18px;
+}
+.sectionHead .meta{
+  min-width:0;
+}
+.sectionDesc{
+  margin:10px 0 0;
+  font-size:15px;
+  line-height:1.8;
+  color:rgba(242,242,242,0.72);
+  max-width:980px;
+}
+.sectionArt{
+  background:rgba(10,14,22,0.60);
+  border:1px solid rgba(255,255,255,0.14);
+  border-radius:20px;
+  overflow:hidden;
+  box-shadow:0 14px 45px rgba(0,0,0,0.35);
+  backdrop-filter:blur(10px);
+}
+.sectionArt .artFrame{
+  width:100%;
+  aspect-ratio: 16 / 10;  /* same aspect ratio style as hero */
+  background:rgba(0,0,0,0.22);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:10px;
+}
+.sectionArt img{
+  width:100%;
+  height:100%;
+  object-fit:contain; /* don't crop these either */
+  display:block;
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,0.12);
+  background:rgba(0,0,0,0.18);
+  filter:saturate(1.06) contrast(1.06);
+}
+
 @media (max-width: 980px){
   .orbit{
     grid-template-columns:1fr;
-    grid-auto-rows:auto;
+    grid-template-rows:auto;
+    min-height:auto;
   }
-  .heroCard{
-    grid-column:auto; grid-row:auto;
-    min-height:0;
-  }
-  .heroMedia{
-    height:auto;
-    padding:10px;
-  }
-  .heroMedia img{
-    height:auto;
-    max-height:420px;
-  }
+  .heroCard{grid-column:auto; grid-row:auto;}
+  .heroMedia{width:100%; max-width:720px;}
   .tl,.tr,.bl,.br{grid-column:auto; grid-row:auto;}
-  .tile .thumb img{height:190px;}
+  .tile{min-height:240px;}
+  .tile .thumb img{object-position:center;}
+
+  .sectionHead{grid-template-columns:1fr}
 }
 
-/* ================= MODAL (click -> details) ================= */
+/* ================= CONTENT CARDS BELOW ================= */
+.projectWide{
+  margin-top:18px;
+  background:rgba(10,14,22,0.78);
+  border:1px solid rgba(255,255,255,0.16);
+  border-radius:22px;
+  padding:18px;
+  display:grid;
+  grid-template-columns:1.3fr 1fr;
+  gap:22px;
+  box-shadow:0 18px 55px rgba(0,0,0,0.45);
+  backdrop-filter:blur(10px);
+}
+.projectWide img{
+  width:100%;
+  height:320px;
+  object-fit:cover;
+  border-radius:16px;
+  border:1px solid rgba(255,255,255,0.14);
+  background:rgba(0,0,0,0.25);
+  display:block;
+}
+@media (max-width: 900px){
+  .projectWide{grid-template-columns:1fr}
+  .projectWide img{height:260px}
+}
+.projectText p{
+  margin:0 0 10px;
+  color:rgba(242,242,242,0.82);
+  line-height:1.75;
+  font-size:15px;
+}
+.grid4{
+  margin-top:18px;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:18px;
+}
+@media (max-width:1100px){
+  .grid4{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:600px){
+  .grid4{grid-template-columns:1fr}
+}
+.pcard{
+  background:rgba(10,14,22,0.78);
+  border:1px solid rgba(255,255,255,0.16);
+  border-radius:20px;
+  padding:14px;
+  box-shadow:0 14px 45px rgba(0,0,0,0.35);
+  backdrop-filter:blur(10px);
+}
+.pcard img{
+  width:100%;
+  height:180px;
+  object-fit:cover;
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,0.14);
+  margin-bottom:10px;
+  background:rgba(0,0,0,0.25);
+  display:block;
+}
+.pTitle{
+  font-weight:950;
+  font-size:17px;
+  margin:4px 0 6px;
+}
+.pText{
+  font-size:14px;
+  color:rgba(242,242,242,0.75);
+  line-height:1.6;
+  margin:0 0 10px;
+}
+
+.refs{
+  margin:10px 0 0 0;
+  padding-left:18px;
+  color:rgba(242,242,242,0.78);
+  font-size:14px;
+  line-height:1.65;
+}
+.refs li{margin:6px 0}
+.refs a{
+  color:rgba(243,199,75,0.95);
+  font-weight:900;
+}
+.refs a:hover{text-decoration:underline}
+
+.footer{
+  margin-top:26px;
+  text-align:center;
+  font-size:14px;
+  color:rgba(242,242,242,0.6);
+}
+
+/* ================= MODAL ================= */
 .modalOverlay{
   position:fixed; inset:0;
   background:rgba(0,0,0,0.72);
@@ -289,111 +446,13 @@ a:hover{color:var(--accent)}
   border-radius:16px;
   border:1px solid rgba(255,255,255,0.14);
   background:rgba(0,0,0,0.25);
+  display:block;
 }
 .modalText p{
   margin:0 0 10px 0;
   color:rgba(242,242,242,0.82);
   line-height:1.75;
   font-size:14.5px;
-}
-.refs{
-  margin:10px 0 0 0;
-  padding-left:18px;
-  color:rgba(242,242,242,0.78);
-  font-size:14px;
-  line-height:1.65;
-}
-.refs li{margin:6px 0}
-.refs a{
-  color:rgba(243,199,75,0.95);
-  font-weight:900;
-}
-.refs a:hover{text-decoration:underline}
-
-/* ================= KEEP UNDERNEATH SAME FOR NOW ================= */
-.sectionDesc{
-  margin:10px 0 20px;
-  font-size:15px;
-  line-height:1.8;
-  color:rgba(242,242,242,0.72);
-  max-width:980px;
-}
-.projectWide{
-  margin-top:22px;
-  background:rgba(10,14,22,0.78);
-  border:1px solid rgba(255,255,255,0.16);
-  border-radius:22px;
-  padding:18px;
-  display:grid;
-  grid-template-columns:1.3fr 1fr;
-  gap:22px;
-  box-shadow:0 18px 55px rgba(0,0,0,0.45);
-  backdrop-filter:blur(10px);
-}
-.projectWide img{
-  width:100%;
-  height:320px;
-  object-fit:cover;
-  border-radius:16px;
-  border:1px solid rgba(255,255,255,0.14);
-  background:rgba(0,0,0,0.25);
-}
-@media (max-width: 900px){
-  .projectWide{grid-template-columns:1fr}
-  .projectWide img{height:260px}
-}
-.projectText p{
-  margin:0 0 10px;
-  color:rgba(242,242,242,0.82);
-  line-height:1.75;
-  font-size:15px;
-}
-.grid4{
-  margin-top:24px;
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:18px;
-}
-@media (max-width:1100px){
-  .grid4{grid-template-columns:repeat(2,1fr)}
-}
-@media (max-width:600px){
-  .grid4{grid-template-columns:1fr}
-}
-.pcard{
-  background:rgba(10,14,22,0.78);
-  border:1px solid rgba(255,255,255,0.16);
-  border-radius:20px;
-  padding:14px;
-  box-shadow:0 14px 45px rgba(0,0,0,0.35);
-  backdrop-filter:blur(10px);
-}
-.pcard img{
-  width:100%;
-  height:180px;
-  object-fit:cover;
-  border-radius:14px;
-  border:1px solid rgba(255,255,255,0.14);
-  margin-bottom:10px;
-  background:rgba(0,0,0,0.25);
-}
-.pTitle{
-  font-weight:950;
-  font-size:17px;
-  margin:4px 0 6px;
-}
-.pText{
-  font-size:14px;
-  color:rgba(242,242,242,0.75);
-  line-height:1.6;
-  margin:0 0 10px;
-}
-
-.footer{
-  margin-top:26px;
-  text-align:center;
-  font-size:14px;
-  color:rgba(242,242,242,0.6);
 }
 </style>
 </head>
@@ -416,9 +475,7 @@ a:hover{color:var(--accent)}
 
     <div class="sectionTitle">Ultrafast light–matter interaction</div>
 
-    <div class="sectionDesc">
-      Click a topic to see details and references. Upload images to <b>assets/research/</b> and update filenames if needed.
-    </div>
+    <!-- (blue text removed as requested) -->
 
     <!-- TOP ORBIT -->
     <section class="orbit" aria-label="Research topics around a central overview">
@@ -472,12 +529,24 @@ a:hover{color:var(--accent)}
 
     </section>
 
-    <!-- ===== KEEP THINGS UNDERNEATH SAME FOR NOW ===== -->
-    <section style="margin-top:64px;">
-      <div class="sectionTitle">Electric-field–driven domain fluctuations in charge-density-wave materials</div>
-      <div class="sectionDesc">
-        Ultrafast and field-driven manipulation of charge order and domain configurations,
-        explored using time-resolved diffraction and scattering techniques.
+    <!-- ================= SECTION 1 (NOW HAS A PICTURE TOO) ================= -->
+    <section class="sectionBlock" aria-label="CDW section">
+
+      <div class="sectionHead">
+        <div class="meta">
+          <div class="sectionTitle">Electric-field–driven domain fluctuations in charge-density-wave materials</div>
+          <div class="sectionDesc">
+            Ultrafast and field-driven manipulation of charge order and domain configurations,
+            explored using time-resolved diffraction and scattering techniques.
+          </div>
+        </div>
+
+        <!-- NEW: picture next to this section heading -->
+        <div class="sectionArt" aria-label="CDW section image">
+          <div class="artFrame">
+            <img src="assets/research/cdw-domain.png" alt="CDW domain dynamics overview">
+          </div>
+        </div>
       </div>
 
       <div class="projectWide">
@@ -502,10 +571,24 @@ a:hover{color:var(--accent)}
       </div>
     </section>
 
-    <section style="margin-top:72px;">
-      <div class="sectionTitle">Polycrystalline ferroelectric, magnetic, thermoelectric, and energy-storage materials</div>
-      <div class="sectionDesc">
-        Structure–property correlations and functional optimization in bulk and polycrystalline oxide materials.
+    <!-- ================= SECTION 2 (NOW HAS A PICTURE TOO) ================= -->
+    <section class="sectionBlock" aria-label="Polycrystalline section">
+
+      <div class="sectionHead">
+        <div class="meta">
+          <div class="sectionTitle">Polycrystalline ferroelectric, magnetic, thermoelectric, and energy-storage materials</div>
+          <div class="sectionDesc">
+            Structure–property correlations and functional optimization in bulk and polycrystalline oxide materials.
+          </div>
+        </div>
+
+        <!-- NEW: picture next to this section heading -->
+        <div class="sectionArt" aria-label="Polycrystalline section image">
+          <div class="artFrame">
+            <!-- Use your future banner image here. Placeholder path is fine. -->
+            <img src="assets/research/poly-banner.png" alt="Polycrystalline materials overview">
+          </div>
+        </div>
       </div>
 
       <div class="grid4">
@@ -651,17 +734,32 @@ a:hover{color:var(--accent)}
     if(e.key === "Escape" && overlay.style.display === "block") closeModal();
   });
 
-  /* Optional: hide broken images cleanly while you don't have them yet */
+  /* Graceful fallback for missing images: swap to a clean placeholder (no broken icons). */
+  const placeholderSvg =
+    'data:image/svg+xml;utf8,' +
+    encodeURIComponent(`
+      <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="750" viewBox="0 0 1200 750">
+        <defs>
+          <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="rgba(243,199,75,0.14)"/>
+            <stop offset="1" stop-color="rgba(255,255,255,0.04)"/>
+          </linearGradient>
+        </defs>
+        <rect width="1200" height="750" fill="url(#g)"/>
+        <rect x="70" y="70" width="1060" height="610" rx="28" ry="28" fill="rgba(0,0,0,0.22)" stroke="rgba(255,255,255,0.18)" stroke-width="3"/>
+        <g fill="rgba(255,255,255,0.70)" font-family="Arial, sans-serif">
+          <text x="110" y="170" font-size="44" font-weight="700">Image coming soon</text>
+          <text x="110" y="230" font-size="26" opacity="0.85">Replace this file path in your HTML/CSS.</text>
+        </g>
+      </svg>
+    `);
+
   document.querySelectorAll('img').forEach(img=>{
     img.addEventListener('error', ()=>{
-      img.style.display = 'none';
-      const p = img.parentElement;
-      if (p) {
-        p.style.background = 'linear-gradient(135deg, rgba(243,199,75,0.10), rgba(255,255,255,0.02))';
-        p.style.borderRadius = '14px';
-        p.style.minHeight = '140px';
-      }
-    });
+      img.src = placeholderSvg;
+      img.alt = "Placeholder image";
+      img.style.objectFit = (img.closest('.heroMedia') || img.closest('.sectionArt')) ? 'contain' : 'cover';
+    }, { once:true });
   });
 </script>
 </body>
