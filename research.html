@@ -3,34 +3,30 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Ultrafast light–matter interaction · Deepankar Sri Gyan</title>
+<title>Contact · Deepankar Sri Gyan</title>
 
 <style>
 :root{
   --bg:#020306;
   --text:#f2f2f2;
-  --muted:rgba(242,242,242,0.80);
   --accent:#f3c74b;
-
-  --card:rgba(10,14,22,0.78);
-  --stroke:rgba(255,255,255,0.16);
-
-  --bgImage:url("assets/bg-template.png");
+  --bgImage: url("assets/bg-template.png");
 }
 
 *{box-sizing:border-box}
 html,body{
-  margin:0;height:100%;
+  margin:0;
+  height:100%;
   background:var(--bg);
   color:var(--text);
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
 }
-a{color:inherit;text-decoration:none}
-a:hover{color:var(--accent)}
+a{text-decoration:none}
 
 /* ================= NAV ================= */
 .nav{
-  position:fixed; top:0; left:0; right:0;
+  position:fixed;
+  top:0; left:0; right:0;
   z-index:10;
   display:flex;
   justify-content:space-between;
@@ -39,728 +35,203 @@ a:hover{color:var(--accent)}
   background:linear-gradient(to bottom, rgba(0,0,0,0.72), rgba(0,0,0,0));
 }
 .nav .name{font-weight:700;font-size:20px}
-.nav .menu{display:flex;gap:22px;font-size:16px;flex-wrap:wrap}
-.nav .menu a{opacity:0.86;padding-bottom:3px}
-.nav .menu a.active{opacity:1;border-bottom:2px solid var(--accent)}
+.nav .menu{
+  display:flex;
+  gap:22px;
+  font-size:16px;
+  flex-wrap:wrap;
+}
+.nav .menu a{
+  color:#fff;
+  opacity:0.86;
+  padding-bottom:3px;
+}
+.nav .menu a.active{
+  opacity:1;
+  border-bottom:2px solid var(--accent);
+}
 
 /* ================= PAGE BG ================= */
 .page{
   min-height:100vh;
-  padding-top:100px;
+  padding-top:110px;
   position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
   overflow:hidden;
 }
 .page::before{
   content:"";
-  position:absolute; inset:0; z-index:0;
+  position:absolute;
+  inset:0;
+  z-index:0;
   background:
-    radial-gradient(900px 560px at 30% 35%, rgba(0,0,0,0.12), rgba(0,0,0,0.76)),
-    linear-gradient(180deg, rgba(0,0,0,0.12), rgba(0,0,0,0.62)),
+    radial-gradient(900px 560px at 30% 35%, rgba(0,0,0,0.06), rgba(0,0,0,0.45)),
+    linear-gradient(180deg, rgba(0,0,0,0.08), rgba(0,0,0,0.38)),
     var(--bgImage);
   background-size:cover;
   background-position:center;
-  background-repeat:no-repeat;
 }
 .page::after{
   content:"";
-  position:absolute; inset:0; z-index:0;
-  background:linear-gradient(180deg, rgba(0,0,0,0.06), rgba(0,0,0,0.45));
+  position:absolute;
+  inset:0;
+  z-index:0;
+  background:linear-gradient(180deg, rgba(0,0,0,0.03), rgba(0,0,0,0.25));
 }
 
-.container{
+/* ================= CENTER ================= */
+.center{
   position:relative;
   z-index:1;
-  width:min(1200px,92%);
-  margin:0 auto;
-  padding:18px 0 90px;
-}
-
-/* ================= SECTION TITLE ================= */
-.sectionTitle{
-  font-weight:950;
-  font-size:34px;
-  padding-bottom:10px;
-  border-bottom:2px solid rgba(243,199,75,0.85);
-  margin:16px 0 18px;
-}
-
-/* ================= ORBIT LAYOUT ================= */
-.orbit{
-  position:relative;
-  width:min(1120px, 96%);
-  margin:26px auto 0;
-  display:grid;
-  grid-template-columns: 1fr 1.18fr 1fr; /* hero only slightly bigger */
-  grid-template-rows: 1fr 1fr;
-  gap:18px;
-  align-items:stretch;
-
-  /* slightly shorter rows so center doesn't feel huge */
-  min-height: clamp(460px, 44vw, 520px);
-}
-
-/* Center hero spans both rows in middle column */
-.heroCard{
-  grid-column:2;
-  grid-row:1 / span 2;
-  background:rgba(10,14,22,0.52);
-  border:1px solid rgba(255,255,255,0.13);
-  border-radius:22px;
-  overflow:hidden;
-  box-shadow:0 18px 60px rgba(0,0,0,0.50);
-  backdrop-filter: blur(10px);
-  position:relative;
-
-  /* hug the content */
-  padding:10px;
-  display:flex;
-}
-
-/* Hero media: small frame around image, no cropping */
-.heroMedia{
   width:100%;
-  border-radius:16px;
-  background:rgba(0,0,0,0.22);
-  border:1px solid rgba(255,255,255,0.10);
-  overflow:hidden;
-
   display:flex;
-  align-items:center;
   justify-content:center;
-
-  /* keeps the hero looking consistent */
-  aspect-ratio: 16 / 10;
-  margin:auto; /* centers within the card */
 }
 
-.heroMedia img{
-  width:100%;
-  height:100%;
-  object-fit:contain; /* IMPORTANT: no cutting */
-  display:block;
-  filter:saturate(1.06) contrast(1.06);
-  background:rgba(0,0,0,0.18);
-}
-
-.heroGlow{
-  position:absolute; inset:0;
-  background: radial-gradient(460px 320px at 52% 48%, rgba(243,199,75,0.10), rgba(0,0,0,0.0) 70%);
-  pointer-events:none;
-}
-
-/* ================= TILES: maximize image + move text to bottom ================= */
-.tile{
-  background:var(--card);
-  border:1px solid var(--stroke);
-  border-radius:20px;
-  overflow:hidden;
-  box-shadow:0 14px 45px rgba(0,0,0,0.35);
-  backdrop-filter:blur(10px);
-  transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease;
-  cursor:pointer;
-  position:relative;
-  min-height: 0;
-  display:flex;
-}
-
-.tile:hover{
-  transform: translateY(-2px);
-  border-color: rgba(243,199,75,0.35);
-  box-shadow:0 18px 58px rgba(0,0,0,0.45);
-}
-
-/* Thumb now fills almost entire tile */
-.tile .thumb{
-  position:absolute; inset:0;
-  padding:10px;
-}
-
-.tile .thumb img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  border-radius:14px;
-  border:1px solid rgba(255,255,255,0.12);
-  background:rgba(0,0,0,0.25);
-  display:block;
-}
-
-/* Text overlay anchored to bottom (more room for image) */
-.tile .body{
+/* Soft glow behind icons */
+.glow{
   position:absolute;
-  left:0; right:0; bottom:0;
-  padding:14px 14px 14px;
+  width:720px;
+  height:200px;
+  border-radius:999px;
+  background:radial-gradient(circle,
+    rgba(243,199,75,0.14),
+    rgba(243,199,75,0.00) 70%);
+  filter:blur(18px);
+  z-index:0;
+}
+
+/* ================= ICON ROW ================= */
+.iconRow{
   display:flex;
-  flex-direction:column;
-  gap:8px;
-
-  background:linear-gradient(
-    to top,
-    rgba(0,0,0,0.80),
-    rgba(0,0,0,0.48) 55%,
-    rgba(0,0,0,0.00)
-  );
-}
-
-.tile .title{
-  margin:0;
-  font-weight:950;
-  font-size:17px;
-  line-height:1.22;
-}
-
-/* remove blue hint text completely (already not in HTML, but keep safe) */
-.tile .hint{display:none}
-
-.tile .cta{
-  display:inline-flex;
-  align-items:center;
-  gap:8px;
-  font-weight:900;
-  font-size:13px;
-  color:rgba(243,199,75,0.95);
-  opacity:0.95;
-}
-.tile:hover .cta{opacity:1}
-
-/* Position tiles */
-.tl{grid-column:1; grid-row:1;}
-.tr{grid-column:3; grid-row:1;}
-.bl{grid-column:1; grid-row:2;}
-.br{grid-column:3; grid-row:2;}
-
-/* ================= SECTION BLOCKS BELOW: add pictures too ================= */
-.sectionBlock{
-  margin-top:64px;
-}
-.sectionHead{
-  display:grid;
-  grid-template-columns: 1.25fr 1fr;
   gap:18px;
-  align-items:stretch;
-  margin:0 0 18px;
-}
-.sectionHead .meta{
-  min-width:0;
-}
-.sectionDesc{
-  margin:10px 0 0;
-  font-size:15px;
-  line-height:1.8;
-  color:rgba(242,242,242,0.72);
-  max-width:980px;
-}
-.sectionArt{
-  background:rgba(10,14,22,0.60);
-  border:1px solid rgba(255,255,255,0.14);
-  border-radius:20px;
-  overflow:hidden;
-  box-shadow:0 14px 45px rgba(0,0,0,0.35);
-  backdrop-filter:blur(10px);
-}
-.sectionArt .artFrame{
-  width:100%;
-  aspect-ratio: 16 / 10;  /* same aspect ratio style as hero */
-  background:rgba(0,0,0,0.22);
-  display:flex;
   align-items:center;
   justify-content:center;
-  padding:10px;
-}
-.sectionArt img{
-  width:100%;
-  height:100%;
-  object-fit:contain; /* don't crop these either */
-  display:block;
-  border-radius:14px;
-  border:1px solid rgba(255,255,255,0.12);
-  background:rgba(0,0,0,0.18);
-  filter:saturate(1.06) contrast(1.06);
+  flex-wrap:nowrap;
+  z-index:1;
 }
 
-@media (max-width: 980px){
-  .orbit{
-    grid-template-columns:1fr;
-    grid-template-rows:auto;
-    min-height:auto;
-  }
-  .heroCard{grid-column:auto; grid-row:auto;}
-  .heroMedia{width:100%; max-width:720px;}
-  .tl,.tr,.bl,.br{grid-column:auto; grid-row:auto;}
-  .tile{min-height:240px;}
-  .tile .thumb img{object-position:center;}
-
-  .sectionHead{grid-template-columns:1fr}
-}
-
-/* ================= CONTENT CARDS BELOW ================= */
-.projectWide{
-  margin-top:18px;
-  background:rgba(10,14,22,0.78);
-  border:1px solid rgba(255,255,255,0.16);
+/* TILE = 1.25× */
+.iconBtn{
+  width:115px;   /* base ~92px ×1.25 */
+  height:115px;
   border-radius:22px;
-  padding:18px;
+
   display:grid;
-  grid-template-columns:1.3fr 1fr;
-  gap:22px;
-  box-shadow:0 18px 55px rgba(0,0,0,0.45);
-  backdrop-filter:blur(10px);
-}
-.projectWide img{
-  width:100%;
-  height:320px;
-  object-fit:cover;
-  border-radius:16px;
+  place-items:center;
+
+  background:rgba(255,255,255,0.035);
   border:1px solid rgba(255,255,255,0.14);
-  background:rgba(0,0,0,0.25);
-  display:block;
-}
-@media (max-width: 900px){
-  .projectWide{grid-template-columns:1fr}
-  .projectWide img{height:260px}
-}
-.projectText p{
-  margin:0 0 10px;
-  color:rgba(242,242,242,0.82);
-  line-height:1.75;
-  font-size:15px;
-}
-.grid4{
-  margin-top:18px;
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:18px;
-}
-@media (max-width:1100px){
-  .grid4{grid-template-columns:repeat(2,1fr)}
-}
-@media (max-width:600px){
-  .grid4{grid-template-columns:1fr}
-}
-.pcard{
-  background:rgba(10,14,22,0.78);
-  border:1px solid rgba(255,255,255,0.16);
-  border-radius:20px;
-  padding:14px;
-  box-shadow:0 14px 45px rgba(0,0,0,0.35);
-  backdrop-filter:blur(10px);
-}
-.pcard img{
-  width:100%;
-  height:180px;
-  object-fit:cover;
-  border-radius:14px;
-  border:1px solid rgba(255,255,255,0.14);
-  margin-bottom:10px;
-  background:rgba(0,0,0,0.25);
-  display:block;
-}
-.pTitle{
-  font-weight:950;
-  font-size:17px;
-  margin:4px 0 6px;
-}
-.pText{
-  font-size:14px;
-  color:rgba(242,242,242,0.75);
-  line-height:1.6;
-  margin:0 0 10px;
+
+  box-shadow:
+    0 16px 44px rgba(0,0,0,0.55),
+    inset 0 1px 0 rgba(255,255,255,0.10);
+
+  backdrop-filter:blur(8px);
+
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease,
+    border-color 0.18s ease,
+    background 0.18s ease;
 }
 
-.refs{
-  margin:10px 0 0 0;
-  padding-left:18px;
-  color:rgba(242,242,242,0.78);
-  font-size:14px;
-  line-height:1.65;
+/* Fancy hover */
+.iconBtn:hover{
+  transform:translateY(-4px);
+  border-color:rgba(243,199,75,0.6);
+  background:rgba(243,199,75,0.10);
+  box-shadow:
+    0 22px 64px rgba(0,0,0,0.65),
+    0 0 26px rgba(243,199,75,0.25);
 }
-.refs li{margin:6px 0}
-.refs a{
-  color:rgba(243,199,75,0.95);
-  font-weight:900;
-}
-.refs a:hover{text-decoration:underline}
 
+/* ICON = 1.75× */
+.iconBtn img{
+  width:74px;   /* base ~42px ×1.75 */
+  height:74px;
+  object-fit:contain;
+  filter:drop-shadow(0 10px 18px rgba(0,0,0,0.5));
+}
+
+/* Remove ugly checkerboard from Instagram PNG */
+.iconBtn img[alt="Instagram"]{
+  background:#000;
+  border-radius:18px;
+  padding:6px;
+}
+
+/* ================= FOOTER ================= */
 .footer{
-  margin-top:26px;
+  position:absolute;
+  bottom:16px;
+  left:0; right:0;
   text-align:center;
   font-size:14px;
-  color:rgba(242,242,242,0.6);
-}
-
-/* ================= MODAL ================= */
-.modalOverlay{
-  position:fixed; inset:0;
-  background:rgba(0,0,0,0.72);
-  backdrop-filter: blur(6px);
-  display:none;
-  z-index:50;
-  padding:22px;
-}
-.modal{
-  width:min(880px, 96%);
-  margin:40px auto;
-  background:rgba(12,16,26,0.92);
-  border:1px solid rgba(255,255,255,0.18);
-  border-radius:22px;
-  box-shadow:0 30px 120px rgba(0,0,0,0.75);
-  overflow:hidden;
-}
-.modalTop{
-  padding:16px 18px;
-  display:flex;
-  justify-content:space-between;
-  align-items:flex-start;
-  gap:12px;
-  border-bottom:1px solid rgba(255,255,255,0.10);
-}
-.modalTitle{
-  margin:0;
-  font-weight:950;
-  font-size:20px;
-  line-height:1.25;
-}
-.closeBtn{
-  border:1px solid rgba(255,255,255,0.18);
-  background:rgba(255,255,255,0.06);
-  color:rgba(242,242,242,0.92);
-  border-radius:14px;
-  padding:10px 12px;
-  font-weight:900;
-  cursor:pointer;
-}
-.closeBtn:hover{border-color:rgba(243,199,75,0.55); color:var(--accent)}
-.modalBody{
-  display:grid;
-  grid-template-columns: 320px 1fr;
-  gap:16px;
-  padding:16px 18px 18px;
-}
-@media (max-width: 820px){
-  .modalBody{grid-template-columns:1fr}
-}
-.modalFig img{
-  width:100%;
-  height:220px;
-  object-fit:cover;
-  border-radius:16px;
-  border:1px solid rgba(255,255,255,0.14);
-  background:rgba(0,0,0,0.25);
-  display:block;
-}
-.modalText p{
-  margin:0 0 10px 0;
-  color:rgba(242,242,242,0.82);
-  line-height:1.75;
-  font-size:14.5px;
+  color:rgba(242,242,242,0.55);
 }
 </style>
 </head>
 
 <body>
+
 <div class="nav">
   <div class="name">Deepankar Sri Gyan</div>
   <div class="menu">
     <a href="index.html">Home</a>
     <a href="about.html">About Me</a>
-    <a class="active" href="research.html">Research</a>
+    <a href="research.html">Research</a>
     <a href="publications.html">Publications</a>
-    <a href="contact.html">Contact Me</a>
+    <a class="active" href="contact.html">Contact Me</a>
     <a href="utility.html">Utility Software</a>
   </div>
 </div>
 
 <main class="page">
-  <div class="container">
+  <div class="center">
+    <div class="glow" aria-hidden="true"></div>
 
-    <div class="sectionTitle">Ultrafast light–matter interaction</div>
+    <div class="iconRow">
 
-    <!-- (blue text removed as requested) -->
+      <a class="iconBtn" href="mailto:deepankarsrigyan1@gmail.com" title="Gmail">
+        <img src="assets/assets/assets/icons/gmail.png" alt="Gmail">
+      </a>
 
-    <!-- TOP ORBIT -->
-    <section class="orbit" aria-label="Research topics around a central overview">
+      <a class="iconBtn" href="mailto:dsrigyan@bu.edu" title="Outlook">
+        <img src="assets/assets/assets/icons/outlook.png" alt="Outlook">
+      </a>
 
-      <article class="tile tl" data-topic="acoustic">
-        <div class="thumb">
-          <img src="assets/research/acoustic-phonons.png" alt="Acoustic/thermal phonons figure">
-        </div>
-        <div class="body">
-          <h3 class="title">Acoustic & thermal phonons through interfaces</h3>
-          <div class="cta">Click for details →</div>
-        </div>
-      </article>
+      <a class="iconBtn" href="https://www.linkedin.com/in/PASTE_YOUR_LINKEDIN_HANDLE" target="_blank" title="LinkedIn">
+        <img src="assets/assets/assets/icons/linkedin.png" alt="LinkedIn">
+      </a>
 
-      <article class="tile tr" data-topic="ferro">
-        <div class="thumb">
-          <img src="assets/research/ferroelectric-dynamics.png" alt="Ferroelectric dynamics figure">
-        </div>
-        <div class="body">
-          <h3 class="title">Photoinduced dynamics in ferroelectric thin films & superlattices</h3>
-          <div class="cta">Click for details →</div>
-        </div>
-      </article>
+      <a class="iconBtn" href="https://www.researchgate.net/profile/Deepankar-Sri-Gyan?ev=hdr_xprf" target="_blank" title="ResearchGate">
+        <img src="assets/assets/assets/icons/researchgate.png" alt="ResearchGate">
+      </a>
 
-      <div class="heroCard" aria-label="Central overview figure">
-        <div class="heroMedia">
-          <img src="assets/research/light-matter-hero.png" alt="Central research overview">
-        </div>
-        <div class="heroGlow"></div>
-      </div>
+      <a class="iconBtn" href="https://x.com/d_sri_gyan" target="_blank" title="X">
+        <img src="assets/assets/assets/icons/x.png" alt="X">
+      </a>
 
-      <article class="tile bl" data-topic="magnon">
-        <div class="thumb">
-          <img src="assets/research/magnon-phonon.png" alt="Magnon-phonon figure">
-        </div>
-        <div class="body">
-          <h3 class="title">Magnon–phonon interactions in magnetic heterostructures</h3>
-          <div class="cta">Click for details →</div>
-        </div>
-      </article>
+      <a class="iconBtn" href="https://www.facebook.com/deepankar.srigyan.1" target="_blank" title="Facebook">
+        <img src="assets/assets/assets/icons/facebook.png" alt="Facebook">
+      </a>
 
-      <article class="tile br" data-topic="midir">
-        <div class="thumb">
-          <img src="assets/research/midir-nonlinear.png" alt="Mid-IR nonlinear phononics figure">
-        </div>
-        <div class="body">
-          <h3 class="title"><i>Mid-IR</i> driven nonlinearity & nonlinear phononics</h3>
-          <div class="cta">Click for details →</div>
-        </div>
-      </article>
+      <a class="iconBtn" href="https://www.instagram.com/PASTE_YOUR_INSTAGRAM_HANDLE" target="_blank" title="Instagram">
+        <img src="assets/assets/assets/icons/instagram.png" alt="Instagram">
+      </a>
 
-    </section>
-
-    <!-- ================= SECTION 1 (NOW HAS A PICTURE TOO) ================= -->
-    <section class="sectionBlock" aria-label="CDW section">
-
-      <div class="sectionHead">
-        <div class="meta">
-          <div class="sectionTitle">Electric-field–driven domain fluctuations in charge-density-wave materials</div>
-          <div class="sectionDesc">
-            Ultrafast and field-driven manipulation of charge order and domain configurations,
-            explored using time-resolved diffraction and scattering techniques.
-          </div>
-        </div>
-
-        <!-- NEW: picture next to this section heading -->
-        <div class="sectionArt" aria-label="CDW section image">
-          <div class="artFrame">
-            <img src="assets/research/cdw-domain.png" alt="CDW domain dynamics overview">
-          </div>
-        </div>
-      </div>
-
-      <div class="projectWide">
-        <img src="assets/research/cdw-domain.png" alt="CDW domain dynamics figure">
-        <div class="projectText">
-          <p>
-            I investigate how external electric fields perturb and reorganize charge-density-wave domains
-            in correlated quantum materials, revealing nonequilibrium fluctuation pathways and metastable
-            configurations.
-          </p>
-          <ul class="refs">
-            <li>
-              <b>Ref:</b> Electric-field-induced fluctuation of the charge-density wave configuration in 1T-TaS₂ —
-              <a href="PASTE_LINK_HERE" target="_blank" rel="noopener">paper link</a>
-            </li>
-            <li>
-              <b>Ref:</b> (Optional) Add another related paper —
-              <a href="PASTE_LINK_HERE" target="_blank" rel="noopener">paper link</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- ================= SECTION 2 (NOW HAS A PICTURE TOO) ================= -->
-    <section class="sectionBlock" aria-label="Polycrystalline section">
-
-      <div class="sectionHead">
-        <div class="meta">
-          <div class="sectionTitle">Polycrystalline ferroelectric, magnetic, thermoelectric, and energy-storage materials</div>
-          <div class="sectionDesc">
-            Structure–property correlations and functional optimization in bulk and polycrystalline oxide materials.
-          </div>
-        </div>
-
-        <!-- NEW: picture next to this section heading -->
-        <div class="sectionArt" aria-label="Polycrystalline section image">
-          <div class="artFrame">
-            <!-- Use your future banner image here. Placeholder path is fine. -->
-            <img src="assets/research/poly-banner.png" alt="Polycrystalline materials overview">
-          </div>
-        </div>
-      </div>
-
-      <div class="grid4">
-        <div class="pcard">
-          <img src="assets/research/poly-1.png" alt="Ferroelectric/antiferroelectric ceramics figure">
-          <div class="pTitle">Ferroelectric & antiferroelectric oxides</div>
-          <div class="pText">Octahedral tilting, phase stabilization, and electrical response in perovskite ceramics.</div>
-          <ul class="refs">
-            <li><b>Ref:</b> (Add link) <a href="PASTE_LINK_HERE" target="_blank" rel="noopener">paper link</a></li>
-          </ul>
-        </div>
-
-        <div class="pcard">
-          <img src="assets/research/poly-2.png" alt="Thermoelectric double perovskites figure">
-          <div class="pTitle">Thermoelectric double perovskites</div>
-          <div class="pText">B-site cation ordering and transport optimization in complex oxides.</div>
-          <ul class="refs">
-            <li><b>Ref:</b> (Add link) <a href="PASTE_LINK_HERE" target="_blank" rel="noopener">paper link</a></li>
-          </ul>
-        </div>
-
-        <div class="pcard">
-          <img src="assets/research/poly-3.png" alt="Magnetic and ESR properties figure">
-          <div class="pTitle">Magnetic & spin-related properties</div>
-          <div class="pText">Magnetic ordering and electron spin resonance in functional oxides.</div>
-          <ul class="refs">
-            <li><b>Ref:</b> (Add link) <a href="PASTE_LINK_HERE" target="_blank" rel="noopener">paper link</a></li>
-          </ul>
-        </div>
-
-        <div class="pcard">
-          <img src="assets/research/poly-4.png" alt="Energy/functional materials figure">
-          <div class="pTitle">Functional & energy materials</div>
-          <div class="pText">Structural, thermal, and functional properties of energy-relevant oxide systems.</div>
-          <ul class="refs">
-            <li><b>Ref:</b> (Add link) <a href="PASTE_LINK_HERE" target="_blank" rel="noopener">paper link</a></li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <div class="footer">© <span id="y"></span> Deepankar Sri Gyan</div>
+    </div>
   </div>
+
+  <div class="footer">© <span id="y"></span> Deepankar Sri Gyan</div>
 </main>
 
-<!-- ================= MODAL ================= -->
-<div class="modalOverlay" id="modalOverlay" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-  <div class="modal">
-    <div class="modalTop">
-      <h3 class="modalTitle" id="modalTitle">Title</h3>
-      <button class="closeBtn" id="closeBtn" aria-label="Close">Close ✕</button>
-    </div>
-
-    <div class="modalBody">
-      <div class="modalFig">
-        <img id="modalImg" src="" alt="Project figure">
-      </div>
-      <div class="modalText" id="modalText"></div>
-    </div>
-  </div>
-</div>
-
 <script>
-  document.getElementById("y").textContent = new Date().getFullYear();
-
-  const TOPICS = {
-    acoustic: {
-      title: "Acoustic & thermal phonons: propagation through interfaces",
-      img: "assets/research/acoustic-phonons.png",
-      html: `
-        <p>Add your short project description here.</p>
-        <ul class="refs">
-          <li><b>Ref:</b> (Add link) <a href="PASTE_LINK_HERE" target="_blank" rel="noopener">paper link</a></li>
-          <li><b>Ref:</b> (Add link) <a href="PASTE_LINK_HERE" target="_blank" rel="noopener">paper link</a></li>
-        </ul>
-      `
-    },
-    ferro: {
-      title: "Photoinduced dynamics in ferroelectric thin films and superlattices",
-      img: "assets/research/ferroelectric-dynamics.png",
-      html: `
-        <p>Add your short project description here.</p>
-        <ul class="refs">
-          <li><b>Ref:</b> (Add link) <a href="PASTE_LINK_HERE" target="_blank" rel="noopener">paper link</a></li>
-          <li><b>Ref:</b> (Add link) <a href="PASTE_LINK_HERE" target="_blank" rel="noopener">paper link</a></li>
-        </ul>
-      `
-    },
-    magnon: {
-      title: "Magnon–phonon interactions in magnetic thin film heterostructures",
-      img: "assets/research/magnon-phonon.png",
-      html: `
-        <p>Add your short project description here.</p>
-        <ul class="refs">
-          <li><b>Ref:</b> (Add link) <a href="PASTE_LINK_HERE" target="_blank" rel="noopener">paper link</a></li>
-          <li><b>Ref:</b> (Add link) <a href="PASTE_LINK_HERE" target="_blank" rel="noopener">paper link</a></li>
-        </ul>
-      `
-    },
-    midir: {
-      title: "Mid-IR driven nonlinearity and nonlinear phononics",
-      img: "assets/research/midir-nonlinear.png",
-      html: `
-        <p>Add your short project description here.</p>
-        <ul class="refs">
-          <li><b>Ref:</b> (Add link) <a href="PASTE_LINK_HERE" target="_blank" rel="noopener">paper link</a></li>
-          <li><b>Ref:</b> (Add link) <a href="PASTE_LINK_HERE" target="_blank" rel="noopener">paper link</a></li>
-        </ul>
-      `
-    }
-  };
-
-  const overlay = document.getElementById("modalOverlay");
-  const closeBtn = document.getElementById("closeBtn");
-  const modalTitle = document.getElementById("modalTitle");
-  const modalImg = document.getElementById("modalImg");
-  const modalText = document.getElementById("modalText");
-
-  function openModal(key){
-    const t = TOPICS[key];
-    if(!t) return;
-    modalTitle.textContent = t.title;
-    modalImg.src = t.img;
-    modalImg.alt = t.title;
-    modalText.innerHTML = t.html;
-    overlay.style.display = "block";
-    document.body.style.overflow = "hidden";
-  }
-  function closeModal(){
-    overlay.style.display = "none";
-    document.body.style.overflow = "";
-  }
-
-  document.querySelectorAll(".tile").forEach(tile=>{
-    tile.addEventListener("click", ()=> openModal(tile.dataset.topic));
-  });
-
-  closeBtn.addEventListener("click", closeModal);
-  overlay.addEventListener("click", (e)=>{
-    if(e.target === overlay) closeModal();
-  });
-  document.addEventListener("keydown", (e)=>{
-    if(e.key === "Escape" && overlay.style.display === "block") closeModal();
-  });
-
-  /* Graceful fallback for missing images: swap to a clean placeholder (no broken icons). */
-  const placeholderSvg =
-    'data:image/svg+xml;utf8,' +
-    encodeURIComponent(`
-      <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="750" viewBox="0 0 1200 750">
-        <defs>
-          <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0" stop-color="rgba(243,199,75,0.14)"/>
-            <stop offset="1" stop-color="rgba(255,255,255,0.04)"/>
-          </linearGradient>
-        </defs>
-        <rect width="1200" height="750" fill="url(#g)"/>
-        <rect x="70" y="70" width="1060" height="610" rx="28" ry="28" fill="rgba(0,0,0,0.22)" stroke="rgba(255,255,255,0.18)" stroke-width="3"/>
-        <g fill="rgba(255,255,255,0.70)" font-family="Arial, sans-serif">
-          <text x="110" y="170" font-size="44" font-weight="700">Image coming soon</text>
-          <text x="110" y="230" font-size="26" opacity="0.85">Replace this file path in your HTML/CSS.</text>
-        </g>
-      </svg>
-    `);
-
-  document.querySelectorAll('img').forEach(img=>{
-    img.addEventListener('error', ()=>{
-      img.src = placeholderSvg;
-      img.alt = "Placeholder image";
-      img.style.objectFit = (img.closest('.heroMedia') || img.closest('.sectionArt')) ? 'contain' : 'cover';
-    }, { once:true });
-  });
+document.getElementById("y").textContent = new Date().getFullYear();
 </script>
+
 </body>
 </html>
