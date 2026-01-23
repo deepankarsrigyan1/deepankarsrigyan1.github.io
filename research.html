@@ -85,15 +85,17 @@ a:hover{color:var(--accent)}
   margin:16px 0 18px;
 }
 
-/* ================= ORBIT LAYOUT ================= */
+/* ================= ORBIT LAYOUT (UPDATED) ================= */
 .orbit{
   position:relative;
-  width:min(1060px, 96%);
-  margin:26px auto 0;
+  width:min(1120px, 96%);
+  margin:30px auto 0;              /* keeps distance from sectionDesc */
   display:grid;
-  grid-template-columns: 1fr 1.25fr 1fr;
-  grid-template-rows: 1fr 1fr;
+  grid-template-columns: 1fr 1.35fr 1fr;  /* hero gets more room */
   gap:18px;
+
+  /* Stable row heights so tiles + hero align perfectly */
+  grid-auto-rows: clamp(230px, 22vw, 280px);
   align-items:stretch;
 }
 
@@ -108,26 +110,35 @@ a:hover{color:var(--accent)}
   box-shadow:0 22px 70px rgba(0,0,0,0.55);
   backdrop-filter: blur(10px);
   position:relative;
+  min-height: calc(2 * clamp(230px, 22vw, 280px) + 18px); /* 2 rows + gap */
 }
 
-/* Force “drawn box” aspect ratio (landscape) */
+/* Hero media fills the card without cropping */
 .heroMedia{
   width:100%;
-  aspect-ratio: 16 / 10;   /* adjust to 16/9 if you prefer */
-  background:rgba(0,0,0,0.25);
+  height:100%;
+  background:rgba(0,0,0,0.22);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:12px;
 }
+
+/* IMPORTANT: contain = no cutting */
 .heroMedia img{
   width:100%;
   height:100%;
-  object-fit:cover;
+  object-fit:contain;              /* <- no crop */
   display:block;
+  border-radius:16px;
+  border:1px solid rgba(255,255,255,0.12);
+  background:rgba(0,0,0,0.18);
   filter:saturate(1.06) contrast(1.06);
 }
 
-/* Removed hero label + text below image, per request */
 .heroGlow{
   position:absolute; inset:0;
-  background: radial-gradient(420px 280px at 52% 48%, rgba(243,199,75,0.10), rgba(0,0,0,0.0) 70%);
+  background: radial-gradient(520px 340px at 52% 48%, rgba(243,199,75,0.10), rgba(0,0,0,0.0) 70%);
   pointer-events:none;
 }
 
@@ -143,6 +154,7 @@ a:hover{color:var(--accent)}
   flex-direction:column;
   transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease;
   cursor:pointer;
+  min-height:0; /* grid/flex stability */
 }
 .tile:hover{
   transform: translateY(-2px);
@@ -155,11 +167,12 @@ a:hover{color:var(--accent)}
 }
 .tile .thumb img{
   width:100%;
-  height:170px;
+  height: clamp(120px, 10vw, 150px);
   object-fit:cover;
   border-radius:14px;
   border:1px solid rgba(255,255,255,0.14);
   background:rgba(0,0,0,0.25);
+  display:block;
 }
 .tile .body{
   padding:14px 14px 16px;
@@ -179,7 +192,7 @@ a:hover{color:var(--accent)}
 
 /* Keep “Click for details” */
 .tile .cta{
-  margin-top:2px;
+  margin-top:auto; /* anchor CTA at bottom */
   display:inline-flex;
   align-items:center;
   gap:8px;
@@ -200,9 +213,20 @@ a:hover{color:var(--accent)}
 @media (max-width: 980px){
   .orbit{
     grid-template-columns:1fr;
-    grid-template-rows:auto;
+    grid-auto-rows:auto;
   }
-  .heroCard{grid-column:auto; grid-row:auto;}
+  .heroCard{
+    grid-column:auto; grid-row:auto;
+    min-height:0;
+  }
+  .heroMedia{
+    height:auto;
+    padding:10px;
+  }
+  .heroMedia img{
+    height:auto;
+    max-height:420px;
+  }
   .tl,.tr,.bl,.br{grid-column:auto; grid-row:auto;}
   .tile .thumb img{height:190px;}
 }
@@ -390,10 +414,8 @@ a:hover{color:var(--accent)}
 <main class="page">
   <div class="container">
 
-    <!-- Heading requested -->
     <div class="sectionTitle">Ultrafast light–matter interaction</div>
 
-    <!-- Keep this line if you want; delete if you want it totally empty -->
     <div class="sectionDesc">
       Click a topic to see details and references. Upload images to <b>assets/research/</b> and update filenames if needed.
     </div>
@@ -469,11 +491,11 @@ a:hover{color:var(--accent)}
           <ul class="refs">
             <li>
               <b>Ref:</b> Electric-field-induced fluctuation of the charge-density wave configuration in 1T-TaS₂ —
-              <a href="PASTE_LINK_HERE" target="_blank">paper link</a>
+              <a href="PASTE_LINK_HERE" target="_blank" rel="noopener">paper link</a>
             </li>
             <li>
               <b>Ref:</b> (Optional) Add another related paper —
-              <a href="PASTE_LINK_HERE" target="_blank">paper link</a>
+              <a href="PASTE_LINK_HERE" target="_blank" rel="noopener">paper link</a>
             </li>
           </ul>
         </div>
@@ -492,7 +514,7 @@ a:hover{color:var(--accent)}
           <div class="pTitle">Ferroelectric & antiferroelectric oxides</div>
           <div class="pText">Octahedral tilting, phase stabilization, and electrical response in perovskite ceramics.</div>
           <ul class="refs">
-            <li><b>Ref:</b> (Add link) <a href="PASTE_LINK_HERE" target="_blank">paper link</a></li>
+            <li><b>Ref:</b> (Add link) <a href="PASTE_LINK_HERE" target="_blank" rel="noopener">paper link</a></li>
           </ul>
         </div>
 
@@ -501,7 +523,7 @@ a:hover{color:var(--accent)}
           <div class="pTitle">Thermoelectric double perovskites</div>
           <div class="pText">B-site cation ordering and transport optimization in complex oxides.</div>
           <ul class="refs">
-            <li><b>Ref:</b> (Add link) <a href="PASTE_LINK_HERE" target="_blank">paper link</a></li>
+            <li><b>Ref:</b> (Add link) <a href="PASTE_LINK_HERE" target="_blank" rel="noopener">paper link</a></li>
           </ul>
         </div>
 
@@ -510,7 +532,7 @@ a:hover{color:var(--accent)}
           <div class="pTitle">Magnetic & spin-related properties</div>
           <div class="pText">Magnetic ordering and electron spin resonance in functional oxides.</div>
           <ul class="refs">
-            <li><b>Ref:</b> (Add link) <a href="PASTE_LINK_HERE" target="_blank">paper link</a></li>
+            <li><b>Ref:</b> (Add link) <a href="PASTE_LINK_HERE" target="_blank" rel="noopener">paper link</a></li>
           </ul>
         </div>
 
@@ -519,7 +541,7 @@ a:hover{color:var(--accent)}
           <div class="pTitle">Functional & energy materials</div>
           <div class="pText">Structural, thermal, and functional properties of energy-relevant oxide systems.</div>
           <ul class="refs">
-            <li><b>Ref:</b> (Add link) <a href="PASTE_LINK_HERE" target="_blank">paper link</a></li>
+            <li><b>Ref:</b> (Add link) <a href="PASTE_LINK_HERE" target="_blank" rel="noopener">paper link</a></li>
           </ul>
         </div>
       </div>
@@ -556,8 +578,8 @@ a:hover{color:var(--accent)}
       html: `
         <p>Add your short project description here.</p>
         <ul class="refs">
-          <li><b>Ref:</b> (Add link) <a href="PASTE_LINK_HERE" target="_blank">paper link</a></li>
-          <li><b>Ref:</b> (Add link) <a href="PASTE_LINK_HERE" target="_blank">paper link</a></li>
+          <li><b>Ref:</b> (Add link) <a href="PASTE_LINK_HERE" target="_blank" rel="noopener">paper link</a></li>
+          <li><b>Ref:</b> (Add link) <a href="PASTE_LINK_HERE" target="_blank" rel="noopener">paper link</a></li>
         </ul>
       `
     },
@@ -567,8 +589,8 @@ a:hover{color:var(--accent)}
       html: `
         <p>Add your short project description here.</p>
         <ul class="refs">
-          <li><b>Ref:</b> (Add link) <a href="PASTE_LINK_HERE" target="_blank">paper link</a></li>
-          <li><b>Ref:</b> (Add link) <a href="PASTE_LINK_HERE" target="_blank">paper link</a></li>
+          <li><b>Ref:</b> (Add link) <a href="PASTE_LINK_HERE" target="_blank" rel="noopener">paper link</a></li>
+          <li><b>Ref:</b> (Add link) <a href="PASTE_LINK_HERE" target="_blank" rel="noopener">paper link</a></li>
         </ul>
       `
     },
@@ -578,8 +600,8 @@ a:hover{color:var(--accent)}
       html: `
         <p>Add your short project description here.</p>
         <ul class="refs">
-          <li><b>Ref:</b> (Add link) <a href="PASTE_LINK_HERE" target="_blank">paper link</a></li>
-          <li><b>Ref:</b> (Add link) <a href="PASTE_LINK_HERE" target="_blank">paper link</a></li>
+          <li><b>Ref:</b> (Add link) <a href="PASTE_LINK_HERE" target="_blank" rel="noopener">paper link</a></li>
+          <li><b>Ref:</b> (Add link) <a href="PASTE_LINK_HERE" target="_blank" rel="noopener">paper link</a></li>
         </ul>
       `
     },
@@ -589,8 +611,8 @@ a:hover{color:var(--accent)}
       html: `
         <p>Add your short project description here.</p>
         <ul class="refs">
-          <li><b>Ref:</b> (Add link) <a href="PASTE_LINK_HERE" target="_blank">paper link</a></li>
-          <li><b>Ref:</b> (Add link) <a href="PASTE_LINK_HERE" target="_blank">paper link</a></li>
+          <li><b>Ref:</b> (Add link) <a href="PASTE_LINK_HERE" target="_blank" rel="noopener">paper link</a></li>
+          <li><b>Ref:</b> (Add link) <a href="PASTE_LINK_HERE" target="_blank" rel="noopener">paper link</a></li>
         </ul>
       `
     }
@@ -627,6 +649,19 @@ a:hover{color:var(--accent)}
   });
   document.addEventListener("keydown", (e)=>{
     if(e.key === "Escape" && overlay.style.display === "block") closeModal();
+  });
+
+  /* Optional: hide broken images cleanly while you don't have them yet */
+  document.querySelectorAll('img').forEach(img=>{
+    img.addEventListener('error', ()=>{
+      img.style.display = 'none';
+      const p = img.parentElement;
+      if (p) {
+        p.style.background = 'linear-gradient(135deg, rgba(243,199,75,0.10), rgba(255,255,255,0.02))';
+        p.style.borderRadius = '14px';
+        p.style.minHeight = '140px';
+      }
+    });
   });
 </script>
 </body>
