@@ -97,27 +97,29 @@ a:hover{color:var(--accent)}
   text-shadow:0 2px 18px rgba(0,0,0,0.35);
 }
 
-/* ================= ORBIT LAYOUT ================= */
+/* ================= ORBIT LAYOUT (FIXED: text below images + better hero) ================= */
+/* 3x3 grid:
+   tl  .  tr
+   .  hero .
+   bl overview br
+*/
 .orbit{
-  position:relative;
   width:min(1120px, 96%);
   margin:26px auto 0;
   display:grid;
-  grid-template-columns: 1fr 1.18fr 1fr;
-  grid-template-rows: minmax(240px, 1fr) minmax(240px, 1fr);
+  grid-template-columns: 1fr 1.15fr 1fr;
+  grid-template-rows: minmax(250px, 1fr) minmax(320px, 1.15fr) minmax(250px, 1fr);
   gap:18px;
   align-items:stretch;
-  min-height: clamp(460px, 44vw, 520px);
 }
 
-/* ================= HERO (CENTER) ================= */
+/* ================= HERO (CENTER IMAGE ONLY) ================= */
 .heroCard{
   grid-column:2;
-  grid-row:1 / span 2;
+  grid-row:2;
   background:transparent;
   border:none;
   box-shadow:none;
-  backdrop-filter:none;
   padding:0;
   display:flex;
   align-items:stretch;
@@ -127,34 +129,30 @@ a:hover{color:var(--accent)}
   width:100%;
   height:100%;
   border-radius:22px;
-  background:rgba(10,14,22,0.52);
-  border:1px solid rgba(255,255,255,0.13);
-  box-shadow:0 18px 60px rgba(0,0,0,0.52);
   overflow:hidden;
-  padding:12px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
+
+  /* cleaner, less “boxy” */
+  background:rgba(0,0,0,0.18);
+  border:1px solid rgba(255,255,255,0.12);
+  box-shadow:0 18px 60px rgba(0,0,0,0.48);
 }
 .heroMedia img{
   width:100%;
   height:100%;
   object-fit:contain;
   display:block;
-  border-radius:16px;
-  border:1px solid rgba(255,255,255,0.10);
-  background:rgba(0,0,0,0.14);
+  background:rgba(0,0,0,0.12);
   filter:saturate(1.06) contrast(1.06);
 }
 .heroGlow{
-  position:absolute; inset:0;
+  position:absolute; inset:-10px;
   background:
     radial-gradient(520px 360px at 52% 48%, rgba(243,199,75,0.11), rgba(0,0,0,0.0) 70%),
     radial-gradient(720px 520px at 50% 60%, rgba(255,255,255,0.04), rgba(0,0,0,0) 60%);
   pointer-events:none;
 }
 
-/* ================= TILES ================= */
+/* ================= TILES (FIXED: image fully visible + text BELOW) ================= */
 .tile{
   background:var(--card);
   border:1px solid var(--stroke);
@@ -164,9 +162,12 @@ a:hover{color:var(--accent)}
   backdrop-filter:blur(10px);
   transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease;
   cursor:pointer;
-  position:relative;
-  display:flex;
   user-select:none;
+
+  /* key change: column layout */
+  display:flex;
+  flex-direction:column;
+  min-height:260px; /* bigger tiles */
 }
 .tile:hover{
   transform: translateY(-2px);
@@ -175,49 +176,34 @@ a:hover{color:var(--accent)}
 }
 .tile:active{ transform: translateY(-1px); }
 
+/* Image area */
 .tile .thumb{
-  position:absolute; inset:0;
-  padding:10px;
+  padding:12px;
 }
 .tile .thumb img{
   width:100%;
-  height:100%;
-  object-fit:cover;
+  height:190px;          /* bigger image area */
+  object-fit:contain;    /* fully visible (no cropping) */
   border-radius:14px;
   border:1px solid rgba(255,255,255,0.12);
-  background:rgba(0,0,0,0.25);
+  background:rgba(0,0,0,0.18);
   display:block;
-  transform:scale(1.01);
-  transition: transform .22s ease, filter .22s ease;
-  filter:saturate(1.02) contrast(1.02);
-}
-.tile:hover .thumb img{
-  transform:scale(1.03);
-  filter:saturate(1.06) contrast(1.06);
+  filter:saturate(1.04) contrast(1.04);
 }
 
+/* Text area below image */
 .tile .body{
-  position:absolute;
-  left:0; right:0; bottom:0;
-  padding:14px 14px 14px;
+  padding:2px 14px 14px;
   display:flex;
   flex-direction:column;
-  gap:8px;
-  background:linear-gradient(
-    to top,
-    rgba(0,0,0,0.82),
-    rgba(0,0,0,0.48) 55%,
-    rgba(0,0,0,0.00)
-  );
+  gap:10px;
 }
 .tile .title{
   margin:0;
   font-weight:950;
   font-size:17px;
-  line-height:1.22;
-  text-shadow:0 2px 12px rgba(0,0,0,0.35);
+  line-height:1.25;
 }
-.tile .hint{display:none}
 .tile .cta{
   display:inline-flex;
   align-items:center;
@@ -232,14 +218,34 @@ a:hover{color:var(--accent)}
 /* Positions */
 .tl{grid-column:1; grid-row:1;}
 .tr{grid-column:3; grid-row:1;}
-.bl{grid-column:1; grid-row:2;}
-.br{grid-column:3; grid-row:2;}
+.bl{grid-column:1; grid-row:3;}
+.br{grid-column:3; grid-row:3;}
 
-/* acoustic tile: make image smaller / less zoomed */
-.tile[data-topic="acoustic"] .thumb{ padding:18px; }
+/* acoustic tile: keep smaller/less zoomed */
 .tile[data-topic="acoustic"] .thumb img{
   object-fit:contain;
-  background:rgba(0,0,0,0.18);
+  background:rgba(0,0,0,0.14);
+}
+
+/* ================= OVERVIEW TILE UNDER HERO (NEW) ================= */
+.overviewTile{
+  grid-column:2;
+  grid-row:3;
+  cursor:default;
+}
+.overviewTile:hover{ transform:none; border-color:var(--stroke); box-shadow:0 14px 45px rgba(0,0,0,0.35); }
+.overviewTile .thumb{ display:none; }
+.overviewTile .body{ padding:16px 16px 18px; }
+.overviewTitle{
+  margin:0;
+  font-weight:950;
+  font-size:18px;
+}
+.overviewText{
+  margin:0;
+  color:rgba(242,242,242,0.78);
+  line-height:1.7;
+  font-size:14.5px;
 }
 
 /* ================= BELOW SECTIONS ================= */
@@ -265,10 +271,10 @@ a:hover{color:var(--accent)}
 .projectWide img{
   width:100%;
   height:320px;
-  object-fit:cover;
+  object-fit:contain; /* safer: show whole figure */
   border-radius:16px;
   border:1px solid rgba(255,255,255,0.14);
-  background:rgba(0,0,0,0.25);
+  background:rgba(0,0,0,0.18);
   display:block;
 }
 @media (max-width: 900px){
@@ -310,12 +316,12 @@ a:hover{color:var(--accent)}
 }
 .pcard img{
   width:100%;
-  height:180px;
-  object-fit:cover;
+  height:190px;
+  object-fit:contain; /* safer: show whole plot */
   border-radius:14px;
   border:1px solid rgba(255,255,255,0.14);
   margin-bottom:10px;
-  background:rgba(0,0,0,0.25);
+  background:rgba(0,0,0,0.18);
   display:block;
 }
 .pTitle{
@@ -351,7 +357,7 @@ a:hover{color:var(--accent)}
   color:rgba(242,242,242,0.6);
 }
 
-/* ================= MODAL (keep picture, show large version) ================= */
+/* ================= MODAL (shows image + text) ================= */
 .modalOverlay{
   position:fixed; inset:0;
   background:rgba(0,0,0,0.72);
@@ -401,15 +407,13 @@ a:hover{color:var(--accent)}
 }
 .closeBtn:hover{border-color:rgba(243,199,75,0.55); color:var(--accent)}
 
-/* NEW modal layout: big image on top, text below */
+/* modal layout: big image on top, text below */
 .modalBody{
   display:grid;
   grid-template-columns:1fr;
   gap:14px;
   padding:16px 18px 18px;
 }
-
-/* modal image frame */
 .modalFig{
   background:rgba(0,0,0,0.22);
   border:1px solid rgba(255,255,255,0.12);
@@ -418,14 +422,13 @@ a:hover{color:var(--accent)}
 }
 .modalFig img{
   width:100%;
-  height:min(56vh, 520px); /* big image */
-  object-fit:contain;      /* never cut */
+  height:min(56vh, 520px);
+  object-fit:contain;
   border-radius:14px;
   border:1px solid rgba(255,255,255,0.10);
   background:rgba(0,0,0,0.14);
   display:block;
 }
-
 .modalText p{
   margin:0 0 10px 0;
   color:rgba(242,242,242,0.84);
@@ -438,11 +441,10 @@ a:hover{color:var(--accent)}
   .orbit{
     grid-template-columns:1fr;
     grid-template-rows:auto;
-    min-height:auto;
   }
-  .heroCard{grid-column:auto; grid-row:auto;}
-  .tl,.tr,.bl,.br{grid-column:auto; grid-row:auto;}
-  .tile{min-height:240px;}
+  .tl,.tr,.bl,.br,.heroCard,.overviewTile{grid-column:auto; grid-row:auto;}
+  .tile .thumb img{height:210px;}
+  .heroCard{min-height:320px;}
 }
 
 /* reduce motion */
@@ -497,6 +499,17 @@ a:hover{color:var(--accent)}
           <img src="assets/research/light-matter-hero.png" alt="Central research overview" loading="eager" decoding="async">
         </div>
         <div class="heroGlow"></div>
+      </div>
+
+      <!-- NEW: one tile under hero (slightly larger feeling, clean text) -->
+      <div class="tile overviewTile" aria-label="Overview">
+        <div class="body">
+          <h3 class="overviewTitle">Overview</h3>
+          <p class="overviewText">
+            Ultrafast pump–probe experiments combining nonlinear optics (SHG) and time-resolved x-ray scattering to
+            track coupled lattice, charge, and spin dynamics far from equilibrium.
+          </p>
+        </div>
       </div>
 
       <article class="tile bl" data-topic="magnon" role="button" tabindex="0" aria-label="Open details: Magnon phonon interactions">
@@ -565,13 +578,13 @@ a:hover{color:var(--accent)}
           <div class="pTitle">Thermoelectric double perovskites</div>
           <div class="pText">A and B-site cation ordering and transport optimization in complex oxides.</div>
           <ul class="refs">
-            <li><b>Ref:</b><a href="https://doi.org/10.1103/PhysRevB.99.174105" target="_blank" rel="noopener">Paper</a></li>
+            <li><b>Ref:</b> <a href="https://doi.org/10.1103/PhysRevB.99.174105" target="_blank" rel="noopener">Paper</a></li>
           </ul>
           <ul class="refs">
-            <li><b>Ref:</b><a href="https://iopscience.iop.org/article/10.1088/1361-648X/ab7575/meta" target="_blank" rel="noopener">Paper</a></li>
+            <li><b>Ref:</b> <a href="https://iopscience.iop.org/article/10.1088/1361-648X/ab7575/meta" target="_blank" rel="noopener">Paper</a></li>
           </ul>
           <ul class="refs">
-            <li><b>Ref:</b><a href="https://doi.org/10.1080/00150193.2018.1528922" target="_blank" rel="noopener">Paper</a></li>
+            <li><b>Ref:</b> <a href="https://doi.org/10.1080/00150193.2018.1528922" target="_blank" rel="noopener">Paper</a></li>
           </ul>
         </div>
 
@@ -580,10 +593,10 @@ a:hover{color:var(--accent)}
           <div class="pTitle">Magnetic & spin-related properties</div>
           <div class="pText">Magnetic ordering and electron spin resonance in functional oxides.</div>
           <ul class="refs">
-            <li><b>Ref:</b><a href="https://doi.org/10.1039/C8RA02455C" target="_blank" rel="noopener">Paper</a></li>
+            <li><b>Ref:</b> <a href="https://doi.org/10.1039/C8RA02455C" target="_blank" rel="noopener">Paper</a></li>
           </ul>
           <ul class="refs">
-            <li><b>Ref:</b><a href="https://doi.org/10.1002/pssb.201900341" target="_blank" rel="noopener">Paper</a></li>
+            <li><b>Ref:</b> <a href="https://doi.org/10.1002/pssb.201900341" target="_blank" rel="noopener">Paper</a></li>
           </ul>
         </div>
 
@@ -633,9 +646,9 @@ a:hover{color:var(--accent)}
       title: "Acoustic & thermal phonons: propagation through interfaces",
       img: "assets/research/acoustic-phonons.png",
       html: `
-        <p>Optical pumping results in excitation of a range of acosutic as well as thermal phonons in the thin film heterostructure. Here we have studied the excitation and propagation of these phonons in the thin films and through the interfaces using time-resolved x-ray diffraction. </p>
+        <p>Optical pumping excites acoustic and thermal phonons in thin-film heterostructures. We study their excitation and propagation through interfaces using time-resolved x-ray diffraction.</p>
         <ul class="refs">
-          <li><b>Ref:</b> <a href="https://doi.org/10.1063/4.0000778"_blank" rel="noopener">Paper</a></li>
+          <li><b>Ref:</b> <a href="https://doi.org/10.1063/4.0000778" target="_blank" rel="noopener">Paper</a></li>
           <li><b>Ref:</b> <a href="https://doi.org/10.1063/4.0000154" target="_blank" rel="noopener">Paper</a></li>
         </ul>
       `
@@ -644,7 +657,7 @@ a:hover{color:var(--accent)}
       title: "Photoinduced dynamics in ferroelectric thin films and superlattices",
       img: "assets/research/ferroelectric-dynamics.png",
       html: `
-        <p>The photoexcited charge carriers result in screening of depolarization field in ferroelectric thin films, exciting a range of polarization dynamics in the thin film. Here we study the effect of depoalrization field screening on stress generation, octahedral rotation and polarization oscillations using time- and wavevector- resolved x-ray diffraction. </p>
+        <p>Photoexcited carriers screen the depolarization field in ferroelectric thin films, driving coupled structural and polarization dynamics. We probe screening-driven stress, octahedral rotations, and polarization oscillations using time- and wavevector-resolved x-ray diffraction.</p>
         <ul class="refs">
           <li><b>Ref:</b> <a href="https://doi.org/10.1002/aelm.202101051" target="_blank" rel="noopener">Paper</a></li>
           <li><b>Ref:</b> <a href="https://doi.org/10.1021/acs.nanolett.1c04831" target="_blank" rel="noopener">Paper</a></li>
@@ -657,9 +670,9 @@ a:hover{color:var(--accent)}
       title: "Magnon–phonon interactions in magnetic thin film heterostructures",
       img: "assets/research/magnon-phonon.png",
       html: `
-        <p>Optical excitation provides a unique opportunity to excite phonons and magnons in magnetic thin film heterostructures. Here we have used a time- and wavevector resolved resonant x-ray diffraction to probe magnon as well as phonon dispersion in a magnetic thin film heterostructure relevant to spin-Seebeck effect.</p>
+        <p>Optical excitation can launch both phonons and magnons in magnetic heterostructures. We use time- and wavevector-resolved resonant x-ray diffraction to probe magnon and phonon dispersions in systems relevant to the spin-Seebeck effect.</p>
         <ul class="refs">
-          <li><b>Ref:</b> Under Preparation <a href="PASTE_LINK_HERE" target="_blank" rel="noopener">paper link</a></li>
+          <li><b>Ref:</b> Under preparation — <a href="PASTE_LINK_HERE" target="_blank" rel="noopener">paper link</a></li>
         </ul>
       `
     },
@@ -667,10 +680,10 @@ a:hover{color:var(--accent)}
       title: "Mid-IR driven nonlinearity and nonlinear phononics",
       img: "assets/research/midir-nonlinear.png",
       html: `
-        <p>We use mid-IR pump to excite phonon modes in thin film and single crystal materials ranging from ferroelectrics to chiral magnetic textures. We study the non-linear effect caused as a direct result of mid-IR pumping as well as non-linear phonon driven effects using time-resolved second harmonic generation (SHG) measurements. </p>
+        <p>We use mid-IR pumping to resonantly drive phonons in thin films and crystals (from ferroelectrics to chiral textures). We study direct nonlinear responses and phonon-driven nonlinear effects using time-resolved SHG.</p>
         <ul class="refs">
-          <li><b>Ref:</b> Submitted <a href="PASTE_LINK_HERE" target="_blank" rel="noopener">paper link</a></li>
-          <li><b>Ref:</b> Submitted <a href="PASTE_LINK_HERE" target="_blank" rel="noopener">paper link</a></li>
+          <li><b>Ref:</b> Submitted — <a href="PASTE_LINK_HERE" target="_blank" rel="noopener">paper link</a></li>
+          <li><b>Ref:</b> Submitted — <a href="PASTE_LINK_HERE" target="_blank" rel="noopener">paper link</a></li>
         </ul>
       `
     }
@@ -686,7 +699,7 @@ a:hover{color:var(--accent)}
     const t = TOPICS[key];
     if(!t) return;
     modalTitle.textContent = t.title;
-    modalImg.src = t.img;
+    modalImg.src = t.img;          // image shows in popup (as you wanted)
     modalImg.alt = t.title;
     modalText.innerHTML = t.html;
     overlay.style.display = "block";
@@ -710,7 +723,7 @@ a:hover{color:var(--accent)}
       }
     });
   }
-  document.querySelectorAll(".tile").forEach(bindTile);
+  document.querySelectorAll(".tile[data-topic]").forEach(bindTile);
 
   closeBtn.addEventListener("click", closeModal);
   overlay.addEventListener("click", (e)=>{
@@ -720,12 +733,9 @@ a:hover{color:var(--accent)}
     if(e.key === "Escape" && overlay.style.display === "block") closeModal();
   });
 
-  /* Hide broken images quietly (keeps layout clean if an image is missing) */
-  document.querySelectorAll('img').forEach(img=>{
-    img.addEventListener('error', ()=>{
-      img.style.display = 'none';
-    }, { once:true });
-  });
+  /* IMPORTANT: removed “hide broken images quietly”
+     because it can make figures “disappear” on GitHub Pages if a path/case is wrong.
+     If any image is missing, you will now SEE it as broken, so you can fix the filename/path. */
 </script>
 </body>
 </html>
