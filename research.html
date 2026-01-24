@@ -97,22 +97,30 @@ a:hover{color:var(--accent)}
   text-shadow:0 2px 18px rgba(0,0,0,0.35);
 }
 
-/* ================= ORBIT LAYOUT (BETTER SPACE USE) ================= */
-/* 3x3 grid but with tighter hero row + centered composition */
+/* =========================================================
+   ULTRAFAST SECTION LAYOUT (FIXED SPACE USAGE)
+   2 rows x 3 columns:
+   [ tile ] [ hero (spans 2 rows) ] [ tile ]
+   [ tile ] [ hero (spans 2 rows) ] [ tile ]
+   This removes the “crossed text” / overview tile completely.
+========================================================= */
 .orbit{
   width:min(1120px, 96%);
   margin:22px auto 0;
   display:grid;
-  grid-template-columns: 1fr 1.22fr 1fr;
-  grid-template-rows: 270px 360px 270px; /* explicitly sized = less awkward empty space */
-  gap:16px;
+  grid-template-columns: 1fr 1.35fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap:18px;
   align-items:stretch;
+
+  /* keeps a strong, filled composition on desktop */
+  min-height: clamp(540px, 52vw, 680px);
 }
 
 /* ================= HERO (CENTER IMAGE ONLY) ================= */
 .heroCard{
   grid-column:2;
-  grid-row:2;
+  grid-row:1 / span 2;
   background:transparent;
   border:none;
   box-shadow:none;
@@ -146,7 +154,7 @@ a:hover{color:var(--accent)}
   pointer-events:none;
 }
 
-/* ================= TILES ================= */
+/* ================= TOPIC TILES (TEXT BELOW IMAGE) ================= */
 .tile{
   background:var(--card);
   border:1px solid var(--stroke);
@@ -159,6 +167,9 @@ a:hover{color:var(--accent)}
   user-select:none;
   display:flex;
   flex-direction:column;
+
+  /* fill their grid cell better */
+  min-height: 100%;
 }
 .tile:hover{
   transform: translateY(-2px);
@@ -167,14 +178,16 @@ a:hover{color:var(--accent)}
 }
 .tile:active{ transform: translateY(-1px); }
 
-/* Image area */
+/* Image area grows to use space; text stays readable */
 .tile .thumb{
-  padding:12px;
+  padding:14px;
+  flex: 1 1 auto;
+  display:flex;
 }
 .tile .thumb img{
   width:100%;
-  height:170px;          /* slightly shorter = better vertical packing */
-  object-fit:contain;
+  height:100%;
+  object-fit:contain; /* fully visible */
   border-radius:14px;
   border:1px solid rgba(255,255,255,0.12);
   background:rgba(0,0,0,0.18);
@@ -182,12 +195,14 @@ a:hover{color:var(--accent)}
   filter:saturate(1.04) contrast(1.04);
 }
 
-/* Text area */
+/* Text area below image */
 .tile .body{
-  padding:2px 14px 14px;
+  padding:12px 14px 14px;
   display:flex;
   flex-direction:column;
   gap:10px;
+  border-top:1px solid rgba(255,255,255,0.10);
+  background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.10));
 }
 .tile .title{
   margin:0;
@@ -206,46 +221,16 @@ a:hover{color:var(--accent)}
 }
 .tile:hover .cta{opacity:1}
 
-/* Positions */
+/* Positions in the new 2x2 around hero */
 .tl{grid-column:1; grid-row:1;}
 .tr{grid-column:3; grid-row:1;}
-.bl{grid-column:1; grid-row:3;}
-.br{grid-column:3; grid-row:3;}
+.bl{grid-column:1; grid-row:2;}
+.br{grid-column:3; grid-row:2;}
 
-/* acoustic tile tweak */
+/* acoustic image “less zoomed” look */
 .tile[data-topic="acoustic"] .thumb img{
   object-fit:contain;
   background:rgba(0,0,0,0.14);
-}
-
-/* ================= OVERVIEW TILE UNDER HERO (CENTERED & BALANCED) ================= */
-.overviewTile{
-  grid-column:2;
-  grid-row:3;
-  cursor:default;
-  display:flex;
-  align-items:center; /* vertical centering */
-}
-.overviewTile:hover{
-  transform:none;
-  border-color:var(--stroke);
-  box-shadow:0 14px 45px rgba(0,0,0,0.35);
-}
-.overviewTile .thumb{ display:none; }
-.overviewTile .body{
-  padding:18px 18px 18px;
-  gap:10px;
-}
-.overviewTitle{
-  margin:0;
-  font-weight:950;
-  font-size:18px;
-}
-.overviewText{
-  margin:0;
-  color:rgba(242,242,242,0.78);
-  line-height:1.7;
-  font-size:14.5px;
 }
 
 /* ================= BELOW SECTIONS ================= */
@@ -257,16 +242,16 @@ a:hover{color:var(--accent)}
   max-width:980px;
 }
 
-/* ELECTRIC-FIELD SECTION: make wide tile narrower + vertically centered text */
+/* ELECTRIC-FIELD SECTION: narrower horizontally + vertically centered text */
 .projectWide{
-  margin:22px auto 0;              /* center the whole block */
-  width:min(980px, 96%);           /* horizontally smaller than before */
+  margin:22px auto 0;
+  width:min(980px, 96%);
   background:rgba(10,14,22,0.78);
   border:1px solid rgba(255,255,255,0.16);
   border-radius:22px;
   padding:18px;
   display:grid;
-  grid-template-columns:1.1fr 0.9fr; /* slightly less image dominance */
+  grid-template-columns:1.1fr 0.9fr;
   gap:22px;
   box-shadow:0 18px 55px rgba(0,0,0,0.45);
   backdrop-filter:blur(10px);
@@ -280,14 +265,11 @@ a:hover{color:var(--accent)}
   background:rgba(0,0,0,0.18);
   display:block;
 }
-
-/* vertical centering of the text column */
 .projectText{
   display:flex;
   flex-direction:column;
-  justify-content:center; /* center vertically */
+  justify-content:center; /* vertical centering */
 }
-
 @media (max-width: 900px){
   .projectWide{
     width:min(980px, 96%);
@@ -296,7 +278,6 @@ a:hover{color:var(--accent)}
   .projectWide img{height:260px}
   .projectText{justify-content:flex-start}
 }
-
 .projectText p{
   margin:0 0 10px;
   color:rgba(242,242,242,0.82);
@@ -451,14 +432,16 @@ a:hover{color:var(--accent)}
   font-size:15px;
 }
 
-/* Responsive orbit */
+/* Responsive: stack everything */
 @media (max-width: 980px){
   .orbit{
     grid-template-columns:1fr;
     grid-template-rows:auto;
+    min-height:auto;
   }
-  .tl,.tr,.bl,.br,.heroCard,.overviewTile{grid-column:auto; grid-row:auto;}
-  .heroCard{min-height:320px;}
+  .heroCard{grid-column:auto; grid-row:auto; min-height:320px;}
+  .tl,.tr,.bl,.br{grid-column:auto; grid-row:auto;}
+  .tile .thumb{min-height:220px;}
 }
 
 /* reduce motion */
@@ -513,16 +496,6 @@ a:hover{color:var(--accent)}
           <img src="assets/research/light-matter-hero.png" alt="Central research overview" loading="eager" decoding="async">
         </div>
         <div class="heroGlow"></div>
-      </div>
-
-      <div class="tile overviewTile" aria-label="Overview">
-        <div class="body">
-          <h3 class="overviewTitle">Overview</h3>
-          <p class="overviewText">
-            Ultrafast pump–probe experiments combining nonlinear optics (SHG) and time-resolved x-ray scattering to
-            track coupled lattice, charge, and spin dynamics far from equilibrium.
-          </p>
-        </div>
       </div>
 
       <article class="tile bl" data-topic="magnon" role="button" tabindex="0" aria-label="Open details: Magnon phonon interactions">
