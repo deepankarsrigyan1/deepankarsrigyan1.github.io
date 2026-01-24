@@ -97,19 +97,15 @@ a:hover{color:var(--accent)}
   text-shadow:0 2px 18px rgba(0,0,0,0.35);
 }
 
-/* ================= ORBIT LAYOUT (FIXED: text below images + better hero) ================= */
-/* 3x3 grid:
-   tl  .  tr
-   .  hero .
-   bl overview br
-*/
+/* ================= ORBIT LAYOUT (BETTER SPACE USE) ================= */
+/* 3x3 grid but with tighter hero row + centered composition */
 .orbit{
   width:min(1120px, 96%);
-  margin:26px auto 0;
+  margin:22px auto 0;
   display:grid;
-  grid-template-columns: 1fr 1.15fr 1fr;
-  grid-template-rows: minmax(250px, 1fr) minmax(320px, 1.15fr) minmax(250px, 1fr);
-  gap:18px;
+  grid-template-columns: 1fr 1.22fr 1fr;
+  grid-template-rows: 270px 360px 270px; /* explicitly sized = less awkward empty space */
+  gap:16px;
   align-items:stretch;
 }
 
@@ -130,9 +126,7 @@ a:hover{color:var(--accent)}
   height:100%;
   border-radius:22px;
   overflow:hidden;
-
-  /* cleaner, less “boxy” */
-  background:rgba(0,0,0,0.18);
+  background:rgba(0,0,0,0.16);
   border:1px solid rgba(255,255,255,0.12);
   box-shadow:0 18px 60px rgba(0,0,0,0.48);
 }
@@ -141,7 +135,7 @@ a:hover{color:var(--accent)}
   height:100%;
   object-fit:contain;
   display:block;
-  background:rgba(0,0,0,0.12);
+  background:rgba(0,0,0,0.10);
   filter:saturate(1.06) contrast(1.06);
 }
 .heroGlow{
@@ -152,7 +146,7 @@ a:hover{color:var(--accent)}
   pointer-events:none;
 }
 
-/* ================= TILES (FIXED: image fully visible + text BELOW) ================= */
+/* ================= TILES ================= */
 .tile{
   background:var(--card);
   border:1px solid var(--stroke);
@@ -163,11 +157,8 @@ a:hover{color:var(--accent)}
   transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease;
   cursor:pointer;
   user-select:none;
-
-  /* key change: column layout */
   display:flex;
   flex-direction:column;
-  min-height:260px; /* bigger tiles */
 }
 .tile:hover{
   transform: translateY(-2px);
@@ -182,8 +173,8 @@ a:hover{color:var(--accent)}
 }
 .tile .thumb img{
   width:100%;
-  height:190px;          /* bigger image area */
-  object-fit:contain;    /* fully visible (no cropping) */
+  height:170px;          /* slightly shorter = better vertical packing */
+  object-fit:contain;
   border-radius:14px;
   border:1px solid rgba(255,255,255,0.12);
   background:rgba(0,0,0,0.18);
@@ -191,7 +182,7 @@ a:hover{color:var(--accent)}
   filter:saturate(1.04) contrast(1.04);
 }
 
-/* Text area below image */
+/* Text area */
 .tile .body{
   padding:2px 14px 14px;
   display:flex;
@@ -201,7 +192,7 @@ a:hover{color:var(--accent)}
 .tile .title{
   margin:0;
   font-weight:950;
-  font-size:17px;
+  font-size:16px;
   line-height:1.25;
 }
 .tile .cta{
@@ -221,21 +212,30 @@ a:hover{color:var(--accent)}
 .bl{grid-column:1; grid-row:3;}
 .br{grid-column:3; grid-row:3;}
 
-/* acoustic tile: keep smaller/less zoomed */
+/* acoustic tile tweak */
 .tile[data-topic="acoustic"] .thumb img{
   object-fit:contain;
   background:rgba(0,0,0,0.14);
 }
 
-/* ================= OVERVIEW TILE UNDER HERO (NEW) ================= */
+/* ================= OVERVIEW TILE UNDER HERO (CENTERED & BALANCED) ================= */
 .overviewTile{
   grid-column:2;
   grid-row:3;
   cursor:default;
+  display:flex;
+  align-items:center; /* vertical centering */
 }
-.overviewTile:hover{ transform:none; border-color:var(--stroke); box-shadow:0 14px 45px rgba(0,0,0,0.35); }
+.overviewTile:hover{
+  transform:none;
+  border-color:var(--stroke);
+  box-shadow:0 14px 45px rgba(0,0,0,0.35);
+}
 .overviewTile .thumb{ display:none; }
-.overviewTile .body{ padding:16px 16px 18px; }
+.overviewTile .body{
+  padding:18px 18px 18px;
+  gap:10px;
+}
 .overviewTitle{
   margin:0;
   font-weight:950;
@@ -256,31 +256,47 @@ a:hover{color:var(--accent)}
   color:rgba(242,242,242,0.72);
   max-width:980px;
 }
+
+/* ELECTRIC-FIELD SECTION: make wide tile narrower + vertically centered text */
 .projectWide{
-  margin-top:22px;
+  margin:22px auto 0;              /* center the whole block */
+  width:min(980px, 96%);           /* horizontally smaller than before */
   background:rgba(10,14,22,0.78);
   border:1px solid rgba(255,255,255,0.16);
   border-radius:22px;
   padding:18px;
   display:grid;
-  grid-template-columns:1.3fr 1fr;
+  grid-template-columns:1.1fr 0.9fr; /* slightly less image dominance */
   gap:22px;
   box-shadow:0 18px 55px rgba(0,0,0,0.45);
   backdrop-filter:blur(10px);
 }
 .projectWide img{
   width:100%;
-  height:320px;
-  object-fit:contain; /* safer: show whole figure */
+  height:300px;
+  object-fit:contain;
   border-radius:16px;
   border:1px solid rgba(255,255,255,0.14);
   background:rgba(0,0,0,0.18);
   display:block;
 }
-@media (max-width: 900px){
-  .projectWide{grid-template-columns:1fr}
-  .projectWide img{height:260px}
+
+/* vertical centering of the text column */
+.projectText{
+  display:flex;
+  flex-direction:column;
+  justify-content:center; /* center vertically */
 }
+
+@media (max-width: 900px){
+  .projectWide{
+    width:min(980px, 96%);
+    grid-template-columns:1fr;
+  }
+  .projectWide img{height:260px}
+  .projectText{justify-content:flex-start}
+}
+
 .projectText p{
   margin:0 0 10px;
   color:rgba(242,242,242,0.82);
@@ -317,7 +333,7 @@ a:hover{color:var(--accent)}
 .pcard img{
   width:100%;
   height:190px;
-  object-fit:contain; /* safer: show whole plot */
+  object-fit:contain;
   border-radius:14px;
   border:1px solid rgba(255,255,255,0.14);
   margin-bottom:10px;
@@ -357,7 +373,7 @@ a:hover{color:var(--accent)}
   color:rgba(242,242,242,0.6);
 }
 
-/* ================= MODAL (shows image + text) ================= */
+/* ================= MODAL ================= */
 .modalOverlay{
   position:fixed; inset:0;
   background:rgba(0,0,0,0.72);
@@ -407,7 +423,6 @@ a:hover{color:var(--accent)}
 }
 .closeBtn:hover{border-color:rgba(243,199,75,0.55); color:var(--accent)}
 
-/* modal layout: big image on top, text below */
 .modalBody{
   display:grid;
   grid-template-columns:1fr;
@@ -443,7 +458,6 @@ a:hover{color:var(--accent)}
     grid-template-rows:auto;
   }
   .tl,.tr,.bl,.br,.heroCard,.overviewTile{grid-column:auto; grid-row:auto;}
-  .tile .thumb img{height:210px;}
   .heroCard{min-height:320px;}
 }
 
@@ -501,7 +515,6 @@ a:hover{color:var(--accent)}
         <div class="heroGlow"></div>
       </div>
 
-      <!-- NEW: one tile under hero (slightly larger feeling, clean text) -->
       <div class="tile overviewTile" aria-label="Overview">
         <div class="body">
           <h3 class="overviewTitle">Overview</h3>
@@ -699,7 +712,7 @@ a:hover{color:var(--accent)}
     const t = TOPICS[key];
     if(!t) return;
     modalTitle.textContent = t.title;
-    modalImg.src = t.img;          // image shows in popup (as you wanted)
+    modalImg.src = t.img;
     modalImg.alt = t.title;
     modalText.innerHTML = t.html;
     overlay.style.display = "block";
@@ -732,10 +745,6 @@ a:hover{color:var(--accent)}
   document.addEventListener("keydown", (e)=>{
     if(e.key === "Escape" && overlay.style.display === "block") closeModal();
   });
-
-  /* IMPORTANT: removed “hide broken images quietly”
-     because it can make figures “disappear” on GitHub Pages if a path/case is wrong.
-     If any image is missing, you will now SEE it as broken, so you can fix the filename/path. */
 </script>
 </body>
 </html>
