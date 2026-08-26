@@ -1,0 +1,567 @@
+    <!doctype html>
+    <html lang="en" class="no-js">
+    <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+      <meta name="theme-color" content="#020306">
+      <meta name="color-scheme" content="dark">
+      <meta name="description" content="Selected publications by Deepankar Sri Gyan in ultrafast x-ray science, quantum materials, complex oxides, ferroelectrics, magnetism, and thermoelectrics.">
+      <title>Publications · Deepankar Sri Gyan</title>
+      <script>document.documentElement.classList.remove('no-js');document.documentElement.classList.add('js');</script>
+      <style>
+
+:root{
+  --bg:#020306;
+  --surface:rgba(10,14,22,.78);
+  --surface-strong:rgba(9,13,21,.92);
+  --surface-soft:rgba(255,255,255,.055);
+  --text:#f4f5f7;
+  --muted:rgba(244,245,247,.78);
+  --muted-2:rgba(244,245,247,.62);
+  --accent:#f3c74b;
+  --accent-soft:rgba(243,199,75,.12);
+  --border:rgba(255,255,255,.15);
+  --border-strong:rgba(255,255,255,.22);
+  --shadow:0 20px 70px rgba(0,0,0,.42);
+  --radius:1.35rem;
+  --container:75rem;
+  --header-height:4.75rem;
+  color-scheme:dark;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;background:var(--bg);-webkit-text-size-adjust:100%}
+body{
+  margin:0;
+  min-width:0;
+  min-height:100%;
+  overflow-x:hidden;
+  background:var(--bg);
+  color:var(--text);
+  font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  line-height:1.5;
+  text-rendering:optimizeLegibility;
+  -webkit-font-smoothing:antialiased;
+}
+img,svg,video{display:block;max-width:100%}
+img{height:auto}
+button,input,textarea,select{font:inherit}
+button{color:inherit}
+a{color:inherit;text-decoration:none}
+p,h1,h2,h3,h4{overflow-wrap:break-word}
+
+.srOnly{
+  position:absolute!important;
+  width:1px!important;height:1px!important;
+  padding:0!important;margin:-1px!important;
+  overflow:hidden!important;clip:rect(0,0,0,0)!important;
+  white-space:nowrap!important;border:0!important;
+}
+.skipLink{
+  position:fixed;
+  z-index:1000;
+  top:.5rem;left:.5rem;
+  transform:translateY(-180%);
+  padding:.75rem 1rem;
+  border-radius:.75rem;
+  background:var(--accent);
+  color:#111;
+  font-weight:800;
+  transition:transform .16s ease;
+}
+.skipLink:focus{transform:translateY(0)}
+
+/* ---------- global navigation ---------- */
+.nav{
+  position:fixed;
+  z-index:100;
+  inset:0 0 auto 0;
+  min-height:var(--header-height);
+  display:flex;
+  align-items:center;
+  gap:1.2rem;
+  padding:
+    max(.65rem, env(safe-area-inset-top))
+    max(clamp(1rem,3vw,2.25rem), env(safe-area-inset-right))
+    .65rem
+    max(clamp(1rem,3vw,2.25rem), env(safe-area-inset-left));
+  background:linear-gradient(180deg,rgba(2,3,6,.93),rgba(2,3,6,.76));
+  border-bottom:1px solid rgba(255,255,255,.08);
+  box-shadow:0 8px 34px rgba(0,0,0,.18);
+  -webkit-backdrop-filter:blur(18px) saturate(1.15);
+  backdrop-filter:blur(18px) saturate(1.15);
+}
+.nav .name{
+  flex:0 1 auto;
+  min-width:0;
+  font-size:clamp(1rem,.94rem + .28vw,1.2rem);
+  font-weight:800;
+  letter-spacing:.01em;
+  white-space:nowrap;
+}
+.nav .menu{
+  margin-left:auto;
+  min-width:0;
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  gap:clamp(.2rem,.75vw,.7rem);
+}
+.nav .menu a{
+  position:relative;
+  min-height:2.75rem;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:.65rem .68rem;
+  border-radius:.75rem;
+  color:rgba(255,255,255,.82);
+  font-size:clamp(.86rem,.78rem + .16vw,.98rem);
+  font-weight:650;
+  line-height:1.1;
+  transition:color .16s ease,background-color .16s ease,transform .16s ease;
+}
+.nav .menu a:hover{color:#fff;background:rgba(255,255,255,.07)}
+.nav .menu a.active,.nav .menu a[aria-current="page"]{
+  color:var(--accent);
+  background:rgba(243,199,75,.095);
+}
+.nav .menu a.active::after,.nav .menu a[aria-current="page"]::after{
+  content:"";
+  position:absolute;
+  left:.72rem;right:.72rem;bottom:.32rem;
+  height:2px;
+  border-radius:99px;
+  background:var(--accent);
+}
+.navToggle{
+  display:none;
+  margin-left:auto;
+  width:2.85rem;height:2.85rem;
+  padding:.72rem;
+  border:1px solid var(--border);
+  border-radius:.8rem;
+  background:rgba(255,255,255,.055);
+  cursor:pointer;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  gap:.28rem;
+}
+.navToggle span:not(.srOnly){width:100%;height:2px;border-radius:2px;background:currentColor;transition:transform .16s ease,opacity .16s ease}
+.nav.menu-open .navToggle span:nth-of-type(2){transform:translateY(6px) rotate(45deg)}
+.nav.menu-open .navToggle span:nth-of-type(3){opacity:0}
+.nav.menu-open .navToggle span:nth-of-type(4){transform:translateY(-6px) rotate(-45deg)}
+
+:focus-visible{
+  outline:3px solid var(--accent);
+  outline-offset:3px;
+  border-radius:.6rem;
+}
+
+.glass{
+  background:var(--surface);
+  border:1px solid var(--border);
+  box-shadow:var(--shadow);
+  -webkit-backdrop-filter:blur(14px);
+  backdrop-filter:blur(14px);
+}
+.footer{
+  color:var(--muted-2);
+  text-align:center;
+  font-size:.82rem;
+}
+
+@media (max-width:64em){
+  .nav{min-height:4.25rem}
+  .nav .name{max-width:calc(100vw - 5.5rem);overflow:hidden;text-overflow:ellipsis}
+  .navToggle{display:none}
+  .nav .menu{
+    width:100%;
+    margin:0;
+    padding:.4rem 0 0;
+    flex:1 0 100%;
+    flex-direction:column;
+    align-items:stretch;
+    gap:.18rem;
+  }
+  .nav .menu a{width:100%;justify-content:flex-start;padding:.78rem .9rem}
+  .nav .menu a.active::after,.nav .menu a[aria-current="page"]::after{display:none}
+
+  .js .nav{flex-wrap:nowrap}
+  .js .navToggle{display:flex}
+  .js .nav .menu{
+    display:none;
+    position:absolute;
+    top:calc(100% + .5rem);
+    left:max(.75rem, env(safe-area-inset-left));
+    right:max(.75rem, env(safe-area-inset-right));
+    width:auto;
+    max-height:calc(100dvh - 5.5rem);
+    overflow:auto;
+    padding:.55rem;
+    border:1px solid var(--border-strong);
+    border-radius:1rem;
+    background:rgba(8,11,18,.97);
+    box-shadow:0 24px 80px rgba(0,0,0,.58);
+    -webkit-backdrop-filter:blur(20px);
+    backdrop-filter:blur(20px);
+  }
+  .js .nav.menu-open .menu{display:flex}
+}
+
+@media (max-width:26em){
+  .nav .name{font-size:.98rem}
+}
+
+@media (hover:hover) and (pointer:fine){
+  .nav .menu a:hover{transform:translateY(-1px)}
+}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{
+    scroll-behavior:auto!important;
+    animation-duration:.001ms!important;
+    animation-iteration-count:1!important;
+    transition-duration:.001ms!important;
+  }
+}
+
+
+.page{position:relative;isolation:isolate;min-height:100vh;min-height:100svh;padding-top:calc(var(--header-height) + clamp(1.3rem,3vw,2.5rem))}
+.page::before,.page::after{content:"";position:fixed;inset:0;z-index:-2;pointer-events:none}
+.page::before{background:radial-gradient(60rem 38rem at 30% 35%,rgba(0,0,0,.06),rgba(0,0,0,.48)),linear-gradient(180deg,rgba(0,0,0,.08),rgba(0,0,0,.4)),url("assets/bg-template.png") center top/cover no-repeat}
+.page::after{z-index:-1;background:linear-gradient(180deg,rgba(0,0,0,.04),rgba(0,0,0,.3))}
+.container{width:min(72rem,calc(100% - 2*clamp(1rem,4vw,2.5rem)));margin:0 auto;padding:1rem 0 clamp(3rem,7vw,5rem)}
+.sectionTitle{margin:.35rem 0 1rem;font-size:clamp(2.1rem,1.5rem + 1.7vw,3.2rem);font-weight:900;line-height:1.05;letter-spacing:-.03em}
+.scholarBar{margin:1rem 0 1rem;padding:clamp(.85rem,2vw,1.05rem) clamp(1rem,2.3vw,1.25rem);border:1px solid rgba(243,199,75,.34);border-radius:1rem;background:rgba(243,199,75,.075);display:flex;align-items:center;gap:.8rem}
+.scholarBar span{color:rgba(244,245,247,.9);font-size:.98rem;line-height:1.5}
+.scholarLink{margin-left:auto;min-height:2.7rem;flex:0 0 auto;display:inline-flex;align-items:center;padding:.62rem .86rem;border:1px solid rgba(243,199,75,.58);border-radius:999px;color:var(--accent);font-size:.86rem;font-weight:780}
+.pubTools{margin:0 0 1rem;padding:.7rem;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:.65rem;align-items:center;border:1px solid var(--border);border-radius:1rem;background:rgba(6,9,15,.68);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+.pubSearch{width:100%;min-height:2.9rem;padding:.7rem .9rem;border:1px solid rgba(255,255,255,.15);border-radius:.8rem;background:rgba(255,255,255,.055);color:var(--text);outline:none}
+.pubSearch::placeholder{color:rgba(244,245,247,.5)}
+.pubSearch:focus{border-color:rgba(243,199,75,.62);box-shadow:0 0 0 3px rgba(243,199,75,.1)}
+.pubStatus{padding-right:.45rem;color:var(--muted-2);font-size:.8rem;white-space:nowrap}
+.pubWrap{padding:clamp(.75rem,2vw,1.25rem);border-radius:var(--radius)}
+.pubList{display:flex;flex-direction:column;gap:clamp(1.1rem,2.5vw,1.8rem)}
+.yearBlock{min-width:0;scroll-margin-top:6rem}
+.pubYear{display:flex;align-items:center;gap:.75rem;margin:0 0 .75rem;color:var(--accent);font-size:clamp(1.15rem,1rem + .45vw,1.4rem);font-weight:900}
+.pubYear::after{content:"";height:1px;flex:1;background:linear-gradient(90deg,rgba(243,199,75,.42),transparent)}
+.pubItem{min-width:0;margin:.62rem 0;padding:clamp(.85rem,2vw,1rem);border:1px solid rgba(255,255,255,.12);border-radius:1rem;background:rgba(0,0,0,.2);transition:border-color .16s ease,background .16s ease,transform .16s ease}
+.pubAuthors{font-size:clamp(.92rem,.87rem + .2vw,1.03rem);font-weight:640;line-height:1.55;color:rgba(244,245,247,.9)}
+.pubTitle{margin:.38rem 0 .38rem;font-size:clamp(1rem,.92rem + .3vw,1.12rem);font-style:italic;line-height:1.48;color:#fff}
+.pubJournal{display:flex;flex-wrap:wrap;align-items:center;gap:.45rem;color:rgba(244,245,247,.7);font-size:.93rem;line-height:1.5}
+.pubLink{margin-left:0!important;min-height:2.2rem;display:inline-flex;align-items:center;padding:.32rem .55rem;border:1px solid rgba(243,199,75,.35);border-radius:.55rem;color:var(--accent);font-size:.8rem;font-weight:760;text-decoration:none!important}
+.noResults{display:none;margin:1rem 0;padding:1rem;border:1px dashed rgba(255,255,255,.18);border-radius:.9rem;color:var(--muted);text-align:center}
+.footer{margin-top:2.2rem}
+@media (hover:hover) and (pointer:fine){.pubItem:hover{transform:translateY(-1px);border-color:rgba(243,199,75,.25);background:rgba(0,0,0,.27)}.scholarLink:hover,.pubLink:hover{background:rgba(243,199,75,.1)}}
+@media (max-width:42em){.scholarBar{align-items:flex-start;flex-direction:column}.scholarLink{margin-left:0}.pubTools{grid-template-columns:1fr}.pubStatus{padding:0 .2rem .1rem}.pubJournal{align-items:flex-start}.pubLink{margin-top:.15rem}}
+@media (max-width:25em){.container{width:calc(100% - 1.5rem)}.pubWrap{padding:.55rem}.pubItem{padding:.78rem}}
+
+      </style>
+    </head><body>
+  <a class="skipLink" href="#mainContent">Skip to main content</a>
+
+<header class="nav" id="siteHeader">
+  <a class="name" href="index.html" aria-label="Deepankar Sri Gyan — home">Deepankar Sri Gyan</a>
+  <button class="navToggle" type="button" aria-expanded="false" aria-controls="primaryMenu">
+    <span class="srOnly">Toggle navigation</span>
+    <span></span><span></span><span></span>
+  </button>
+  <nav class="menu" id="primaryMenu" aria-label="Primary navigation">
+      <a href="index.html">Home</a>
+  <a href="about.html">About Me</a>
+  <a href="research.html">Research</a>
+  <a class="active" aria-current="page" href="publications.html">Publications</a>
+  <a href="contact.html">Contact Me</a>
+  <a href="utility.html">Utility Software</a>
+  </nav>
+</header>
+<main class="page" id="mainContent">
+<div class="container">
+
+<h1 class="sectionTitle">Publications</h1>
+
+<!-- ===== Google Scholar Bar ===== -->
+<div class="scholarBar">
+  <span>Complete list, citation metrics, and updates available on Google Scholar</span>
+  <a class="scholarLink" href="https://scholar.google.co.in/citations?user=B6FFurUAAAAJ&hl=en" target="_blank">
+    View Google Scholar →
+  </a>
+</div>
+
+
+<div class="pubTools" role="search" aria-label="Filter publications">
+  <label class="srOnly" for="pubSearch">Search publications</label>
+  <input class="pubSearch" id="pubSearch" type="search" autocomplete="off" placeholder="Search by title, author, journal, or year…">
+  <div class="pubStatus" id="pubStatus" aria-live="polite"></div>
+</div>
+<div class="noResults" id="noResults">No publications match your search.</div>
+<section class="glass pubWrap">
+<div class="pubList">
+
+<!-- ================== 2025 ================== -->
+<div class="yearBlock">
+  <div class="pubYear">2025</div>
+
+  <div class="pubItem">
+    <div class="pubAuthors"><strong>D. Sri Gyan</strong>, H. J. Lee, X. Guo, et al.</div>
+    <div class="pubTitle">Transient Terahertz Oscillations During Photoinduced Polarization Topology Reconfiguration in Ferroelectric Superlattices</div>
+    <div class="pubJournal">Advanced Science (Accepted, 2025)
+      <a class="pubLink" href="https://www.osti.gov/biblio/3011729" target="_blank">[Paper]</a>
+    </div>
+  </div>
+
+  <div class="pubItem">
+    <div class="pubAuthors"><strong>D. Sri Gyan</strong>, N. Li, Z. Chen, et al.</div>
+    <div class="pubTitle">Ultrafast low-temperature metal–insulator interface phonon dynamics and heat transport in a Pt/Gd₃Fe₅O₁₂ heterostructure</div>
+    <div class="pubJournal">Structural Dynamics 12, 065101 (2025)
+      <a class="pubLink" href="https://doi.org/10.1063/4.0000778" target="_blank">[Paper]</a>
+    </div>
+  </div>
+</div>
+
+<!-- ================== 2024 ================== -->
+<div class="yearBlock">
+  <div class="pubYear">2024</div>
+
+  <div class="pubItem">
+    <div class="pubAuthors">N. Li, H. J. Lee, <strong>D. Sri Gyan</strong>, et al.</div>
+    <div class="pubTitle">Ultrafast optically induced perturbation of oxygen octahedral rotations in multiferroic BiFeO₃ thin films</div>
+    <div class="pubJournal">Nano Letters 24, 6417–6424 (2024)
+      <a class="pubLink" href="https://doi.org/10.1021/acs.nanolett.4c01519" target="_blank">[Paper]</a>
+    </div>
+  </div>
+
+  <div class="pubItem">
+    <div class="pubAuthors">R. Liu, T. D. Janicki, <strong>D. Sri Gyan</strong>, et al.</div>
+    <div class="pubTitle">Optical and electronic functionality arising from controlled defect formation in nanoscale complex oxide lateral epitaxy</div>
+    <div class="pubJournal">Science Advances 10, eadk5509 (2024)
+      <a class="pubLink" href="https://doi.org/10.1126/sciadv.adk5509" target="_blank">[Paper]</a>
+    </div>
+  </div>
+</div>
+
+<!-- ================== 2022 ================== -->
+<div class="yearBlock">
+  <div class="pubYear">2022</div>
+
+  <div class="pubItem">
+    <div class="pubAuthors"><strong>D. Sri Gyan</strong>, D. Mannix, et al.</div>
+    <div class="pubTitle">Low-temperature nanoscale heat transport in a gadolinium iron garnet heterostructure probed by ultrafast x-ray diffraction</div>
+    <div class="pubJournal">Structural Dynamics 9, 045101 (2022)
+      <a class="pubLink" href="https://doi.org/10.1063/4.0000154" target="_blank">[Paper]</a>
+    </div>
+  </div>
+
+  <div class="pubItem">
+    <div class="pubAuthors">H. J. Lee, Y. Ahn, <strong>D. Sri Gyan</strong>, et al.</div>
+    <div class="pubTitle">Sub-picosecond optical stress generation in multiferroic BiFeO₃</div>
+    <div class="pubJournal">Nano Letters 22, 4294–4300 (2022)
+      <a class="pubLink" href="https://doi.org/10.1021/acs.nanolett.1c04831" target="_blank">[Paper]</a>
+    </div>
+  </div>
+
+  <div class="pubItem">
+    <div class="pubAuthors"><strong>D. Sri Gyan</strong>, H. J. Lee, Y. Ahn, et al.</div>
+    <div class="pubTitle">Optically induced picosecond lattice compression in ferroelectric/dielectric superlattices</div>
+    <div class="pubJournal">Advanced Electronic Materials 8, 2101051 (2022)
+      <a class="pubLink" href="https://doi.org/10.1002/aelm.202101051" target="_blank">[Paper]</a>
+    </div>
+  </div>
+</div>
+
+<!-- ================== 2020 ================== -->
+<div class="yearBlock">
+  <div class="pubYear">2020</div>
+
+  <div class="pubItem">
+    <div class="pubAuthors"><strong>D. Sri Gyan</strong>, P. Sharma, A. Dwivedi</div>
+    <div class="pubTitle">Effect of octahedral tilting on antiferroelectric phase stabilization in (1−x) NaNbO₃−xCdTiO₃ ceramics</div>
+    <div class="pubJournal">Journal of Physics D 53, 335305 (2020)
+      <a class="pubLink" href="https://iopscience.iop.org/article/10.1088/1361-6463/ab84a6/meta" target="_blank">[Paper]</a>
+    </div>
+  </div>
+
+  <div class="pubItem">
+    <div class="pubAuthors"><strong>D. Sri Gyan</strong>, M. Saxena, et al.</div>
+    <div class="pubTitle">Magnetic and electron spin resonance properties of BaxSr₂−xTiFeO₆ double perovskites</div>
+    <div class="pubJournal">Physica Status Solidi (b) 257, 1900341 (2020)
+      <a class="pubLink" href="https://doi.org/10.1002/pssb.201900341" target="_blank">[Paper]</a>
+    </div>
+  </div>
+
+  <div class="pubItem">
+    <div class="pubAuthors"><strong>D. Sri Gyan</strong>, V. Sundaram, et al.</div>
+    <div class="pubTitle">Effect of B-site cation ordering on high-temperature thermoelectric behavior of BaxSr₂−xTiFeO₆ double perovskites</div>
+    <div class="pubJournal">Journal of Physics: Condensed Matter 32, 235401 (2020)
+      <a class="pubLink" href="https://iopscience.iop.org/article/10.1088/1361-648X/ab7575/meta" target="_blank">[Paper]</a>
+    </div>
+  </div>
+</div>
+
+<!-- ================== 2019 ================== -->
+<div class="yearBlock">
+  <div class="pubYear">2019</div>
+
+  <div class="pubItem">
+    <div class="pubAuthors">K. Tanwar*, <strong>D. Sri Gyan*</strong>, et al.</div>
+    <div class="pubTitle">Enhancement of thermoelectric power factor by inducing octahedral ordering in La₂−xSrₓCoFeO₆</div>
+    <div class="pubJournal">Physical Review B 99, 174105 (2019)
+      <a class="pubLink" href="https://doi.org/10.1103/PhysRevB.99.174105" target="_blank">[Paper]</a>
+    </div>
+  </div>
+
+  <div class="pubItem">
+    <div class="pubAuthors"><strong>D. Sri Gyan</strong>, A. A. Goyal, et al.</div>
+    <div class="pubTitle">Stabilization of anti-ferroelectric phase in NaNbO₃ by incorporating CaTiO₃</div>
+    <div class="pubJournal">Journal of Physics D 52, 165304 (2019)
+      <a class="pubLink" href="https://iopscience.iop.org/article/10.1088/1361-6463/aaff41/meta" target="_blank">[Paper]</a>
+    </div>
+  </div>
+
+  <div class="pubItem">
+    <div class="pubAuthors"><strong>D. Sri Gyan</strong>, A. Dwivedi</div>
+    <div class="pubTitle">Structural and electrical characterization of NaNbO₃–PVDF nanocomposites</div>
+    <div class="pubJournal">Journal of Applied Physics 125, 024103 (2019)
+      <a class="pubLink" href="https://doi.org/10.1063/1.5046458" target="_blank">[Paper]</a>
+    </div>
+  </div>
+</div>
+
+<!-- ================== 2018–2015 ================== -->
+<div class="yearBlock">
+  <div class="pubYear">2018–2015</div>
+
+  <div class="pubItem">
+    <div class="pubAuthors"><strong>D. Sri Gyan</strong>, P. Roy, T. Maiti</div>
+    <div class="pubTitle">Synthesis and thermoelectric properties of Ba₂TiFeO₆ double perovskite</div>
+    <div class="pubJournal">Ferroelectrics 536, 146–155 (2018)
+      <a class="pubLink" href="https://doi.org/10.1080/00150193.2018.1528922" target="_blank">[Paper]</a>
+    </div>
+  </div>
+
+  <div class="pubItem">
+    <div class="pubAuthors">K. Tanwar, <strong>D. Sri Gyan</strong>, et al.</div>
+    <div class="pubTitle">Magnetic properties of cerium and zinc co-doped barium hexaferrites</div>
+    <div class="pubJournal">RSC Advances 8, 19600–19609 (2018)
+      <a class="pubLink" href="https://doi.org/10.1039/C8RA02455C" target="_blank">[Paper]</a>
+    </div>
+  </div>
+
+  <div class="pubItem">
+    <div class="pubAuthors"><strong>D. Sri Gyan</strong>, K. Balasubramanian</div>
+    <div class="pubTitle">Ionic liquid microseeded WC/RF ablative composite for heat shielding</div>
+    <div class="pubJournal">RSC Advances 6, 65152–65161 (2016)
+      <a class="pubLink" href="https://doi.org/10.1039/C6RA09285C" target="_blank">[Paper]</a>
+    </div>
+  </div>
+
+  <div class="pubItem">
+    <div class="pubAuthors"><strong>D. Sri Gyan</strong>, R. Gupta, P. K. Roy</div>
+    <div class="pubTitle">Comparison of GDC–LSCF IT-SOFC system with conventional power sources</div>
+    <div class="pubJournal">IEEE Energy Economics and Environment (2015)
+      <a class="pubLink" href="https://doi.org/10.1109/EnergyEconomics.2015.7235109" target="_blank">[Paper]</a>
+    </div>
+  </div>
+</div>
+
+</div>
+</section>
+
+<div class="footer">© <span id="y"></span> Deepankar Sri Gyan</div>
+
+</div>
+</main>
+
+
+
+
+<script>
+(() => {
+  const nav = document.querySelector('.nav');
+  const toggle = document.querySelector('.navToggle');
+  const menu = document.getElementById('primaryMenu');
+
+  const closeMenu = (restoreFocus = false) => {
+    if (!nav || !toggle) return;
+    nav.classList.remove('menu-open');
+    toggle.setAttribute('aria-expanded','false');
+    if (restoreFocus) toggle.focus();
+  };
+
+  if (nav && toggle && menu) {
+    toggle.addEventListener('click', () => {
+      const open = nav.classList.toggle('menu-open');
+      toggle.setAttribute('aria-expanded', String(open));
+      if (open) menu.querySelector('a')?.focus();
+    });
+    menu.addEventListener('click', e => {
+      if (e.target.closest('a')) closeMenu(false);
+    });
+    document.addEventListener('click', e => {
+      if (nav.classList.contains('menu-open') && !nav.contains(e.target)) closeMenu(false);
+    });
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && nav.classList.contains('menu-open')) closeMenu(true);
+    });
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 1024) closeMenu(false);
+    }, {passive:true});
+  }
+
+  document.querySelectorAll('[data-current-year]').forEach(el => {
+    el.textContent = new Date().getFullYear();
+  });
+  const legacyYear = document.getElementById('y');
+  if (legacyYear) legacyYear.textContent = new Date().getFullYear();
+
+  document.querySelectorAll('a[target="_blank"]').forEach(a => {
+    const rel = new Set((a.getAttribute('rel') || '').split(/\s+/).filter(Boolean));
+    rel.add('noopener'); rel.add('noreferrer');
+    a.setAttribute('rel', [...rel].join(' '));
+  });
+
+  document.querySelectorAll('img[data-fallback-src]').forEach(img => {
+    img.addEventListener('error', () => {
+      const fallback = img.dataset.fallbackSrc;
+      if (fallback && img.src !== new URL(fallback, document.baseURI).href) {
+        img.src = fallback;
+        delete img.dataset.fallbackSrc;
+      }
+    }, {once:true});
+  });
+})();
+</script>
+<script>
+(() => {
+  const input = document.getElementById('pubSearch');
+  const status = document.getElementById('pubStatus');
+  const noResults = document.getElementById('noResults');
+  const items = [...document.querySelectorAll('.pubItem')];
+  const years = [...document.querySelectorAll('.yearBlock')];
+  if (!input) return;
+
+  const update = () => {
+    const q = input.value.trim().toLocaleLowerCase();
+    let visible = 0;
+    items.forEach(item => {
+      const year = item.closest('.yearBlock')?.querySelector('.pubYear')?.textContent || '';
+      const haystack = (year + ' ' + item.textContent).toLocaleLowerCase();
+      const show = !q || haystack.includes(q);
+      item.hidden = !show;
+      if (show) visible++;
+    });
+    years.forEach(block => {
+      block.hidden = ![...block.querySelectorAll('.pubItem')].some(item => !item.hidden);
+    });
+    status.textContent = `${visible} publication${visible === 1 ? '' : 's'} shown`;
+    noResults.style.display = visible ? 'none' : 'block';
+  };
+  input.addEventListener('input', update);
+  update();
+})();
+</script>
+</body>
+</html>

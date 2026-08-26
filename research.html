@@ -1,0 +1,605 @@
+    <!doctype html>
+    <html lang="en" class="no-js">
+    <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+      <meta name="theme-color" content="#020306">
+      <meta name="color-scheme" content="dark">
+      <meta name="description" content="Research by Deepankar Sri Gyan on ultrafast light–matter interaction, ferroelectric dynamics, nonlinear phononics, acoustic and thermal phonons, magnetic heterostructures, and correlated quantum materials.">
+      <title>Research · Deepankar Sri Gyan</title>
+      <script>document.documentElement.classList.remove('no-js');document.documentElement.classList.add('js');</script>
+      <style>
+
+:root{
+  --bg:#020306;
+  --surface:rgba(10,14,22,.78);
+  --surface-strong:rgba(9,13,21,.92);
+  --surface-soft:rgba(255,255,255,.055);
+  --text:#f4f5f7;
+  --muted:rgba(244,245,247,.78);
+  --muted-2:rgba(244,245,247,.62);
+  --accent:#f3c74b;
+  --accent-soft:rgba(243,199,75,.12);
+  --border:rgba(255,255,255,.15);
+  --border-strong:rgba(255,255,255,.22);
+  --shadow:0 20px 70px rgba(0,0,0,.42);
+  --radius:1.35rem;
+  --container:75rem;
+  --header-height:4.75rem;
+  color-scheme:dark;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;background:var(--bg);-webkit-text-size-adjust:100%}
+body{
+  margin:0;
+  min-width:0;
+  min-height:100%;
+  overflow-x:hidden;
+  background:var(--bg);
+  color:var(--text);
+  font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  line-height:1.5;
+  text-rendering:optimizeLegibility;
+  -webkit-font-smoothing:antialiased;
+}
+img,svg,video{display:block;max-width:100%}
+img{height:auto}
+button,input,textarea,select{font:inherit}
+button{color:inherit}
+a{color:inherit;text-decoration:none}
+p,h1,h2,h3,h4{overflow-wrap:break-word}
+
+.srOnly{
+  position:absolute!important;
+  width:1px!important;height:1px!important;
+  padding:0!important;margin:-1px!important;
+  overflow:hidden!important;clip:rect(0,0,0,0)!important;
+  white-space:nowrap!important;border:0!important;
+}
+.skipLink{
+  position:fixed;
+  z-index:1000;
+  top:.5rem;left:.5rem;
+  transform:translateY(-180%);
+  padding:.75rem 1rem;
+  border-radius:.75rem;
+  background:var(--accent);
+  color:#111;
+  font-weight:800;
+  transition:transform .16s ease;
+}
+.skipLink:focus{transform:translateY(0)}
+
+/* ---------- global navigation ---------- */
+.nav{
+  position:fixed;
+  z-index:100;
+  inset:0 0 auto 0;
+  min-height:var(--header-height);
+  display:flex;
+  align-items:center;
+  gap:1.2rem;
+  padding:
+    max(.65rem, env(safe-area-inset-top))
+    max(clamp(1rem,3vw,2.25rem), env(safe-area-inset-right))
+    .65rem
+    max(clamp(1rem,3vw,2.25rem), env(safe-area-inset-left));
+  background:linear-gradient(180deg,rgba(2,3,6,.93),rgba(2,3,6,.76));
+  border-bottom:1px solid rgba(255,255,255,.08);
+  box-shadow:0 8px 34px rgba(0,0,0,.18);
+  -webkit-backdrop-filter:blur(18px) saturate(1.15);
+  backdrop-filter:blur(18px) saturate(1.15);
+}
+.nav .name{
+  flex:0 1 auto;
+  min-width:0;
+  font-size:clamp(1rem,.94rem + .28vw,1.2rem);
+  font-weight:800;
+  letter-spacing:.01em;
+  white-space:nowrap;
+}
+.nav .menu{
+  margin-left:auto;
+  min-width:0;
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  gap:clamp(.2rem,.75vw,.7rem);
+}
+.nav .menu a{
+  position:relative;
+  min-height:2.75rem;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:.65rem .68rem;
+  border-radius:.75rem;
+  color:rgba(255,255,255,.82);
+  font-size:clamp(.86rem,.78rem + .16vw,.98rem);
+  font-weight:650;
+  line-height:1.1;
+  transition:color .16s ease,background-color .16s ease,transform .16s ease;
+}
+.nav .menu a:hover{color:#fff;background:rgba(255,255,255,.07)}
+.nav .menu a.active,.nav .menu a[aria-current="page"]{
+  color:var(--accent);
+  background:rgba(243,199,75,.095);
+}
+.nav .menu a.active::after,.nav .menu a[aria-current="page"]::after{
+  content:"";
+  position:absolute;
+  left:.72rem;right:.72rem;bottom:.32rem;
+  height:2px;
+  border-radius:99px;
+  background:var(--accent);
+}
+.navToggle{
+  display:none;
+  margin-left:auto;
+  width:2.85rem;height:2.85rem;
+  padding:.72rem;
+  border:1px solid var(--border);
+  border-radius:.8rem;
+  background:rgba(255,255,255,.055);
+  cursor:pointer;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  gap:.28rem;
+}
+.navToggle span:not(.srOnly){width:100%;height:2px;border-radius:2px;background:currentColor;transition:transform .16s ease,opacity .16s ease}
+.nav.menu-open .navToggle span:nth-of-type(2){transform:translateY(6px) rotate(45deg)}
+.nav.menu-open .navToggle span:nth-of-type(3){opacity:0}
+.nav.menu-open .navToggle span:nth-of-type(4){transform:translateY(-6px) rotate(-45deg)}
+
+:focus-visible{
+  outline:3px solid var(--accent);
+  outline-offset:3px;
+  border-radius:.6rem;
+}
+
+.glass{
+  background:var(--surface);
+  border:1px solid var(--border);
+  box-shadow:var(--shadow);
+  -webkit-backdrop-filter:blur(14px);
+  backdrop-filter:blur(14px);
+}
+.footer{
+  color:var(--muted-2);
+  text-align:center;
+  font-size:.82rem;
+}
+
+@media (max-width:64em){
+  .nav{min-height:4.25rem}
+  .nav .name{max-width:calc(100vw - 5.5rem);overflow:hidden;text-overflow:ellipsis}
+  .navToggle{display:none}
+  .nav .menu{
+    width:100%;
+    margin:0;
+    padding:.4rem 0 0;
+    flex:1 0 100%;
+    flex-direction:column;
+    align-items:stretch;
+    gap:.18rem;
+  }
+  .nav .menu a{width:100%;justify-content:flex-start;padding:.78rem .9rem}
+  .nav .menu a.active::after,.nav .menu a[aria-current="page"]::after{display:none}
+
+  .js .nav{flex-wrap:nowrap}
+  .js .navToggle{display:flex}
+  .js .nav .menu{
+    display:none;
+    position:absolute;
+    top:calc(100% + .5rem);
+    left:max(.75rem, env(safe-area-inset-left));
+    right:max(.75rem, env(safe-area-inset-right));
+    width:auto;
+    max-height:calc(100dvh - 5.5rem);
+    overflow:auto;
+    padding:.55rem;
+    border:1px solid var(--border-strong);
+    border-radius:1rem;
+    background:rgba(8,11,18,.97);
+    box-shadow:0 24px 80px rgba(0,0,0,.58);
+    -webkit-backdrop-filter:blur(20px);
+    backdrop-filter:blur(20px);
+  }
+  .js .nav.menu-open .menu{display:flex}
+}
+
+@media (max-width:26em){
+  .nav .name{font-size:.98rem}
+}
+
+@media (hover:hover) and (pointer:fine){
+  .nav .menu a:hover{transform:translateY(-1px)}
+}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{
+    scroll-behavior:auto!important;
+    animation-duration:.001ms!important;
+    animation-iteration-count:1!important;
+    transition-duration:.001ms!important;
+  }
+}
+
+
+.page{position:relative;isolation:isolate;min-height:100vh;min-height:100svh;padding-top:calc(var(--header-height) + clamp(1.2rem,3vw,2.4rem));overflow:visible}
+.page::before,.page::after{content:"";position:fixed;inset:0;z-index:-2;pointer-events:none}
+.page::before{background:radial-gradient(62rem 39rem at 30% 35%,rgba(0,0,0,.08),rgba(0,0,0,.78)),linear-gradient(180deg,rgba(0,0,0,.1),rgba(0,0,0,.62)),url("assets/bg-template.png") center/cover no-repeat}
+.page::after{z-index:-1;background:radial-gradient(50rem 32rem at 70% 22%,rgba(243,199,75,.07),transparent 60%),linear-gradient(180deg,rgba(0,0,0,.02),rgba(0,0,0,.4))}
+.container{width:min(var(--container),calc(100% - 2*clamp(1rem,4vw,2.5rem)));margin:0 auto;padding:1rem 0 clamp(3rem,7vw,5rem)}
+.sectionTitle{max-width:100%;margin:clamp(1rem,3vw,1.6rem) 0 1rem;padding-bottom:.5rem;border-bottom:2px solid rgba(243,199,75,.75);font-size:clamp(1.65rem,1.2rem + 1.4vw,2.35rem);font-weight:900;line-height:1.15;letter-spacing:-.02em}
+.sectionDesc{max-width:64rem;margin:.35rem 0 1.25rem;color:rgba(244,245,247,.72);font-size:.98rem;line-height:1.75}
+.orbit{width:100%;margin:1.2rem auto 0;display:grid;grid-template-columns:minmax(0,1fr) minmax(17rem,1.35fr) minmax(0,1fr);grid-template-rows:1fr 1fr;gap:clamp(.75rem,1.5vw,1.1rem);min-height:clamp(34rem,52vw,42rem)}
+.heroCard{grid-column:2;grid-row:1/span 2;min-width:0;display:flex;align-items:stretch;position:relative}
+.heroMedia{width:100%;height:100%;overflow:hidden;border:1px solid rgba(255,255,255,.12);border-radius:1.25rem;background:rgba(0,0,0,.16);box-shadow:0 18px 60px rgba(0,0,0,.46)}
+.heroMedia img{width:100%;height:100%;object-fit:contain;background:rgba(0,0,0,.1);filter:saturate(1.04) contrast(1.04)}
+.heroGlow{position:absolute;inset:-.6rem;pointer-events:none;background:radial-gradient(32rem 23rem at 52% 48%,rgba(243,199,75,.1),transparent 70%)}
+.tile{min-width:0;min-height:0;display:flex;flex-direction:column;overflow:hidden;border:1px solid var(--border);border-radius:1.15rem;background:var(--surface);box-shadow:0 14px 45px rgba(0,0,0,.32);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);cursor:pointer;user-select:none;transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease}
+.tile .thumb{min-height:0;flex:1 1 auto;display:flex;padding:.72rem}
+.tile .thumb img{width:100%;height:100%;min-height:0;object-fit:contain;border:1px solid rgba(255,255,255,.1);border-radius:.8rem;background:rgba(0,0,0,.17)}
+.tile .body{padding:.72rem .85rem .85rem;border-top:1px solid rgba(255,255,255,.08);background:linear-gradient(180deg,rgba(255,255,255,.018),rgba(0,0,0,.08))}
+.tile .title{margin:0;font-size:clamp(.9rem,.8rem + .22vw,1.02rem);font-weight:850;line-height:1.35}
+.tile .cta{margin-top:.55rem;color:var(--accent);font-size:.78rem;font-weight:850}
+.tl{grid-column:1;grid-row:1}.tr{grid-column:3;grid-row:1}.bl{grid-column:1;grid-row:2}.br{grid-column:3;grid-row:2}
+.projectWide{width:min(62rem,100%);margin:1.2rem auto 0;padding:clamp(.8rem,2vw,1.1rem);display:grid;grid-template-columns:minmax(0,1.08fr) minmax(16rem,.92fr);gap:clamp(1rem,2.4vw,1.5rem);align-items:center;border:1px solid var(--border);border-radius:1.25rem;background:var(--surface);box-shadow:var(--shadow);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+.projectWide>img{width:100%;aspect-ratio:16/10;object-fit:contain;border:1px solid rgba(255,255,255,.12);border-radius:.9rem;background:rgba(0,0,0,.18)}
+.projectText p{margin:0 0 .65rem;color:rgba(244,245,247,.82);font-size:.95rem;line-height:1.72}
+.grid4{margin-top:1.2rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,14.5rem),1fr));gap:clamp(.75rem,1.5vw,1rem)}
+.pcard{min-width:0;padding:.8rem;border:1px solid var(--border);border-radius:1.1rem;background:var(--surface);box-shadow:0 14px 45px rgba(0,0,0,.3);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);transition:transform .18s ease,border-color .18s ease}
+.pcard img{width:100%;aspect-ratio:4/3;object-fit:contain;border:1px solid rgba(255,255,255,.12);border-radius:.8rem;background:rgba(0,0,0,.17)}
+.pTitle{margin:.65rem 0 .32rem;font-size:1rem;font-weight:880;line-height:1.35}.pText{margin:0 0 .5rem;color:rgba(244,245,247,.72);font-size:.85rem;line-height:1.6}
+.refs{margin:.55rem 0 0;padding-left:1.1rem;color:rgba(244,245,247,.75);font-size:.82rem;line-height:1.6}.refs li{margin:.28rem 0}.refs a{color:var(--accent);font-weight:760;text-decoration:underline;text-decoration-color:rgba(243,199,75,.38);text-underline-offset:.18em}.pendingRef{color:var(--muted-2);font-style:italic}
+.footer{margin-top:2.5rem}
+.modalOverlay{position:fixed;inset:0;z-index:200;display:none;overflow-y:auto;padding:max(1rem,env(safe-area-inset-top)) max(1rem,env(safe-area-inset-right)) max(1rem,env(safe-area-inset-bottom)) max(1rem,env(safe-area-inset-left));background:rgba(0,0,0,.76);-webkit-backdrop-filter:blur(7px);backdrop-filter:blur(7px)}
+.modal{width:min(61rem,100%);max-height:calc(100dvh - 2rem);margin:auto;overflow:auto;border:1px solid rgba(255,255,255,.18);border-radius:1.25rem;background:rgba(12,16,26,.97);box-shadow:0 30px 120px rgba(0,0,0,.75);transform:translateY(.5rem);opacity:0;transition:transform .16s ease,opacity .16s ease}
+.modalOverlay.show .modal{transform:translateY(0);opacity:1}.modalTop{position:sticky;top:0;z-index:2;padding:.8rem 1rem;display:flex;justify-content:space-between;align-items:center;gap:.75rem;border-bottom:1px solid rgba(255,255,255,.1);background:rgba(12,16,26,.97)}
+.modalTitle{margin:0;font-size:clamp(1.05rem,.92rem + .4vw,1.28rem);line-height:1.25}.closeBtn{min-width:2.75rem;min-height:2.75rem;padding:.6rem .75rem;border:1px solid rgba(255,255,255,.18);border-radius:.75rem;background:rgba(255,255,255,.06);cursor:pointer;font-weight:800}.modalBody{display:grid;grid-template-columns:1fr;gap:.85rem;padding:1rem}.modalFig{padding:.6rem;border:1px solid rgba(255,255,255,.11);border-radius:1rem;background:rgba(0,0,0,.2)}.modalFig img{width:100%;height:min(52svh,32rem);object-fit:contain;border-radius:.75rem;background:rgba(0,0,0,.12)}.modalText p{margin:0 0 .7rem;color:rgba(244,245,247,.84);font-size:.94rem;line-height:1.7}
+@media (hover:hover) and (pointer:fine){.tile:hover,.pcard:hover{transform:translateY(-2px);border-color:rgba(243,199,75,.3)}.tile:hover{box-shadow:0 18px 58px rgba(0,0,0,.42)}}
+@media (max-width:70em){.orbit{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:auto;min-height:0}.heroCard{order:-1;grid-column:1/-1;grid-row:auto;aspect-ratio:16/7}.tl,.tr,.bl,.br{grid-column:auto;grid-row:auto}.tile .thumb{aspect-ratio:4/3}}
+@media (max-width:52em){.projectWide{grid-template-columns:1fr}.projectWide>img{aspect-ratio:16/9}}
+@media (max-width:42em){.orbit{grid-template-columns:1fr}.heroCard{aspect-ratio:4/3}.tile .thumb{aspect-ratio:16/10}.modalOverlay{padding:.55rem}.modal{max-height:calc(100dvh - 1.1rem)}.modalTop{align-items:flex-start}.sectionTitle{font-size:clamp(1.45rem,7vw,1.85rem)}}
+@media (max-width:25em){.container{width:calc(100% - 1.5rem)}}
+
+      </style>
+    </head><body>
+  <a class="skipLink" href="#mainContent">Skip to main content</a>
+
+<header class="nav" id="siteHeader">
+  <a class="name" href="index.html" aria-label="Deepankar Sri Gyan — home">Deepankar Sri Gyan</a>
+  <button class="navToggle" type="button" aria-expanded="false" aria-controls="primaryMenu">
+    <span class="srOnly">Toggle navigation</span>
+    <span></span><span></span><span></span>
+  </button>
+  <nav class="menu" id="primaryMenu" aria-label="Primary navigation">
+      <a href="index.html">Home</a>
+  <a href="about.html">About Me</a>
+  <a class="active" aria-current="page" href="research.html">Research</a>
+  <a href="publications.html">Publications</a>
+  <a href="contact.html">Contact Me</a>
+  <a href="utility.html">Utility Software</a>
+  </nav>
+</header>
+<main class="page" id="mainContent">
+  <div class="container">
+
+    <h1 class="sectionTitle">Ultrafast light–matter interaction</h1>
+
+    <section class="orbit" aria-label="Research topics around a central overview">
+
+      <article class="tile tl" data-topic="acoustic" role="button" tabindex="0" aria-label="Open details: Acoustic and thermal phonons">
+        <div class="thumb">
+          <img src="assets/research/acoustic-phonons.png" alt="Acoustic/thermal phonons figure" loading="lazy" decoding="async">
+        </div>
+        <div class="body">
+          <h3 class="title">Acoustic & thermal phonons through interfaces</h3>
+          <div class="cta">Click for details →</div>
+        </div>
+      </article>
+
+      <article class="tile tr" data-topic="ferro" role="button" tabindex="0" aria-label="Open details: Ferroelectric dynamics">
+        <div class="thumb">
+          <img src="assets/research/ferroelectric-dynamics.png" alt="Ferroelectric dynamics figure" loading="lazy" decoding="async">
+        </div>
+        <div class="body">
+          <h3 class="title">Photoinduced dynamics in ferroelectric thin films & superlattices</h3>
+          <div class="cta">Click for details →</div>
+        </div>
+      </article>
+
+      <div class="heroCard" aria-label="Central overview figure">
+        <div class="heroMedia">
+          <img src="assets/research/light-matter-hero.png" alt="Central research overview" loading="eager" decoding="async">
+        </div>
+        <div class="heroGlow"></div>
+      </div>
+
+      <article class="tile bl" data-topic="magnon" role="button" tabindex="0" aria-label="Open details: Magnon phonon interactions">
+        <div class="thumb">
+          <img src="assets/research/magnon-phonon.png" alt="Magnon-phonon figure" loading="lazy" decoding="async">
+        </div>
+        <div class="body">
+          <h3 class="title">Magnon–phonon interactions in magnetic heterostructures</h3>
+          <div class="cta">Click for details →</div>
+        </div>
+      </article>
+
+      <article class="tile br" data-topic="midir" role="button" tabindex="0" aria-label="Open details: Mid-IR nonlinear phononics">
+        <div class="thumb">
+          <img src="assets/research/midir-nonlinear.png" alt="Mid-IR nonlinear phononics figure" loading="lazy" decoding="async">
+        </div>
+        <div class="body">
+          <h3 class="title"><i>Mid-IR</i> driven nonlinearity & nonlinear phononics</h3>
+          <div class="cta">Click for details →</div>
+        </div>
+      </article>
+
+    </section>
+
+    <!-- ================= BOTTOM SECTION 1 ================= -->
+    <section style="margin-top:64px;">
+      <div class="sectionTitle">Electric-field–driven domain fluctuations in charge-density-wave materials</div>
+      <div class="sectionDesc">
+        Ultrafast and field-driven manipulation of charge order and domain configurations,
+        explored using time-resolved diffraction and scattering techniques.
+      </div>
+
+      <div class="projectWide">
+        <img src="assets/research/cdw-domain.png" alt="CDW domain dynamics figure" loading="lazy" decoding="async">
+        <div class="projectText">
+          <p>
+            How external electric fields perturb and reorganize charge-density-wave domains
+            in correlated quantum materials (1T-TaS₂), revealing nonequilibrium fluctuation pathways and metastable
+            configurations.
+          </p>
+          <ul class="refs">
+            <li><b>Ref:</b> <span class="pendingRef">Reference link forthcoming</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= BOTTOM SECTION 2 ================= -->
+    <section style="margin-top:72px;">
+      <div class="sectionTitle">Polycrystalline ferroelectric, magnetic, thermoelectric, and energy-storage materials</div>
+      <div class="grid4">
+        <div class="pcard">
+          <img src="assets/research/poly-1.PNG" alt="Ferroelectric/antiferroelectric ceramics figure" loading="lazy" decoding="async">
+          <div class="pTitle">Ferroelectric & antiferroelectric oxides</div>
+          <div class="pText">Octahedral tilting, phase stabilization, and electrical response in perovskite ceramics.</div>
+          <ul class="refs">
+            <li><b>Ref:</b> <a href="https://iopscience.iop.org/article/10.1088/1361-6463/ab84a6" target="_blank" rel="noopener">Paper</a></li>
+          </ul>
+          <ul class="refs">
+            <li><b>Ref:</b> <a href="https://iopscience.iop.org/article/10.1088/1361-6463/aaff41" target="_blank" rel="noopener">Paper</a></li>
+          </ul>
+        </div>
+
+        <div class="pcard">
+          <img src="assets/research/poly-2.png" alt="Thermoelectric double perovskites figure" loading="lazy" decoding="async">
+          <div class="pTitle">Thermoelectric double perovskites</div>
+          <div class="pText">A and B-site cation ordering and transport optimization in complex oxides.</div>
+          <ul class="refs">
+            <li><b>Ref:</b> <a href="https://doi.org/10.1103/PhysRevB.99.174105" target="_blank" rel="noopener">Paper</a></li>
+          </ul>
+          <ul class="refs">
+            <li><b>Ref:</b> <a href="https://iopscience.iop.org/article/10.1088/1361-648X/ab7575/meta" target="_blank" rel="noopener">Paper</a></li>
+          </ul>
+          <ul class="refs">
+            <li><b>Ref:</b> <a href="https://doi.org/10.1080/00150193.2018.1528922" target="_blank" rel="noopener">Paper</a></li>
+          </ul>
+        </div>
+
+        <div class="pcard">
+          <img src="assets/research/poly-3.png" alt="Magnetic and ESR properties figure" loading="lazy" decoding="async">
+          <div class="pTitle">Magnetic & spin-related properties</div>
+          <div class="pText">Magnetic ordering and electron spin resonance in functional oxides.</div>
+          <ul class="refs">
+            <li><b>Ref:</b> <a href="https://doi.org/10.1039/C8RA02455C" target="_blank" rel="noopener">Paper</a></li>
+          </ul>
+          <ul class="refs">
+            <li><b>Ref:</b> <a href="https://doi.org/10.1002/pssb.201900341" target="_blank" rel="noopener">Paper</a></li>
+          </ul>
+        </div>
+
+        <div class="pcard">
+          <img src="assets/research/poly-4.png" alt="Energy/functional materials figure" loading="lazy" decoding="async">
+          <div class="pTitle">Functional & energy materials</div>
+          <div class="pText">Structural, thermal, and functional properties of energy-relevant oxide systems.</div>
+          <ul class="refs">
+            <li><b>Ref:</b> <a href="https://doi.org/10.1063/1.5046458" target="_blank" rel="noopener">Paper</a></li>
+          </ul>
+          <ul class="refs">
+            <li><b>Ref:</b> <a href="https://doi.org/10.1039/C6RA09285C" target="_blank" rel="noopener">Paper</a></li>
+          </ul>
+          <ul class="refs">
+            <li><b>Ref:</b> <a href="https://ieeexplore.ieee.org/abstract/document/7235109" target="_blank" rel="noopener">Paper</a></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <div class="footer">© <span id="y"></span> Deepankar Sri Gyan</div>
+  </div>
+</main>
+
+<!-- ================= MODAL ================= -->
+<div class="modalOverlay" id="modalOverlay" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal">
+    <div class="modalTop">
+      <h3 class="modalTitle" id="modalTitle">Title</h3>
+      <button class="closeBtn" id="closeBtn" aria-label="Close">Close ✕</button>
+    </div>
+
+    <div class="modalBody">
+      <div class="modalFig">
+        <img id="modalImg" src="" alt="Project figure">
+      </div>
+      <div class="modalText" id="modalText"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.getElementById("y").textContent = new Date().getFullYear();
+
+  const TOPICS = {
+    acoustic: {
+      title: "Acoustic & thermal phonons: propagation through interfaces",
+      img: "assets/research/acoustic-phonons.png",
+      html: `
+        <p>Optical pumping excites acoustic and thermal phonons in thin-film heterostructures. We study their excitation and propagation through interfaces using time-resolved x-ray diffraction.</p>
+        <ul class="refs">
+          <li><b>Ref:</b> <a href="https://doi.org/10.1063/4.0000778" target="_blank" rel="noopener">Paper</a></li>
+          <li><b>Ref:</b> <a href="https://doi.org/10.1063/4.0000154" target="_blank" rel="noopener">Paper</a></li>
+        </ul>
+      `
+    },
+    ferro: {
+      title: "Photoinduced dynamics in ferroelectric thin films and superlattices",
+      img: "assets/research/ferroelectric-dynamics.png",
+      html: `
+        <p>Photoexcited carriers screen the depolarization field in ferroelectric thin films, driving coupled structural and polarization dynamics. We probe screening-driven stress, octahedral rotations, and polarization oscillations using time- and wavevector-resolved x-ray diffraction.</p>
+        <ul class="refs">
+          <li><b>Ref:</b> <a href="https://doi.org/10.1002/aelm.202101051" target="_blank" rel="noopener">Paper</a></li>
+          <li><b>Ref:</b> <a href="https://doi.org/10.1021/acs.nanolett.1c04831" target="_blank" rel="noopener">Paper</a></li>
+          <li><b>Ref:</b> <a href="https://doi.org/10.1021/acs.nanolett.4c01519" target="_blank" rel="noopener">Paper</a></li>
+          <li><b>Ref:</b> <a href="https://www.osti.gov/pages/biblio/3011729" target="_blank" rel="noopener">Paper</a></li>
+        </ul>
+      `
+    },
+    magnon: {
+      title: "Magnon–phonon interactions in magnetic thin film heterostructures",
+      img: "assets/research/magnon-phonon.png",
+      html: `
+        <p>Optical excitation can launch both phonons and magnons in magnetic heterostructures. We use time- and wavevector-resolved resonant x-ray diffraction to probe magnon and phonon dispersions in systems relevant to the spin-Seebeck effect.</p>
+        <ul class="refs">
+          <li><b>Ref:</b> Under preparation — <span class="pendingRef">link forthcoming</span></li>
+        </ul>
+      `
+    },
+    midir: {
+      title: "Mid-IR driven nonlinearity and nonlinear phononics",
+      img: "assets/research/midir-nonlinear.png",
+      html: `
+        <p>We use mid-IR pumping to resonantly drive phonons in thin films and crystals (from ferroelectrics to chiral textures). We study direct nonlinear responses and phonon-driven nonlinear effects using time-resolved SHG.</p>
+        <ul class="refs">
+          <li><b>Ref:</b> Submitted — <span class="pendingRef">link forthcoming</span></li>
+          <li><b>Ref:</b> Submitted — <span class="pendingRef">link forthcoming</span></li>
+        </ul>
+      `
+    }
+  };
+
+  const overlay = document.getElementById("modalOverlay");
+  const closeBtn = document.getElementById("closeBtn");
+  const modalTitle = document.getElementById("modalTitle");
+  const modalImg = document.getElementById("modalImg");
+  const modalText = document.getElementById("modalText");
+
+  function openModal(key){
+    const t = TOPICS[key];
+    if(!t) return;
+    modalTitle.textContent = t.title;
+    modalImg.src = t.img;
+    modalImg.alt = t.title;
+    modalText.innerHTML = t.html;
+    overlay.style.display = "grid";
+    overlay.classList.add("show");
+    document.body.style.overflow = "hidden";
+    overlay.dataset.returnFocus = document.activeElement?.dataset?.topic || "";
+    closeBtn.focus();
+  }
+  function closeModal(){
+    overlay.style.display = "none";
+    overlay.classList.remove("show");
+    document.body.style.overflow = "";
+    const key = overlay.dataset.returnFocus;
+    if(key) document.querySelector(`.tile[data-topic="${key}"]`)?.focus();
+  }
+
+  function bindTile(tile){
+    const key = tile.dataset.topic;
+    tile.addEventListener("click", ()=> openModal(key));
+    tile.addEventListener("keydown", (e)=>{
+      if(e.key === "Enter" || e.key === " "){
+        e.preventDefault();
+        openModal(key);
+      }
+    });
+  }
+  document.querySelectorAll(".tile[data-topic]").forEach(bindTile);
+
+  closeBtn.addEventListener("click", closeModal);
+  overlay.addEventListener("click", (e)=>{
+    if(e.target === overlay) closeModal();
+  });
+  document.addEventListener("keydown", (e)=>{
+    if(e.key === "Escape" && overlay.style.display === "block") closeModal();
+  });
+</script>
+
+<script>
+(() => {
+  const nav = document.querySelector('.nav');
+  const toggle = document.querySelector('.navToggle');
+  const menu = document.getElementById('primaryMenu');
+
+  const closeMenu = (restoreFocus = false) => {
+    if (!nav || !toggle) return;
+    nav.classList.remove('menu-open');
+    toggle.setAttribute('aria-expanded','false');
+    if (restoreFocus) toggle.focus();
+  };
+
+  if (nav && toggle && menu) {
+    toggle.addEventListener('click', () => {
+      const open = nav.classList.toggle('menu-open');
+      toggle.setAttribute('aria-expanded', String(open));
+      if (open) menu.querySelector('a')?.focus();
+    });
+    menu.addEventListener('click', e => {
+      if (e.target.closest('a')) closeMenu(false);
+    });
+    document.addEventListener('click', e => {
+      if (nav.classList.contains('menu-open') && !nav.contains(e.target)) closeMenu(false);
+    });
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && nav.classList.contains('menu-open')) closeMenu(true);
+    });
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 1024) closeMenu(false);
+    }, {passive:true});
+  }
+
+  document.querySelectorAll('[data-current-year]').forEach(el => {
+    el.textContent = new Date().getFullYear();
+  });
+  const legacyYear = document.getElementById('y');
+  if (legacyYear) legacyYear.textContent = new Date().getFullYear();
+
+  document.querySelectorAll('a[target="_blank"]').forEach(a => {
+    const rel = new Set((a.getAttribute('rel') || '').split(/\s+/).filter(Boolean));
+    rel.add('noopener'); rel.add('noreferrer');
+    a.setAttribute('rel', [...rel].join(' '));
+  });
+
+  document.querySelectorAll('img[data-fallback-src]').forEach(img => {
+    img.addEventListener('error', () => {
+      const fallback = img.dataset.fallbackSrc;
+      if (fallback && img.src !== new URL(fallback, document.baseURI).href) {
+        img.src = fallback;
+        delete img.dataset.fallbackSrc;
+      }
+    }, {once:true});
+  });
+})();
+</script>
+</body>
+</html>
